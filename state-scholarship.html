@@ -120,17 +120,6 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1444529930367815"
         crossorigin="anonymous"></script>
-
-    <!-- Anti-Flash Script: Hides Confessions Tab if URL params exist -->
-    <script>
-        (function() {
-            var params = new URLSearchParams(window.location.search);
-            var hasParams = params.get('tab') || params.get('state') || params.get('bustab') || params.get('sem') || params.get('route');
-            if (hasParams) {
-                document.write('<style id="anti-flash-style">.tab-content#confession-tab { display: none !important; }</style>');
-            }
-        })();
-    </script>
 </head>
 
 <body>
