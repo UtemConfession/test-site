@@ -332,12 +332,28 @@ function updateM10ANextDeparture() {
     }
 }
 
+function reloadBusTab(params) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('tab', 'bus-tab');
+    if (params.bustab) url.searchParams.set('bustab', params.bustab);
+    if (params.sem) url.searchParams.set('sem', params.sem);
+    if (params.route) url.searchParams.set('route', params.route);
+    window.location.href = url.toString();
+}
+
+function getCurrentBusState() {
+    return {
+        bustab: busTabPublic && busTabPublic.classList.contains("active") ? "public" : "internal",
+        sem: semToggleRegular && semToggleRegular.classList.contains("active") ? "regular" : "special",
+        route: currentBusRoute
+    };
+}
+
 document.querySelectorAll(".bus-route-pill").forEach(pill => {
     pill.addEventListener("click", () => {
-        document.querySelectorAll(".bus-route-pill").forEach(p => p.classList.remove("active"));
-        pill.classList.add("active");
-        currentBusRoute = pill.getAttribute("data-route");
-        updateBusScheduleDisplay();
+        const state = getCurrentBusState();
+        state.route = pill.getAttribute("data-route");
+        reloadBusTab(state);
     });
 });
 
@@ -358,17 +374,15 @@ const panelPublic    = document.getElementById("panelPublicBus");
 
 if (busTabInternal && busTabPublic && panelInternal && panelPublic) {
     busTabInternal.addEventListener("click", () => {
-        busTabInternal.classList.add("active");
-        busTabPublic.classList.remove("active", "active-pink");
-        panelInternal.style.display = "block";
-        panelPublic.style.display   = "none";
+        const state = getCurrentBusState();
+        state.bustab = "internal";
+        reloadBusTab(state);
     });
 
     busTabPublic.addEventListener("click", () => {
-        busTabPublic.classList.add("active", "active-pink");
-        busTabInternal.classList.remove("active");
-        panelPublic.style.display   = "block";
-        panelInternal.style.display = "none";
+        const state = getCurrentBusState();
+        state.bustab = "public";
+        reloadBusTab(state);
     });
 }
 
@@ -379,22 +393,84 @@ const pillsRegularSem  = document.getElementById("pillsRegularSem");
 
 if (semToggleSpecial && semToggleRegular && pillsSpecialSem && pillsRegularSem) {
     semToggleSpecial.addEventListener("click", () => {
-        semToggleSpecial.classList.add("active");
-        semToggleRegular.classList.remove("active");
-        pillsSpecialSem.style.display = "flex";
-        pillsRegularSem.style.display = "none";
-        
+        const state = getCurrentBusState();
+        state.sem = "special";
+        // Default to first pill in special
         const firstPill = pillsSpecialSem.querySelector(".bus-route-pill");
-        if (firstPill) firstPill.click();
+        if (firstPill) state.route = firstPill.getAttribute("data-route");
+        reloadBusTab(state);
     });
 
     semToggleRegular.addEventListener("click", () => {
-        semToggleRegular.classList.add("active");
-        semToggleSpecial.classList.remove("active");
-        pillsRegularSem.style.display = "flex";
-        pillsSpecialSem.style.display = "none";
-        
+        const state = getCurrentBusState();
+        state.sem = "regular";
+        // Default to first pill in regular
         const firstPill = pillsRegularSem.querySelector(".bus-route-pill");
-        if (firstPill) firstPill.click();
+        if (firstPill) state.route = firstPill.getAttribute("data-route");
+        reloadBusTab(state);
     });
 }
+
+// --- INITIALIZATION / HYDRATION ON LOAD ---
+document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab');
+    
+    if (tab === 'bus-tab') {
+        const bustab = urlParams.get('bustab');
+        const sem = urlParams.get('sem');
+        const route = urlParams.get('route');
+
+        // Force Bus tab globally
+        const allNavItems = document.querySelectorAll('.nav-item');
+        const allTabContents = document.querySelectorAll('.tab-content');
+        allNavItems.forEach(nav => nav.classList.remove('active'));
+        allTabContents.forEach(tab => tab.classList.remove('active'));
+        
+        const bNav = document.querySelector('[data-tab="bus-tab"]');
+        if(bNav) bNav.classList.add('active');
+        const bTab = document.getElementById('bus-tab');
+        if(bTab) bTab.classList.add('active');
+
+        // Apply bustab
+        if (bustab === 'public' && busTabPublic && panelPublic && panelInternal) {
+            busTabPublic.classList.add("active", "active-pink");
+            busTabInternal.classList.remove("active");
+            panelPublic.style.display = "block";
+            panelInternal.style.display = "none";
+        } else if (bustab === 'internal' && busTabInternal && panelInternal && panelPublic) {
+            busTabInternal.classList.add("active");
+            busTabPublic.classList.remove("active", "active-pink");
+            panelInternal.style.display = "block";
+            panelPublic.style.display = "none";
+        }
+
+        // Apply sem
+        if (sem === 'regular' && semToggleRegular && semToggleSpecial && pillsRegularSem && pillsSpecialSem) {
+            semToggleRegular.classList.add("active");
+            semToggleSpecial.classList.remove("active");
+            pillsRegularSem.style.display = "flex";
+            pillsSpecialSem.style.display = "none";
+        } else if (sem === 'special' && semToggleSpecial && semToggleRegular && pillsSpecialSem && pillsRegularSem) {
+            semToggleSpecial.classList.add("active");
+            semToggleRegular.classList.remove("active");
+            pillsSpecialSem.style.display = "flex";
+            pillsRegularSem.style.display = "none";
+        }
+
+        // Apply route
+        if (route) {
+            document.querySelectorAll(".bus-route-pill").forEach(p => p.classList.remove("active"));
+            const activePill = document.querySelector(`.bus-route-pill[data-route="${route}"]`);
+            if (activePill) activePill.classList.add("active");
+            currentBusRoute = route;
+        }
+
+        updateBusScheduleDisplay();
+        
+        // Clean URL so clicking main tabs doesn't carry query params, but keep it long enough for GA4
+        setTimeout(() => {
+            window.history.replaceState({}, document.title, window.location.pathname + "?tab=bus-tab");
+        }, 1000);
+    }
+});
