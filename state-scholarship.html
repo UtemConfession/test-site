@@ -127,7 +127,7 @@
             var params = new URLSearchParams(window.location.search);
             var hasParams = params.get('tab') || params.get('state') || params.get('bustab') || params.get('sem') || params.get('route');
             if (hasParams) {
-                document.write('<style>.tab-content#confession-tab { display: none !important; }</style>');
+                document.write('<style id="anti-flash-style">.tab-content#confession-tab { display: none !important; }</style>');
             }
         })();
     </script>

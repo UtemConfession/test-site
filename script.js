@@ -16,6 +16,12 @@ const tabContents = document.querySelectorAll(".tab-content");
 
 function switchTab(tabId) {
     if (!tabId) return;
+    
+    const antiFlash = document.getElementById("anti-flash-style");
+    if (antiFlash) antiFlash.remove();
+    
+    window.history.replaceState({}, document.title, window.location.pathname);
+    
     navItems.forEach(item => {
         item.classList.toggle("active", item.getAttribute("data-tab") === tabId);
     });
