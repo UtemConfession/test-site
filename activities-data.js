@@ -131,7 +131,7 @@ const activitiesData = [
         bestTime: { en: "Morning", ms: "Pagi" },
         duration: { en: "1 hour", ms: "1 jam" },
         bookingRequired: false,
-        image: "./assets/images/activities/baba-nyonya-museum.png",
+        image: "./assets/images/activities/baba-nyonya-museum.org&utm_campaign=api&utm_content=thumbnail",
         mapUrl: "https://maps.app.goo.gl/1Qy8z7Z7X8s7G3J88",
         websiteUrl: "https://babanyonyamuseum.com/"
     },
@@ -158,7 +158,7 @@ const activitiesData = [
         bestTime: { en: "Early morning or late afternoon", ms: "Awal pagi atau lewat petang" },
         duration: { en: "1-2 hours", ms: "1-2 jam" },
         bookingRequired: false,
-        image: "./assets/images/activities/melaka-botanical-garden.png",
+        image: "./assets/images/activities/melaka-botanical-garden.org&utm_campaign=api&utm_content=thumbnail",
         mapUrl: "https://maps.app.goo.gl/wQ1g5Z4w3d2W5f4h7",
         websiteUrl: ""
     },
@@ -311,7 +311,7 @@ const activitiesData = [
         fullDesc: { en: "The Stadthuys is believed to be the oldest-surviving Dutch building in the East. Its bright terracotta red color makes it the centerpiece of Melaka's historic district.", ms: "Stadthuys dipercayai bangunan Belanda tertua yang masih wujud di Timur. Warna merah terakota yang terang menjadikannya pusat perhatian di daerah bersejarah Melaka." },
         openingHours: { en: "9:00 AM - 5:00 PM (Museum)", ms: "9:00 AM - 5:00 PM (Muzium)" },
         bestTime: { en: "Early Morning for photos", ms: "Awal pagi untuk gambar" }, duration: { en: "1 hour", ms: "1 jam" }, bookingRequired: false,
-        image: "./assets/images/activities/stadthuys.png", mapUrl: "https://maps.app.goo.gl/dummy", websiteUrl: ""
+        image: "./assets/images/activities/stadthuys.org&utm_campaign=api&utm_content=thumbnail", mapUrl: "https://maps.app.goo.gl/dummy", websiteUrl: ""
     },
     {
         id: "christ-church", categoryId: "historical", type: "indoor",
@@ -323,7 +323,7 @@ const activitiesData = [
         shortDesc: { en: "An 18th-century Anglican church known for its distinct red facade.", ms: "Gereja Anglikan abad ke-18 yang terkenal dengan fasad merahnya." },
         fullDesc: { en: "Built by the Dutch when they took possession of Melaka from the Portuguese, it's one of the defining landmarks of the city and still a functioning church today.", ms: "Dibina oleh Belanda apabila mereka mengambil alih Melaka daripada Portugis, ia merupakan salah satu mercu tanda utama bandar ini dan masih berfungsi sebagai gereja hari ini." },
         openingHours: { en: "9:00 AM - 4:30 PM", ms: "9:00 AM - 4:30 PM" }, bestTime: { en: "Morning", ms: "Pagi" }, duration: { en: "30 mins", ms: "30 minit" }, bookingRequired: false,
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Christ_Church,_Melaka.jpg/800px-Christ_Church,_Melaka.jpg", mapUrl: "https://maps.app.goo.gl/dummy", websiteUrl: ""
+         mapUrl: "https://maps.app.goo.gl/dummy", websiteUrl: ""
     },
     {
         id: "st-paul-church", categoryId: "historical", type: "outdoor",
@@ -1055,6 +1055,12 @@ const activitiesData = [
 if (typeof window !== "undefined") {
     window.activitiesData = activitiesData;
 }
+
+
+
+
+
+
 
 
 
