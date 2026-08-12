@@ -224,7 +224,7 @@ function renderActivities() {
             const imgHTML = `
                 <div style="position: relative; width: 100%; height: 160px; background: var(--bg-card-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-size: 40px; overflow: hidden;">
                     <span>${catIcon}</span>
-                    ${item.image ? `<img src="${item.image}" alt="${name.replace(/"/g, '&quot;')}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" loading="lazy">` : ''}
+                    ${item.image ? `<img src="${item.image}" alt="${name.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" decoding="async" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" loading="lazy">` : ''}
                 </div>
             `;
 
@@ -329,7 +329,9 @@ function openActivityModal(item) {
     
     let imgHTML = "";
     if (item.image) {
-        imgHTML = `<div style="width:100%; height:240px; background:url('${item.image}') center/cover no-repeat;"></div>`;
+        imgHTML = `<div style="width:100%; height:240px; overflow:hidden; position:relative; background: var(--bg-card-hover);">
+            <img src="${item.image}" alt="${name.replace(/"/g, '&quot;')}" referrerpolicy="no-referrer" decoding="async" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'" loading="lazy">
+        </div>`;
     }
 
     const bookingRow = item.bookingRequired ? `<p style="font-size: 13.5px; color: #ef4444; margin: 6px 0; font-weight: 700;">⚠️ ${lang === 'ms' ? 'Tempahan Diperlukan' : 'Booking Required'}</p>` : "";

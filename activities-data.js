@@ -23,7 +23,7 @@ const activitiesData = [
         bestTime: { en: "Early morning to avoid heat", ms: "Awal pagi untuk mengelakkan panas" },
         duration: { en: "30 mins", ms: "30 minit" },
         bookingRequired: false,
-        image: "./assets/images/activities/a-famosa.png",
+        image: "./assets/images/activities/a-famosa.jpg",
         mapUrl: "https://maps.app.goo.gl/9R6YvqNwqj4V4j21A",
         websiteUrl: ""
     },
@@ -50,7 +50,7 @@ const activitiesData = [
         bestTime: { en: "Weekends 7:30 PM", ms: "Hujung minggu 7:30 PM" },
         duration: { en: "2-3 hours", ms: "2-3 jam" },
         bookingRequired: false,
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Jonker_Street_Night_Market.jpg/800px-Jonker_Street_Night_Market.jpg",
+        image: "./assets/images/activities/Jonker-Street-Night-Market.jpg",
         mapUrl: "https://maps.app.goo.gl/ZqE8fN4oZRb7zM9G6",
         websiteUrl: ""
     },
@@ -77,7 +77,7 @@ const activitiesData = [
         bestTime: { en: "Morning or Night Safari", ms: "Pagi atau Safari Malam" },
         duration: { en: "3-4 hours", ms: "3-4 jam" },
         bookingRequired: false,
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Malacca_Zoo.jpg/800px-Malacca_Zoo.jpg",
+        image: "./assets/images/activities/zoo mel night safari.jpeg",
         mapUrl: "https://maps.app.goo.gl/z2Pq4UeM1g8pA8P86",
         websiteUrl: "https://www.zoomelaka.gov.my/"
     },
@@ -104,7 +104,7 @@ const activitiesData = [
         bestTime: { en: "Sunset or Night", ms: "Senja atau Malam" },
         duration: { en: "45 mins", ms: "45 minit" },
         bookingRequired: false,
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Malacca_River.jpg/800px-Malacca_River.jpg",
+        image: "./assets/images/activities/melaka-rivercruise.webp",
         mapUrl: "https://maps.app.goo.gl/yBw4K4b8J6x2G5dJ9",
         websiteUrl: "https://melakarivercruise.my/"
     },
@@ -131,7 +131,7 @@ const activitiesData = [
         bestTime: { en: "Morning", ms: "Pagi" },
         duration: { en: "1 hour", ms: "1 jam" },
         bookingRequired: false,
-        image: "./assets/images/activities/baba-nyonya-museum.org&utm_campaign=api&utm_content=thumbnail",
+        image: "./assets/images/activities/baba-nyonya-museum.jpg",
         mapUrl: "https://maps.app.goo.gl/1Qy8z7Z7X8s7G3J88",
         websiteUrl: "https://babanyonyamuseum.com/"
     },
@@ -158,7 +158,7 @@ const activitiesData = [
         bestTime: { en: "Early morning or late afternoon", ms: "Awal pagi atau lewat petang" },
         duration: { en: "1-2 hours", ms: "1-2 jam" },
         bookingRequired: false,
-        image: "./assets/images/activities/melaka-botanical-garden.org&utm_campaign=api&utm_content=thumbnail",
+        image: "./assets/images/activities/melaka-botanical-garden.jpg",
         mapUrl: "https://maps.app.goo.gl/wQ1g5Z4w3d2W5f4h7",
         websiteUrl: ""
     },
@@ -293,7 +293,7 @@ const activitiesData = [
         bestTime: { en: "Evening or Rainy day", ms: "Petang atau Hari Hujan" },
         duration: { en: "2 hours", ms: "2 jam" },
         bookingRequired: false,
-        image: "./assets/images/activities/mitc-bowling.png",
+        image: "./assets/images/activities/mitc-bowling.jpg",
         mapUrl: "https://maps.app.goo.gl/9t8u7Y6b5a4V3c2b1",
         websiteUrl: ""
     }
