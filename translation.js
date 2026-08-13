@@ -1,4 +1,4 @@
-﻿// translation.js — All UI strings (EN/BM) and setLanguage / toggleLanguage
+// translation.js — All UI strings (EN/BM) and setLanguage / toggleLanguage
 
 const translations = {
     en: {
@@ -524,10 +524,10 @@ function setLanguage(lang) {
     const t = translations[lang];
     if (!t) return;
 
-    // Mapped navigation dictionary by data-tab attribute
+    // Mapped navigation dictionary by data-tab attribute or href
     const tabNavMap = {
         "activities-tab": { desktop: t.nav_activities, mobile: t.nav_activities },
-          "confession-tab": { desktop: t.nav_confessions, mobile: t.nav_confessions },
+        "confession-tab": { desktop: t.nav_confessions, mobile: t.nav_confessions },
         "archive-tab": { desktop: t.nav_archive, mobile: t.mobile_nav_archive },
         "calendar-tab": { desktop: t.nav_calendar, mobile: t.mobile_nav_calendar },
         "gpa-tab": { desktop: t.nav_gpa, mobile: t.mobile_nav_gpa },
@@ -541,24 +541,56 @@ function setLanguage(lang) {
         "support-tab": { desktop: t.nav_support, mobile: t.nav_support }
     };
 
+    const hrefNavMap = {
+        "calendar.html": { desktop: t.nav_calendar, mobile: t.mobile_nav_calendar },
+        "bus.html": { desktop: t.nav_buses, mobile: t.mobile_nav_buses },
+        "library.html": { desktop: t.nav_library, mobile: t.mobile_nav_library },
+        "health.html": { desktop: t.nav_health, mobile: t.mobile_nav_health },
+        "gpa.html": { desktop: t.nav_gpa, mobile: t.mobile_nav_gpa },
+        "scholarships.html": { desktop: t.nav_scholarships, mobile: t.mobile_nav_scholarships },
+        "exams.html": { desktop: t.nav_exams, mobile: t.mobile_nav_exams },
+        "wifi.html": { desktop: t.nav_links, mobile: t.mobile_nav_links },
+        "support.html": { desktop: t.nav_support, mobile: t.nav_support },
+        "activities.html": { desktop: t.nav_activities, mobile: t.nav_activities },
+        "marketplace.html": { desktop: t.nav_marketplace, mobile: t.mobile_nav_marketplace },
+        "guides.html": { desktop: t.nav_guides, mobile: t.mobile_nav_guides },
+        "index.html": { desktop: t.nav_confessions, mobile: t.nav_confessions },
+        "index.html#confession-tab": { desktop: t.nav_confessions, mobile: t.nav_confessions },
+        "index.html#calendar-tab": { desktop: t.nav_calendar, mobile: t.mobile_nav_calendar },
+        "index.html#gpa-tab": { desktop: t.nav_gpa, mobile: t.mobile_nav_gpa },
+        "index.html#exams-tab": { desktop: t.nav_exams, mobile: t.mobile_nav_exams },
+        "index.html#links-tab": { desktop: t.nav_links, mobile: t.mobile_nav_links },
+        "index.html#bus-tab": { desktop: t.nav_buses, mobile: t.mobile_nav_buses },
+        "index.html#marketplace-tab": { desktop: t.nav_marketplace, mobile: t.mobile_nav_marketplace },
+        "index.html#library-tab": { desktop: t.nav_library, mobile: t.mobile_nav_library },
+        "index.html#health-tab": { desktop: t.nav_health, mobile: t.mobile_nav_health },
+        "index.html#activities-tab": { desktop: t.nav_activities, mobile: t.nav_activities },
+        "index.html#scholarships-tab": { desktop: t.nav_scholarships, mobile: t.mobile_nav_scholarships },
+        "index.html#support-tab": { desktop: t.nav_support, mobile: t.nav_support }
+    };
+
     // 1. Sidebar nav items
     document.querySelectorAll(".sidebar .nav-menu .nav-item").forEach(item => {
         const tab = item.getAttribute("data-tab");
+        const href = item.getAttribute("href");
         if (tab && tabNavMap[tab]) {
             updateNodeText(item, tabNavMap[tab].desktop);
-        } else if (item.getAttribute("href") === "guides.html") {
-            updateNodeText(item, t.nav_guides);
+        } else if (href && hrefNavMap[href]) {
+            updateNodeText(item, hrefNavMap[href].desktop);
         }
     });
 
     // 2. Mobile bottom nav buttons & drawer buttons
     document.querySelectorAll(".mobile-bottom-nav .mobile-nav-btn, .mobile-drawer-grid .drawer-item-btn").forEach(btn => {
         const tab = btn.getAttribute("data-tab");
+        const href = btn.getAttribute("href");
         const span = btn.querySelector("span");
-        if (tab && span && tabNavMap[tab]) {
-            span.textContent = tabNavMap[tab].mobile;
-        } else if (btn.getAttribute("href") === "guides.html" && span) {
-            span.textContent = t.mobile_nav_guides;
+        if (span) {
+            if (tab && tabNavMap[tab]) {
+                span.textContent = tabNavMap[tab].mobile;
+            } else if (href && hrefNavMap[href]) {
+                span.textContent = hrefNavMap[href].mobile;
+            }
         }
     });
 
@@ -1208,7 +1240,7 @@ const scholarshipDict = {
 };
 
 function applyScholarshipTranslations() {
-    const cards = document.querySelectorAll('#scholarships-tab .scholarship-card, #stateScholarshipsResult .state-panel');
+    const cards = document.querySelectorAll('.scholarship-card, .state-panel, #scholarships-tab .scholarship-card, #stateScholarshipsResult .state-panel');
     cards.forEach(card => {
         const titleEl = card.querySelector('h3, h4');
         const descEl = card.querySelector('p');
