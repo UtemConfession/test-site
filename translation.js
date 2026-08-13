@@ -72,7 +72,7 @@ const translations = {
         opt_newyear: "New Year's Day (Jan 1, 2027)",
         opt_custom: "Set Custom Date...",
 
-        title_bus_transit: "UTeM Campus Shuttle Timetable (Semester Khas & Regular)",
+        title_bus_transit: "UTeM Campus Shuttle Timetable",
         label_next_departure: "Next Scheduled Departure:",
         label_note: "Note: Shuttle bus arrival times may vary based on traffic conditions on Lebuhraya Ayer Keroh. Please reach boarding points 5 minutes early.",
         th_departure: "Departure",
@@ -329,7 +329,7 @@ const translations = {
         opt_newyear: "Tahun Baru (1 Jan 2027)",
         opt_custom: "Tetapkan Tarikh Khas...",
 
-        title_bus_transit: "Jadual Masa Shuttle Kampus UTeM (Semester Khas & Biasa)",
+        title_bus_transit: "Jadual Bas Shuttle UTeM",
         label_next_departure: "Pelepasan Seterusnya:",
         label_note: "Nota: Masa ketibaan bas shuttle mungkin berbeza mengikut keadaan trafik di Lebuhraya Ayer Keroh. Sila berada di tempat menunggu 5 minit awal.",
         th_departure: "Pelepasan",
@@ -779,8 +779,8 @@ function setLanguage(lang) {
         : '<strong>Ingin menjual barangan terpakai atau mempromosikan servis anda?</strong> Hubungi admin di: <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--accent-gold); font-weight: 700;">utemconfessionpromax@duck.com</a>';
 
     // 7. Bus Transit (Minggu Semester Khas & Regular)
-    const busTitle = document.querySelector("#bus-tab .card-title");
-    if (busTitle) updateNodeText(busTitle, t.title_bus_transit || "UTeM Campus Shuttle Timetable (Semester Khas & Regular)");
+    const titleCampusBus = document.getElementById("title_campus_bus");
+    if (titleCampusBus) titleCampusBus.textContent = t.title_bus_transit || "UTeM Campus Shuttle Timetable";
 
     const labelRadarTitle = document.getElementById("labelRadarTitle");
     if (labelRadarTitle) labelRadarTitle.textContent = lang === "en" ? "UTeM Shuttle Route Radar" : "Radar Laluan Bas UTeM";
