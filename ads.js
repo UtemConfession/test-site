@@ -61,10 +61,16 @@
             '};';
         container.appendChild(optScript);
 
+        // Map specific keys to their required Adsterra CDN domains
+        var domain = 'www.highperformanceformat.com'; // default
+        if (key === '3f0e9d18402f36cd0e01379deb26a60b') {
+            domain = 'unprofessionalginger.com';
+        }
+
         // Create the invoke script
         var invokeScript = document.createElement('script');
         invokeScript.type = 'text/javascript';
-        invokeScript.src = 'https://www.highperformanceformat.com/' + key + '/invoke.js';
+        invokeScript.src = 'https://' + domain + '/' + key + '/invoke.js';
         invokeScript.async = true;
         container.appendChild(invokeScript);
     }
