@@ -93,8 +93,8 @@ const translations = {
         opt_dest_paya: "Paya Luboh - Route M16",
         bus_sources_label: "Official Data Sources & Reference Links:",
         label_m10a_details: "M10A Schedule & Operations:",
-        m10a_detail1: "<strong>Weekdays:</strong> Melaka Sentral ⇄ MITC (via Batu Berendam)",
-        m10a_detail2: "<strong>Weekends:</strong> Extends directly to Zoo Melaka & UTeM",
+        m10a_detail1: "<strong>Weekdays (Mon-Thu):</strong> Melaka Sentral ⇄ MITC (via Batu Berendam)",
+        m10a_detail2: "<strong>Weekends (Fri-Sun):</strong> Extends directly to Zoo Melaka & UTeM",
         m10a_detail3: "<strong>Hours:</strong> 6:00 AM – 8:00 PM (Cashless: TNG, Debit, QR)",
 
         title_calendar: "Academic Calendar (2026/2027)",
@@ -350,8 +350,8 @@ const translations = {
         opt_dest_paya: "Paya Luboh - Laluan M16",
         bus_sources_label: "Sumber Data Rasmi & Pautan Rujukan:",
         label_m10a_details: "Jadual & Operasi M10A:",
-        m10a_detail1: "<strong>Hari Bekerja:</strong> Melaka Sentral ⇄ MITC (melalui Batu Berendam)",
-        m10a_detail2: "<strong>Hujung Minggu:</strong> Dilanjutkan ke Zoo Melaka & UTeM",
+        m10a_detail1: "<strong>Isnin-Khamis:</strong> Melaka Sentral ⇄ MITC (melalui Batu Berendam)",
+        m10a_detail2: "<strong>Jumaat-Ahad:</strong> Dilanjutkan ke Zoo Melaka & UTeM",
         m10a_detail3: "<strong>Waktu:</strong> 6:00 AM – 8:00 PM (Tanpa Tunai: TNG, Kad Debit, QR)",
 
         title_calendar: "Kalendar Akademik (2026/2027)",
@@ -767,16 +767,26 @@ function setLanguage(lang) {
     const subMarketItems = document.getElementById("subMarketItems");
     if (subMarketItems) subMarketItems.textContent = lang === "en" ? "Buy & Sell Student Essentials" : "Beli & Jual Keperluan Pelajar";
 
+    const descMarketItems = document.getElementById("descMarketItems");
+    if (descMarketItems) descMarketItems.textContent = lang === "en" 
+        ? "Buy & sell student essentials directly with fellow UTeM students. From mechanical keyboards and electronics to textbooks and hostel gear." 
+        : "Beli & jual keperluan pelajar secara terus dengan rakan pelajar UTeM. Dari papan kekunci mekanikal dan barangan elektronik kepada buku teks dan kelengkapan asrama.";
+
     const titleMarketServices = document.getElementById("titleMarketServices");
     if (titleMarketServices) titleMarketServices.textContent = lang === "en" ? "🚘 Student Services Directory" : "🚘 Direktori Perkhidmatan Pelajar";
 
     const subMarketServices = document.getElementById("subMarketServices");
     if (subMarketServices) subMarketServices.textContent = lang === "en" ? "Campus Runners & Services" : "Pelari Kampus & Perkhidmatan";
 
+    const descMarketServices = document.getElementById("descMarketServices");
+    if (descMarketServices) descMarketServices.textContent = lang === "en" 
+        ? "Discover trusted student-run services around campus, including campus Grab drivers, personal shoppers, print runners, and project helpers." 
+        : "Temui perkhidmatan pelajar yang dipercayai di sekitar kampus, termasuk pemandu Grab kampus, pembeli peribadi (personal shopper), pelari cetakan (print runners), dan pembantu projek.";
+
     const sellerNoticeMarketplace = document.getElementById("sellerNoticeMarketplace");
     if (sellerNoticeMarketplace) sellerNoticeMarketplace.innerHTML = lang === "en"
-        ? '<strong>Want to list items or promote your student services?</strong> Feel free to contact admin email with your details at: <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--accent-gold); font-weight: 700;">utemconfessionpromax@duck.com</a>'
-        : '<strong>Ingin menjual barangan terpakai atau mempromosikan servis anda?</strong> Hubungi admin di: <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--accent-gold); font-weight: 700;">utemconfessionpromax@duck.com</a>';
+        ? 'Got something to offer or sell? Get listed here! 🚀 <br><span style="color: var(--text-secondary); font-size: 14px;">Send your info to our admin at: <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">utemconfessionpromax@duck.com</a></span>'
+        : 'Ada barang nak jual atau servis nak ditawarkan? Iklankan di sini! 🚀 <br><span style="color: var(--text-secondary); font-size: 14px;">Hantar butiran anda kepada admin di: <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">utemconfessionpromax@duck.com</a></span>';
 
     // 7. Bus Transit (Minggu Semester Khas & Regular)
     const titleCampusBus = document.getElementById("title_campus_bus");
