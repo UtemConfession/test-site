@@ -759,7 +759,7 @@ const translations = {
         gpaEstimationNote: "Note: Official final CGPA calculations follow the university grading policy on SMPWeb with credit-weighted quality points.",
 
         // --- Marketplace Tab (marketplace.html) ---
-        staticContactCard: "To list your items or freelance student services, submit your listing details via the official UCPM listing form."
+        staticContactCard: "Got something to sell or offering a service? 🚀 Get listed here! Drop us an email at utemconfessionpromax@duck.com"
     },
     ms: {
         nav_activities: "Aktiviti",
@@ -1519,7 +1519,7 @@ const translations = {
         gpaEstimationNote: "Nota: Pengiraan CGPA rasmi tertakluk kepada polisi penggredan universiti di SMPWeb mengikut nilai mata kualiti kredit.",
 
         // --- Marketplace Tab (marketplace.html) (BM) ---
-        staticContactCard: "Untuk menyenaraikan barangan atau perkhidmatan pelajar anda, hantar butiran melalui borang penyenaraian rasmi UCPM."
+        staticContactCard: "Ada barang nak letgo atau buat servis student? 🚀 Iklankan di sini! E-melkan butiran korang terus ke utemconfessionpromax@duck.com"
     }
 };
 
@@ -1828,8 +1828,8 @@ function setLanguage(lang) {
 
     const sellerNoticeMarketplace = document.getElementById("sellerNoticeMarketplace");
     if (sellerNoticeMarketplace) sellerNoticeMarketplace.innerHTML = lang === "en"
-        ? 'Got something to offer or sell? Get listed here! 🚀 <br><span style="color: var(--text-secondary); font-size: 14px;">Send your info to our admin at: <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">utemconfessionpromax@duck.com</a></span>'
-        : 'Ada barang nak jual atau servis nak ditawarkan? Iklankan di sini! 🚀 <br><span style="color: var(--text-secondary); font-size: 14px;">Hantar butiran anda kepada admin di: <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">utemconfessionpromax@duck.com</a></span>';
+        ? 'Got something to sell or offering a service? 🚀 Get listed here!<br><span style="color: var(--text-secondary); font-size: 14px;">Just drop us an email with your details at <a href="mailto:utemconfessionpromax@duck.com" style="color: #ff33cc; text-decoration: none; font-weight: 600;">utemconfessionpromax@duck.com</a></span>'
+        : 'Ada barang nak letgo atau buat servis student? 🚀 Iklankan di sini!<br><span style="color: var(--text-secondary); font-size: 14px;">E-melkan butiran korang terus ke admin di <a href="mailto:utemconfessionpromax@duck.com" style="color: #ff33cc; text-decoration: none; font-weight: 600;">utemconfessionpromax@duck.com</a></span>';
 
     // 7. Bus Transit (Minggu Semester Khas & Regular)
     const titleCampusBus = document.getElementById("title_campus_bus");
