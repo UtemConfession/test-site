@@ -67,6 +67,114 @@ function getReplyCount(reply) {
 }
 
 /**
+ * Detects topic keywords in confession content, reply, or tags and returns the most relevant student guide
+ */
+function getRelatedGuide(item) {
+    if (!item) return null;
+    const text = `${item.content || ""} ${item.tags || ""} ${item.reply || ""}`.toLowerCase();
+    
+    if (text.includes("sticker") || text.includes("spku") || text.includes("parking") || text.includes("pelekat") || text.includes("saman motor") || text.includes("saman kereta")) {
+        return {
+            title: "Student Vehicle Sticker (SPKU) & Parking Rules",
+            url: "guide-vehicle-sticker-parking.html",
+            icon: "🚗"
+        };
+    }
+    if (text.includes("hostel") || text.includes("kolej kediaman") || text.includes("merit") || text.includes("asrama") || text.includes("satelit") || text.includes("al-jazari") || text.includes("ibnu battuta")) {
+        return {
+            title: "Hostel & Kolej Kediaman Merit System Guide",
+            url: "guide-hostel-kolej-kediaman-merit.html",
+            icon: "🏢"
+        };
+    }
+    if (text.includes("gpa") || text.includes("cgpa") || text.includes("pointer") || text.includes("anugerah dekan") || text.includes("ulang gred") || text.includes("kedudukan bersyarat") || text.includes("probation")) {
+        return {
+            title: "UTeM GPA/CGPA Calculator & Grading Guide",
+            url: "guide-gpa-calculator.html",
+            icon: "🎓"
+        };
+    }
+    if (text.includes("ptptn") || text.includes("waiver") || text.includes("pinjaman") || text.includes("first class") || text.includes("biasiswa")) {
+        return {
+            title: "PTPTN Loan & First Class Exemption Guide",
+            url: "guide-ptptn-loan.html",
+            icon: "💰"
+        };
+    }
+    if (text.includes("past year") || text.includes("exam paper") || text.includes("kertas exam") || text.includes("final exam") || text.includes("peperiksaan") || text.includes("study week")) {
+        return {
+            title: "Past Year Exam Papers & Revision Strategies",
+            url: "guide-past-year-exams.html",
+            icon: "📝"
+        };
+    }
+    if (text.includes("add drop") || text.includes("course registration") || text.includes("daftar subjek") || text.includes("smpweb") || text.includes("prasyarat") || text.includes("tambah gugur")) {
+        return {
+            title: "Course Registration & Add/Drop SMPWeb Guide",
+            url: "guide-course-registration-add-drop.html",
+            icon: "📋"
+        };
+    }
+    if (text.includes("fyp") || text.includes("final year project") || text.includes("projek sarjana muda") || text.includes("psm") || text.includes("supervisor")) {
+        return {
+            title: "Final Year Project (FYP) Complete Survival Guide",
+            url: "guide-final-year-project-fyp.html",
+            icon: "🔬"
+        };
+    }
+    if (text.includes("internship") || text.includes("latihan industri") || text.includes("li ") || text.includes("intern ")) {
+        return {
+            title: "Internship & Industrial Training (LI) Guide",
+            url: "guide-internship-industrial-training.html",
+            icon: "💼"
+        };
+    }
+    if (text.includes("sewa") || text.includes("rumah sewa") || text.includes("off-campus") || text.includes("taman tasik utama")) {
+        return {
+            title: "Off-Campus House Rental & Roommate Guide",
+            url: "guide-off-campus-rental.html",
+            icon: "🏠"
+        };
+    }
+    if (text.includes("wifi") || text.includes("eduroam") || text.includes("vpn") || text.includes("internet utem")) {
+        return {
+            title: "UTeM Wi-Fi, Eduroam & IT Services Guide",
+            url: "guide-it-software-eduroam.html",
+            icon: "📶"
+        };
+    }
+    if (text.includes("makan") || text.includes("budget") || text.includes("jimat") || text.includes("duit poket")) {
+        return {
+            title: "Student Budgeting, Food & Cost of Living Guide",
+            url: "guide-budget-living-food.html",
+            icon: "🍛"
+        };
+    }
+    if (text.includes("tempat study") || text.includes("study cafe") || text.includes("plh") || text.includes("laman hikmah")) {
+        return {
+            title: "Top Study Places & Late Night Cafes in Melaka",
+            url: "guide-top-10-study-places.html",
+            icon: "☕"
+        };
+    }
+    if (text.includes("bas") || text.includes("bus") || text.includes("transit") || text.includes("jadual bas")) {
+        return {
+            title: "Campus Bus Transit & Melaka Public Transport Guide",
+            url: "guide-campus-bus-transit.html",
+            icon: "🚌"
+        };
+    }
+    if (text.includes("freshman") || text.includes("junior") || text.includes("mhs") || text.includes("orientasi") || text.includes("first year") || text.includes("intake")) {
+        return {
+            title: "UTeM Freshman Survival Guide & Campus Life",
+            url: "guide-freshman-survival.html",
+            icon: "🎒"
+        };
+    }
+    return null;
+}
+
+/**
  * Opens Read More Modal displaying full confession content & metadata
  */
 function openArchiveModal(item) {
@@ -77,6 +185,7 @@ function openArchiveModal(item) {
 
     const categoryBadgeColor = getCategoryColor(item.category);
     const replyCount = getReplyCount(item.reply);
+    const relatedGuide = getRelatedGuide(item);
 
     let replyHtml = "";
     if (item.reply) {
@@ -90,6 +199,22 @@ function openArchiveModal(item) {
         `;
     }
 
+    let guideHtml = "";
+    if (relatedGuide) {
+        guideHtml = `
+            <div style="margin-top: 14px; padding: 10px 14px; background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <div style="font-size: 0.82rem; color: var(--text-secondary, #cbd5e1); display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 1rem;">${relatedGuide.icon}</span>
+                    <strong style="color: var(--accent-gold, #d4af37);">Related Student Guide:</strong>
+                    <span>${escapeHtml(relatedGuide.title)}</span>
+                </div>
+                <a href="${escapeHtml(relatedGuide.url)}" style="font-size: 0.8rem; font-weight: 700; color: #000000; background: linear-gradient(135deg, #d4af37 0%, #ffeb3b 100%); text-decoration: none; padding: 4px 12px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25);" target="_blank">
+                    Read Guide ➔
+                </a>
+            </div>
+        `;
+    }
+
     body.innerHTML = `
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
             <span style="background:${categoryBadgeColor.bg}; color:${categoryBadgeColor.text}; font-weight:700; font-size:0.8rem; padding:4px 12px; border-radius:12px; border: 1px solid ${categoryBadgeColor.border};">
@@ -99,6 +224,7 @@ function openArchiveModal(item) {
         </div>
         <div style="font-size: 0.95rem; line-height: 1.65; color: var(--text-secondary, #cbd5e1); white-space: pre-wrap; margin-bottom: 14px; border-left: 3px solid var(--accent-gold, #d4af37); padding-left: 14px;">${escapeHtml(item.content)}</div>
         ${replyHtml}
+        ${guideHtml}
         ${item.telegramLink ? `
             <div style="display:flex; justify-content:flex-end; align-items:center; border-top:1px solid var(--border-color, rgba(255,255,255,0.1)); padding-top:12px; margin-top:16px; font-size:0.85rem;">
                 <a href="${escapeHtml(item.telegramLink)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent-gold, #d4af37); text-decoration:none; font-weight:700; display:inline-flex; align-items:center; gap:6px;">✈️ View Original Post</a>
@@ -245,10 +371,20 @@ function renderArchiveConfessions() {
             ">${item.reply ? (replyCount > 1 ? "View Confession & Replies ➔" : "View Confession & Reply ➔") : "Read More ➔"}</button>
         ` : "";
 
+        const cardRelatedGuide = getRelatedGuide(item);
+        let cardGuideHtml = cardRelatedGuide ? `
+            <div style="margin-top: 8px;">
+                <a href="${escapeHtml(cardRelatedGuide.url)}" class="archive-card-guide-link" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.73rem; font-weight: 600; color: var(--accent-gold, #d4af37); background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.22); padding: 3px 8px; border-radius: 6px; text-decoration: none; transition: all 0.2s;" onclick="event.stopPropagation();">
+                    <span>${cardRelatedGuide.icon}</span> <span>${escapeHtml(cardRelatedGuide.title)}</span> ➔
+                </a>
+            </div>
+        ` : "";
+
         card.innerHTML = `
             <div>
                 ${cardHeaderHtml}
                 <p class="archive-card-content" style="margin: 0; font-size: 0.88rem; color: var(--text-secondary, #cbd5e1); line-height: 1.55; white-space: pre-wrap;">${escapeHtml(displayText)}</p>
+                ${cardGuideHtml}
                 ${readMoreBtnHtml}
             </div>
         `;
