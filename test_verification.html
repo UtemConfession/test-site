@@ -50,6 +50,39 @@
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
     <script src="components.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const weather = document.getElementById('campusWeatherPill');
+        const telegram = document.querySelector('.telegram-widget-card');
+        const confession = document.querySelector('.confession-layout .card:nth-child(1)');
+        const guidelines = document.querySelector('.confession-layout .card:nth-child(2)');
+
+        const wRect = weather.getBoundingClientRect();
+        const tRect = telegram.getBoundingClientRect();
+        const cRect = confession.getBoundingClientRect();
+        const gRect = guidelines.getBoundingClientRect();
+
+        const gap1 = tRect.top - wRect.bottom;
+        const gap2 = cRect.top - tRect.bottom;
+        const gap3 = gRect.top - cRect.bottom;
+
+        const results = {
+            gap1_weather_to_telegram: gap1,
+            gap2_telegram_to_confession: gap2,
+            gap3_confession_to_guidelines: gap3,
+            weatherBottom: wRect.bottom,
+            telegramTop: tRect.top,
+            telegramBottom: tRect.bottom,
+            confessionTop: cRect.top,
+            confessionBottom: cRect.bottom,
+            guidelinesTop: gRect.top
+        };
+        console.log("===VERIFICATION_RESULTS===" + JSON.stringify(results));
+        document.title = "VERIFY: " + gap1 + " | " + gap2 + " | " + gap3;
+    }, 500);
+});
+</script>
 </head>
 
 <body>
@@ -70,8 +103,8 @@
                 <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 6px;">
                     <div id="campusWeatherPill"
                         style="display: inline-flex; align-items: center; gap: 8px; background: rgba(13, 21, 39, 0.85); border: 1px solid var(--border-color); padding: 5px 16px; border-radius: 30px; font-size: 13.5px; font-weight: 600; color: var(--text-primary); backdrop-filter: blur(10px); width: fit-content; max-width: 100%; box-sizing: border-box; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                        <span id="weatherIcon" style="font-size: 16px;">⛅</span>
-                        <span id="weatherText">Durian Tunggal / Ayer Keroh: 31°C Fair</span>
+                        <span id="weatherIcon" style="font-size: 16px;">â›…</span>
+                        <span id="weatherText">Durian Tunggal / Ayer Keroh: 31Â°C Fair</span>
                         <span
                             style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px;">Live Weather</span>
                     </div>
@@ -123,9 +156,9 @@
 
                         <div id="googleLoginContainer" class="google-auth-box">
                             <div id="telegramInAppNotice" class="telegram-browser-alert" style="display: none;">
-                                📲 <strong>Opened inside Telegram / Social App?</strong><br>
+                                ðŸ“² <strong>Opened inside Telegram / Social App?</strong><br>
                                 Google blocks sign-in inside embedded app browsers.<br>
-                                <strong>Tap the 3 dots (...) at top right ➔ select "Open in Safari /
+                                <strong>Tap the 3 dots (...) at top right âž” select "Open in Safari /
                                     Chrome"</strong> to sign in smoothly!
                             </div>
 
@@ -246,7 +279,7 @@
                                     </div>
                                     <button id="removeImageBtn" type="button" class="btn btn-sm btn-secondary"
                                         style="padding: 3px 8px; font-size: 10px; color: #ef4444; border-color: rgba(239,68,68,0.3);">
-                                        ✕ Remove
+                                        âœ• Remove
                                     </button>
                                 </div>
                             </div>
@@ -335,7 +368,7 @@
                     <a href="guide-gpa-calculator.html"
                         style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
                         <strong
-                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">🎓
+                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">ðŸŽ“
                             UTeM GPA Calculator & Scale</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Calculate semester GPA, target Dean's
                             List (Anugerah Dekan), and understand probation thresholds.</span>
@@ -343,7 +376,7 @@
                     <a href="guide-campus-bus-transit.html"
                         style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
                         <strong
-                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">🚌
+                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">ðŸšŒ
                             Shuttle Bus Routes & Schedules</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Navigate shuttle loops between Kampus
                             Induk (Durian Tunggal), Kampus Teknologi (Ayer Keroh), and hostels.</span>
@@ -351,7 +384,7 @@
                     <a href="guide-freshman-survival.html"
                         style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
                         <strong
-                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">📖
+                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">ðŸ“–
                             Freshman Onboarding Guide</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Access Perpustakaan Laman Hikmah (PLH),
                             PKU medical clinic services, and Eduroam Wi-Fi setup.</span>
@@ -359,7 +392,7 @@
                     <a href="guide-past-year-exams.html"
                         style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
                         <strong
-                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">📝
+                            style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">ðŸ“
                             Past Year Exam Strategies</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Revision strategies for FTMK, FKE, FKM,
                             and FPTT faculties plus official examination hall rules.</span>
@@ -400,7 +433,7 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="authentication.min.js" defer></script>
 
-    <!-- Utilities (must load first — helpers used by all modules) -->
+    <!-- Utilities (must load first â€” helpers used by all modules) -->
     <script src="utils.min.js" defer></script>
     <script src="translation.min.js" defer></script>
 

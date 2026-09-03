@@ -1646,7 +1646,8 @@ footer {
         gap: 0px !important;
     }
     .telegram-widget-card {
-        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 6px !important;
         padding: 6px 8px !important;
         border-radius: 10px !important;
         gap: 6px !important;
@@ -1801,7 +1802,8 @@ footer {
 
     /* 6. Confession form extra compact */
     .confession-layout {
-        gap: 0px !important;
+        margin-top: 0 !important;
+        gap: 6px !important;
     }
 
     .google-auth-box {
@@ -2398,7 +2400,7 @@ footer {
     border: 1px solid rgba(42, 171, 238, 0.3) !important;
     border-radius: 16px !important;
     padding: 16px 20px !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 20px;
     backdrop-filter: blur(12px) !important;
     transition: var(--transition) !important;
     gap: 16px !important;
@@ -2492,6 +2494,8 @@ footer {
         align-items: center !important;
         justify-content: space-between !important;
         padding: 12px 14px !important;
+        margin-top: 0 !important;
+        margin-bottom: 6px !important;
     }
     .telegram-widget-left {
         gap: 10px !important;
