@@ -210,9 +210,156 @@ if (calendarSearch) {
     });
 }
 
-// Initial render
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => renderCalendarEvents());
-} else {
-    renderCalendarEvents();
+// --- 1-CLICK CALENDAR SYNC (.ICS GENERATOR) ---
+function exportCalendarICS() {
+    const icsLines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//UTeM Confessions Pro Max//Academic Calendar//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "X-WR-CALNAME:UTeM Academic Calendar 2026/2027",
+        "X-WR-TIMEZONE:Asia/Kuala_Lumpur"
+    ];
+
+    const formatDateForICS = (dateStr) => dateStr.replace(/-/g, "");
+
+    const addDays = (dateStr, days) => {
+        const d = new Date(dateStr);
+        d.setDate(d.getDate() + days);
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, "0");
+        const dd = String(d.getDate()).padStart(2, "0");
+        return `${yyyy}${mm}${dd}`;
+    };
+
+    academicEvents.forEach((ev, idx) => {
+        const uid = `utem-cal-${idx}-${formatDateForICS(ev.startDate)}@ucpm`;
+        const dtStart = formatDateForICS(ev.startDate);
+        const dtEnd = addDays(ev.endDate, 1);
+        const summary = (ev.title || "").replace(/,/g, "\\,");
+        const description = (ev.desc || ev.title || "").replace(/,/g, "\\,");
+
+        icsLines.push(
+            "BEGIN:VEVENT",
+            `UID:${uid}`,
+            `DTSTAMP:${formatDateForICS(ev.startDate)}T000000Z`,
+            `DTSTART;VALUE=DATE:${dtStart}`,
+            `DTEND;VALUE=DATE:${dtEnd}`,
+            `SUMMARY:${summary}`,
+            `DESCRIPTION:${description}`,
+            "LOCATION:Universiti Teknikal Malaysia Melaka (UTeM)",
+            "STATUS:CONFIRMED",
+            "END:VEVENT"
+        );
+    });
+
+    icsLines.push("END:VCALENDAR");
+
+    const blob = new Blob([icsLines.join("\r\n")], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "UTeM_Academic_Calendar_2026_2027.ics");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    if (typeof showToast === "function") {
+        showToast("Calendar downloaded! Open to import into Google or Apple Calendar.", "success", 4000);
+    }
 }
+
+const syncCalendarBtn = document.getElementById("syncCalendarBtn");
+if (syncCalendarBtn) {
+    syncCalendarBtn.addEventListener("click", exportCalendarICS);
+}
+
+// Dynamic Academic Milestone Countdown Pill
+function renderMilestonePill() {
+    const pill = document.getElementById("calendarMilestonePill");
+    const icon = document.getElementById("milestoneIcon");
+    const text = document.getElementById("milestoneText");
+    const badge = document.getElementById("milestoneBadge");
+    if (!pill || !text) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const isMs = (typeof currentLang !== 'undefined' && currentLang === 'ms') || document.documentElement.lang === 'ms';
+    const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    const monthsMs = ["Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogo", "Sept", "Okt", "Nov", "Dis"];
+    const months = isMs ? monthsMs : monthsEn;
+
+    function formatShortDate(dateStr) {
+        const d = new Date(dateStr);
+        return `${d.getDate()} ${months[d.getMonth()]}`;
+    }
+
+    const majorMilestones = academicEvents.filter(ev => ev.category === "academic" || ev.category === "break" || ev.category === "exam");
+
+    let currentEvent = null;
+    let nextEvent = null;
+
+    for (const ev of majorMilestones) {
+        const start = new Date(ev.startDate);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(ev.endDate);
+        end.setHours(23, 59, 59, 999);
+
+        if (today >= start && today <= end) {
+            currentEvent = ev;
+        } else if (today < start && !nextEvent) {
+            nextEvent = ev;
+        }
+    }
+
+    if (currentEvent && currentEvent.category === "academic") {
+        if (nextEvent) {
+            const nextStart = new Date(nextEvent.startDate);
+            nextStart.setHours(0, 0, 0, 0);
+            const daysLeft = Math.ceil((nextStart - today) / (1000 * 60 * 60 * 24));
+            if (icon) icon.textContent = "📚";
+            const dayWord = isMs ? "hari" : (daysLeft === 1 ? "day" : "days");
+            text.textContent = isMs 
+                ? `Fasa Kuliah: ${nextEvent.title} dlm ${daysLeft} ${dayWord} (${formatShortDate(nextEvent.startDate)})`
+                : `Lecture Phase: ${nextEvent.title} in ${daysLeft} ${dayWord} (${formatShortDate(nextEvent.startDate)})`;
+        }
+    } else if (currentEvent && (currentEvent.category === "break" || currentEvent.category === "exam")) {
+        if (nextEvent) {
+            const nextStart = new Date(nextEvent.startDate);
+            nextStart.setHours(0, 0, 0, 0);
+            const daysLeft = Math.ceil((nextStart - today) / (1000 * 60 * 60 * 24));
+            if (icon) icon.textContent = currentEvent.category === "break" ? "🏖️" : "📝";
+            const dayWord = isMs ? "hari" : (daysLeft === 1 ? "day" : "days");
+            text.textContent = isMs
+                ? `${currentEvent.title}: ${nextEvent.title} dlm ${daysLeft} ${dayWord} (${formatShortDate(nextEvent.startDate)})`
+                : `${currentEvent.title}: ${nextEvent.title} in ${daysLeft} ${dayWord} (${formatShortDate(nextEvent.startDate)})`;
+        }
+    } else if (nextEvent) {
+        const nextStart = new Date(nextEvent.startDate);
+        nextStart.setHours(0, 0, 0, 0);
+        const daysLeft = Math.ceil((nextStart - today) / (1000 * 60 * 60 * 24));
+        if (icon) icon.textContent = "🌴";
+        const dayWord = isMs ? "hari" : (daysLeft === 1 ? "day" : "days");
+        text.textContent = isMs
+            ? `Cuti Semester: Sem 1 bermula dlm ${daysLeft} ${dayWord} (${formatShortDate(nextEvent.startDate)})`
+            : `Semester Break: Sem 1 begins in ${daysLeft} ${dayWord} (${formatShortDate(nextEvent.startDate)})`;
+    }
+
+    if (badge) badge.textContent = isMs ? "Pencapaian" : "Milestone";
+}
+
+// Initial render
+function initCalendar() {
+    renderCalendarEvents();
+    renderMilestonePill();
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCalendar);
+} else {
+    initCalendar();
+}
+

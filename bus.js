@@ -352,11 +352,26 @@ function updateM10ANextDeparture() {
     }
 }
 
+function setHomeTickerRoute(routeKey) {
+    let code = "KI";
+    if (routeKey === "kt") code = "KT";
+    else if (routeKey === "ep") code = "EP";
+    else if (routeKey === "m10a") code = "M10A";
+    else if (routeKey === "satria_regular") code = "Satria";
+    else if (routeKey === "lestari_regular") code = "Lestari";
+    else code = "KI";
+    try { localStorage.setItem("ucpm_active_bus_route", code); } catch (e) {}
+}
+
 document.querySelectorAll(".bus-route-pill").forEach(pill => {
+    const route = pill.getAttribute("data-route");
+    pill.addEventListener("mouseenter", () => setHomeTickerRoute(route));
     pill.addEventListener("click", () => {
         document.querySelectorAll(".bus-route-pill").forEach(p => p.classList.remove("active"));
         pill.classList.add("active");
-        currentBusRoute = pill.getAttribute("data-route");
+        currentBusRoute = route;
+        try { localStorage.setItem("ucpm_fav_bus_route", currentBusRoute); } catch (e) {}
+        setHomeTickerRoute(route);
         updateBusScheduleDisplay();
     });
 });
@@ -367,9 +382,6 @@ function refreshAllBusSchedules() {
     updateM10ANextDeparture();
 }
 
-refreshAllBusSchedules();
-setInterval(refreshAllBusSchedules, 60000);
-
 // --- SUB-TAB & SEMESTER TOGGLE EVENT LISTENERS ---
 const busTabInternal = document.getElementById("busTabInternal");
 const busTabPublic   = document.getElementById("busTabPublic");
@@ -377,18 +389,24 @@ const panelInternal  = document.getElementById("panelInternalShuttle");
 const panelPublic    = document.getElementById("panelPublicBus");
 
 if (busTabInternal && busTabPublic && panelInternal && panelPublic) {
+    busTabInternal.addEventListener("mouseenter", () => setHomeTickerRoute(currentBusRoute));
     busTabInternal.addEventListener("click", () => {
         busTabInternal.classList.add("active");
         busTabPublic.classList.remove("active", "active-pink");
         panelInternal.style.display = "block";
         panelPublic.style.display   = "none";
+        try { localStorage.setItem("ucpm_bus_active_tab", "internal"); } catch (e) {}
+        setHomeTickerRoute(currentBusRoute);
     });
 
+    busTabPublic.addEventListener("mouseenter", () => setHomeTickerRoute("m10a"));
     busTabPublic.addEventListener("click", () => {
         busTabPublic.classList.add("active", "active-pink");
         busTabInternal.classList.remove("active");
         panelPublic.style.display   = "block";
         panelInternal.style.display = "none";
+        try { localStorage.setItem("ucpm_bus_active_tab", "public"); } catch (e) {}
+        setHomeTickerRoute("m10a");
     });
 }
 
@@ -418,3 +436,32 @@ if (semToggleSpecial && semToggleRegular && pillsSpecialSem && pillsRegularSem) 
         if (firstPill) firstPill.click();
     });
 }
+
+// Restore saved user preferences
+try {
+    const savedTab = localStorage.getItem("ucpm_bus_active_tab");
+    if (savedTab === "public" && busTabPublic) {
+        busTabPublic.click();
+    }
+
+    const savedRoute = localStorage.getItem("ucpm_fav_bus_route");
+    if (savedRoute && busRoutesData[savedRoute]) {
+        const targetPill = document.querySelector(`.bus-route-pill[data-route="${savedRoute}"]`);
+        if (targetPill) {
+            const parent = targetPill.closest("#pillsSpecialSem, #pillsRegularSem");
+            if (parent && parent.id === "pillsRegularSem" && semToggleRegular) {
+                semToggleRegular.classList.add("active");
+                if (semToggleSpecial) semToggleSpecial.classList.remove("active");
+                if (pillsRegularSem) pillsRegularSem.style.display = "flex";
+                if (pillsSpecialSem) pillsSpecialSem.style.display = "none";
+            }
+            document.querySelectorAll(".bus-route-pill").forEach(p => p.classList.remove("active"));
+            targetPill.classList.add("active");
+            currentBusRoute = savedRoute;
+        }
+    }
+} catch (e) {}
+
+refreshAllBusSchedules();
+setInterval(refreshAllBusSchedules, 60000);
+
