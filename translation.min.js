@@ -120,14 +120,14 @@ const translations = {
         opt_newyear: "New Year's Day (Jan 1, 2027)",
         opt_custom: "Set Custom Date...",
 
-        title_bus_transit: "UTeM Campus Shuttle Timetable",
+        title_bus_transit: "UTeM Bus Timetable",
         label_next_departure: "Next Scheduled Departure:",
         label_note: "Note: Shuttle bus arrival times may vary based on traffic conditions on Lebuhraya Ayer Keroh. Please reach boarding points 5 minutes early.",
         th_departure: "Departure",
         th_day_type: "Days",
         th_status: "Status",
 
-        title_public_bus: "BAS.MY Bus M10A Official Timetable (Pink Bus)",
+        title_public_bus: "Pink Bus M10A Official Timetable",
         desc_public_bus: "Public bus service operating between Melaka Sentral ⇄ Batu Berendam ⇄ MITC ⇄ Zoo Melaka ⇄ UTeM Main Campus.",
         label_route_timeline: "M10A Route Stops",
         label_weekend: "Weekend Only",
@@ -714,8 +714,8 @@ const translations = {
         descCoffee: "Keep our servers running smoothly and support continuous improvements to the campus transit tracker, exam archives, and interactive tools.",
         noticeKofiCurrency: "Tips and donations directly help fund server hosting, domain renewals, and API bandwidth costs.",
 
-        updatesTitle: "Campus & Platform Updates",
-        updatesSubtitle: "Stay informed with the latest UTeM campus notices, academic timetable releases, bus schedule revisions, and new feature rollouts on UCPM.",
+        updatesTitle: "UCPM Web Updates",
+        updatesSubtitle: "Stay informed with the latest feature releases, enhancements, UI refinements, and bug fixes across the UCPM web platform.",
 
         descMarketItems: "Buy and sell pre-loved textbooks, lab coats, drawing sets, electronics, and dorm appliances safely within the UTeM student community.",
         descMarketServices: "Discover freelance student services across campus including document printing, room moving, device repair, photography, and tutoring.",
@@ -733,12 +733,12 @@ const translations = {
         drawerSupport: "Support Us",
 
         busTabInternal: "🚌 Campus Shuttle",
-        busTabPublic: "💖 Bus M10A Pink Bus",
-        title_campus_bus: "UTeM Campus Shuttle Timetable",
+        busTabPublic: "💖 M10A Pink Bus",
+        title_campus_bus: "UTeM Bus Timetable",
         semToggleSpecial: "📌 Special Semester",
         semToggleRegular: "🗓️ Regular Semester",
-        labelRadarTitle: "UTeM Shuttle Route Radar",
-        titlePublicBus: "Bus M10A Pink Bus",
+        labelRadarTitle: "UTeM Bus Route",
+        titlePublicBus: "Pink Bus M10A Official Timetable",
         m10aLiveBadge: "Weekend Service to UTeM",
         labelRouteTimeline: "M10A Route Stops",
         labelWeekend1: "Fri-Sun Only",
@@ -943,14 +943,14 @@ const translations = {
         opt_newyear: "Tahun Baru (1 Jan 2027)",
         opt_custom: "Tetapkan Tarikh Khas...",
 
-        title_bus_transit: "Jadual Bas Shuttle UTeM",
+        title_bus_transit: "Jadual Bas UTeM",
         label_next_departure: "Pelepasan Seterusnya:",
         label_note: "Nota: Masa ketibaan bas shuttle mungkin berbeza mengikut keadaan trafik di Lebuhraya Ayer Keroh. Sila berada di tempat menunggu 5 minit awal.",
         th_departure: "Pelepasan",
         th_day_type: "Hari",
         th_status: "Status",
 
-        title_public_bus: "Jadual Masa Rasmi Bas M10A BAS.MY (Bas Pink)",
+        title_public_bus: "Jadual Rasmi Bas Pink M10A",
         desc_public_bus: "Perkhidmatan bas awam beroperasi antara Melaka Sentral ⇄ Batu Berendam ⇄ MITC ⇄ Zoo Melaka ⇄ Kampus Induk UTeM.",
         label_route_timeline: "Hentian Laluan M10A",
         label_weekend: "Hujung Minggu Sahaja",
@@ -1550,8 +1550,8 @@ const translations = {
         noticeKofiCurrency: "Sumbangan anda membantu menampung kos pengehosan pelayan, pembaharuan domain, dan lebar jalur API.",
 
         // --- Updates Tab (updates.html) (BM) ---
-        updatesTitle: "Kemas Kini Kampus & Platform",
-        updatesSubtitle: "Ketahui notis terkini kampus UTeM, pengumuman jadual akademik, pindaan jadual bas shuttle, dan ciri-ciri baharu di UCPM.",
+        updatesTitle: "Kemas Kini Laman Web UCPM",
+        updatesSubtitle: "Ketahui pelancaran ciri baharu, peningkatan sistem, penambahbaikan antara muka, dan pembaikan pepijat di platform web UCPM.",
 
         // --- Marketplace Tab (marketplace.html) (BM) ---
         descMarketItems: "Jual beli buku teks terpakai, kot makmal, set lukisan teknikal, peranti elektronik, dan kelengkapan bilik asrama secara selamat dalam kalangan warga UTeM.",
@@ -1575,11 +1575,11 @@ const translations = {
         // --- Bus Tab UI Elements (bus.html) (BM) ---
         busTabInternal: "🚌 Bas Shuttle Kampus",
         busTabPublic: "💖 Bas Pink M10A",
-        title_campus_bus: "Jadual Bas Shuttle Kampus UTeM",
+        title_campus_bus: "Jadual Bas UTeM",
         semToggleSpecial: "📌 Semester Khas",
         semToggleRegular: "🗓️ Semester Biasa",
-        labelRadarTitle: "Radar Laluan Bas Shuttle UTeM",
-        titlePublicBus: "Bas Pink M10A",
+        labelRadarTitle: "Laluan Bas UTeM",
+        titlePublicBus: "Jadual Rasmi Bas Pink M10A",
         m10aLiveBadge: "Perkhidmatan Hujung Minggu ke UTeM",
         labelRouteTimeline: "Hentian Laluan M10A",
         labelWeekend1: "Jumaat-Ahad Sahaja",
@@ -1675,6 +1675,7 @@ let currentLang = localStorage.getItem("lang") || "en";
 
 function setLanguage(lang) {
     currentLang = lang;
+    document.documentElement.lang = lang;
     const t = translations[lang];
     if (!t) return;
 
@@ -1984,10 +1985,10 @@ function setLanguage(lang) {
 
     // 7. Bus Transit (Minggu Semester Khas & Regular)
     const titleCampusBus = document.getElementById("title_campus_bus");
-    if (titleCampusBus) titleCampusBus.textContent = t.title_bus_transit || "UTeM Campus Shuttle Timetable";
+    if (titleCampusBus) titleCampusBus.textContent = t.title_bus_transit || "UTeM Bus Timetable";
 
     const labelRadarTitle = document.getElementById("labelRadarTitle");
-    if (labelRadarTitle) labelRadarTitle.textContent = lang === "en" ? "UTeM Shuttle Route Radar" : "Radar Laluan Bas UTeM";
+    if (labelRadarTitle) labelRadarTitle.textContent = lang === "en" ? "UTeM Bus Route" : "Laluan Bas UTeM";
 
     document.querySelectorAll(".bus-route-pill").forEach(pill => {
         const routeKey = pill.getAttribute("data-route");
@@ -1999,7 +2000,7 @@ function setLanguage(lang) {
         else if (routeKey === "lestari_regular") pill.textContent = "Lestari ⇄ Fakulti";
     });
 
-    const busThs = document.querySelectorAll("#bus-tab .gpa-table th");
+    const busThs = document.querySelectorAll("#bus-tab .bus-schedule-table th, #bus-tab .gpa-table th");
     if (busThs.length >= 3) {
         busThs[0].textContent = t.th_departure || "Departure";
         busThs[1].textContent = t.th_day_type || "Days";
@@ -2013,7 +2014,7 @@ function setLanguage(lang) {
     if (departureLabel) departureLabel.textContent = t.label_next_departure;
 
     const titlePublicBus = document.getElementById("titlePublicBus");
-    if (titlePublicBus) titlePublicBus.textContent = t.title_public_bus || "Bus M10A Pink Bus";
+    if (titlePublicBus) titlePublicBus.textContent = t.title_public_bus || "Pink Bus M10A Official Timetable";
 
     const descPublicBus = document.getElementById("descPublicBus");
     if (descPublicBus) descPublicBus.textContent = t.desc_public_bus;
@@ -2455,6 +2456,16 @@ function setLanguage(lang) {
         }
         try { applyScholarshipTranslations(); } catch (err) { console.warn('Scholarship translation error:', err); }
         try { if(typeof refreshActivitiesTranslations === 'function') refreshActivitiesTranslations(); } catch (err) { console.warn('Activities translation error:', err); }
+        if (typeof renderMilestonePill === 'function') renderMilestonePill();
+        else if (typeof window.renderMilestonePill === 'function') window.renderMilestonePill();
+        if (typeof initExamSeasonPill === 'function') initExamSeasonPill();
+        else if (typeof window.initExamSeasonPill === 'function') window.initExamSeasonPill();
+        if (typeof initLibraryHoursPill === 'function') initLibraryHoursPill();
+        else if (typeof window.initLibraryHoursPill === 'function') window.initLibraryHoursPill();
+        if (typeof initPkuHoursPill === 'function') initPkuHoursPill();
+        else if (typeof window.initPkuHoursPill === 'function') window.initPkuHoursPill();
+        if (typeof updateUnitMelStatus === 'function') updateUnitMelStatus();
+        else if (typeof window.updateUnitMelStatus === 'function') window.updateUnitMelStatus();
     } catch (e) {
         console.warn("Dynamic component translation warning:", e);
     }

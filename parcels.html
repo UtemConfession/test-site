@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=5.4">
+    <link rel="stylesheet" href="style.min.css?v=5.7">
 
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1444529930367815"
@@ -78,21 +78,24 @@
         <!-- Main Content Area -->
         <main class="main-content">
 
+            <!-- Dynamic Unit Mel Parcel Hub Smart Pill -->
+            <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 6px;">
+                <div id="parcelHoursPill" class="top-smart-pill glow-parcel-closed" title="Click to view detailed Unit Mel parcel pickup hours & drop radar">
+                    <span id="parcelPillIcon" style="font-size: 16px;">&#x1F512;</span>
+                    <span id="parcelPillText">Closed Today &middot; Reopens Mon 8:00 AM</span>
+                    <span id="parcelPillBadge" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px;">Weekend</span>
+                </div>
+            </div>
+
             <!-- CARD 1: HERO & LIVE UNIT MEL STATUS -->
             <div class="card" style="margin-bottom: 24px; padding: 26px 24px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 12px;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--accent-gold)">
-                            <path d="M20 7l-8-4-8 4 8 4 8-4zm-8 6l-8-4v8l8 4 8-4v-8l-8 4z"/>
-                        </svg>
-                        <h1 id="heroTitleParcel" style="font-size: 24px; font-weight: 800; color: var(--text-primary); margin: 0;">
-                            UTeM Hostel Parcel Hub &amp; Delivery Radar
-                        </h1>
-                    </div>
-                    <div id="unitMelLiveBadge" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 20px; font-size: 12.5px; font-weight: 700; background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3);">
-                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e;"></span>
-                        <span id="unitMelStatusText">Checking Unit Mel hours...</span>
-                    </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--accent-gold)">
+                        <path d="M20 7l-8-4-8 4 8 4 8-4zm-8 6l-8-4v8l8 4 8-4v-8l-8 4z"/>
+                    </svg>
+                    <h1 id="heroTitleParcel" style="font-size: 24px; font-weight: 800; color: var(--text-primary); margin: 0;">
+                        UTeM Hostel Parcel Hub &amp; Delivery Radar
+                    </h1>
                 </div>
                 <p id="heroDescParcel" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 14px 0;">
                     Official university guidance for Shopee, TikTok Shop, Lazada, and courier packages. Per official UTeM policy, all parcels are directed to Unit Mel, Pusat Persatuan Pelajar (Student Centre) for security and organized collection.
@@ -504,63 +507,190 @@
                 });
             }
 
-            // 4. Live Unit Mel Status Badge (Bilingual)
+            // 4. Live Unit Mel Status Smart Pill (Bilingual - Matches Library & PKU format & scheme)
+            const parcelHolidays = {
+                "2026-08-31": { en: "National Day", ms: "Hari Kebangsaan" },
+                "2026-09-16": { en: "Malaysia Day", ms: "Hari Malaysia" },
+                "2026-09-24": { en: "Maulidur Rasul", ms: "Maulidur Rasul" },
+                "2026-11-08": { en: "Deepavali", ms: "Hari Deepavali" },
+                "2026-12-25": { en: "Christmas Day", ms: "Hari Krismas" },
+                "2027-01-01": { en: "New Year's Day", ms: "Tahun Baru 2027" },
+                "2027-02-06": { en: "Chinese New Year", ms: "Tahun Baru Cina" },
+                "2027-02-07": { en: "Chinese New Year", ms: "Tahun Baru Cina" },
+                "2027-03-09": { en: "Hari Raya Aidilfitri", ms: "Hari Raya Aidilfitri" },
+                "2027-03-10": { en: "Hari Raya Aidilfitri", ms: "Hari Raya Aidilfitri" },
+                "2027-05-01": { en: "Labour Day", ms: "Hari Pekerja" },
+                "2027-05-20": { en: "Wesak Day", ms: "Hari Wesak" }
+            };
+
             function updateUnitMelStatus() {
-                const badge = document.getElementById('unitMelLiveBadge');
-                const text = document.getElementById('unitMelStatusText');
-                if (!badge || !text) return;
+                const pill = document.getElementById('parcelHoursPill');
+                const pillIcon = document.getElementById('parcelPillIcon');
+                const pillText = document.getElementById('parcelPillText');
+                const pillBadge = document.getElementById('parcelPillBadge');
+                if (!pill || !pillText) return;
 
-                const isMs = window.currentLang === 'ms';
+                const isMs = (typeof currentLang !== 'undefined' && currentLang === 'ms') || window.currentLang === 'ms' || document.documentElement.lang === 'ms';
                 const now = new Date();
+
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const dayOfMonth = String(now.getDate()).padStart(2, '0');
+                const dateKey = `${year}-${month}-${dayOfMonth}`;
+
                 const day = now.getDay(); // 0 = Sun, 5 = Fri, 6 = Sat
-                const hours = now.getHours();
-                const minutes = now.getMinutes();
-                const totalMinutes = hours * 60 + minutes;
+                const timeMinutes = now.getHours() * 60 + now.getMinutes();
 
-                const openMorning = 8 * 60; // 08:00
-                const closeEvening = 17 * 60; // 17:00
+                function applyPill(glowClass, iconChar, textStr, badgeText, badgeBg, badgeColor) {
+                    pill.classList.remove('glow-parcel-open', 'glow-parcel-closed');
+                    pill.classList.add(glowClass);
+                    if (pillIcon) pillIcon.textContent = iconChar;
+                    pillText.textContent = textStr;
+                    if (pillBadge) {
+                        pillBadge.textContent = badgeText;
+                        pillBadge.style.background = badgeBg;
+                        pillBadge.style.color = badgeColor;
+                    }
+                }
 
-                // Weekend check
-                if (day === 0 || day === 6) {
-                    badge.style.background = 'rgba(239, 68, 68, 0.15)';
-                    badge.style.color = '#ef4444';
-                    badge.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-                    text.textContent = isMs ? '🔴 Tutup Hujung Minggu (Buka Isnin 8:00 PG)' : '🔴 Closed for the Weekend (Opens Monday 8:00 AM)';
+                // Case 1: Public Holidays
+                const holiday = parcelHolidays[dateKey];
+                if (holiday) {
+                    const hName = isMs ? holiday.ms : holiday.en;
+                    applyPill(
+                        'glow-parcel-closed',
+                        '\u{1F512}',
+                        isMs ? `Ditutup Hari Ini \u00B7 ${hName}` : `Closed Today \u00B7 ${hName}`,
+                        isMs ? 'Cuti Am' : 'Holiday',
+                        'rgba(239, 68, 68, 0.15)',
+                        '#ef4444'
+                    );
                     return;
                 }
 
-                // Friday prayer check: 12:15 PM (735 min) to 2:45 PM (885 min)
-                if (day === 5) {
-                    if (totalMinutes >= 735 && totalMinutes < 885) {
-                        badge.style.background = 'rgba(245, 158, 11, 0.15)';
-                        badge.style.color = '#f59e0b';
-                        badge.style.borderColor = 'rgba(245, 158, 11, 0.3)';
-                        text.textContent = isMs ? '🟡 Ditutup bagi Solat Jumaat (Buka 2:45 PTG)' : '🟡 Closed for Solat Jumaat (Reopens 2:45 PM)';
-                        return;
-                    }
-                } else {
-                    // Mon-Thu lunch break: 1:00 PM (780 min) to 2:00 PM (840 min)
-                    if (totalMinutes >= 780 && totalMinutes < 840) {
-                        badge.style.background = 'rgba(245, 158, 11, 0.15)';
-                        badge.style.color = '#f59e0b';
-                        badge.style.borderColor = 'rgba(245, 158, 11, 0.3)';
-                        text.textContent = isMs ? '🟡 Rehat Tengah Hari (Buka 2:00 PTG)' : '🟡 Lunch Break (Reopens 2:00 PM)';
-                        return;
-                    }
+                // Case 2: Weekends (Saturday & Sunday)
+                if (day === 0 || day === 6) {
+                    applyPill(
+                        'glow-parcel-closed',
+                        '\u{1F512}',
+                        isMs ? 'Ditutup Hari Ini \u00B7 Dibuka Isnin 8:00 PG' : 'Closed Today \u00B7 Reopens Mon 8:00 AM',
+                        isMs ? 'Hujung Minggu' : 'Weekend',
+                        'rgba(148, 163, 184, 0.15)',
+                        '#94a3b8'
+                    );
+                    return;
                 }
 
-                // Standard open check
-                if (totalMinutes >= openMorning && totalMinutes < closeEvening) {
-                    badge.style.background = 'rgba(34, 197, 94, 0.15)';
-                    badge.style.color = '#22c55e';
-                    badge.style.borderColor = 'rgba(34, 197, 94, 0.3)';
-                    text.textContent = isMs ? '🟢 Unit Mel Dibuka (Tutup 5:00 PTG)' : '🟢 Unit Mel Open Today (Closes 5:00 PM)';
-                } else {
-                    badge.style.background = 'rgba(239, 68, 68, 0.15)';
-                    badge.style.color = '#ef4444';
-                    badge.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-                    text.textContent = isMs ? '🔴 Operasi Tamat Hari Ini (Buka 8:00 PG Esok)' : '🔴 Closed for the Day (Opens 8:00 AM Tomorrow)';
+                // Case 3: Before 8:00 AM
+                if (timeMinutes < 480) {
+                    applyPill(
+                        'glow-parcel-closed',
+                        '\u23F3',
+                        isMs ? 'Ditutup \u00B7 Dibuka Hari Ini 8:00 PG' : 'Closed \u00B7 Opens Today at 8:00 AM',
+                        isMs ? 'Ditutup' : 'Closed',
+                        'rgba(148, 163, 184, 0.15)',
+                        '#94a3b8'
+                    );
+                    return;
                 }
+
+                // Case 4: Friday Prayer Break (12:15 PM - 2:45 PM)
+                if (day === 5 && timeMinutes >= 735 && timeMinutes < 885) {
+                    applyPill(
+                        'glow-parcel-closed',
+                        '\u23F3',
+                        isMs ? 'Rehat Solat Jumaat \u00B7 Dibuka 2:45 PTG' : 'Friday Prayer Break \u00B7 Reopens 2:45 PM',
+                        isMs ? 'Solat Jumaat' : 'Prayer Break',
+                        'rgba(234, 179, 8, 0.15)',
+                        '#eab308'
+                    );
+                    return;
+                }
+
+                // Case 5: Mon - Thu Lunch Break (1:00 PM - 2:00 PM)
+                if (day >= 1 && day <= 4 && timeMinutes >= 780 && timeMinutes < 840) {
+                    applyPill(
+                        'glow-parcel-closed',
+                        '\u23F3',
+                        isMs ? 'Rehat Harian \u00B7 Dibuka 2:00 PTG' : 'Daily Rest Break \u00B7 Reopens 2:00 PM',
+                        isMs ? 'Waktu Rehat' : 'Rest Break',
+                        'rgba(234, 179, 8, 0.15)',
+                        '#eab308'
+                    );
+                    return;
+                }
+
+                // Case 6: Open Operating Hours (8:00 AM - 5:00 PM)
+                if (timeMinutes < 1020) {
+                    if (day === 5 && timeMinutes < 735) {
+                        applyPill(
+                            'glow-parcel-open',
+                            '\u{1F4E6}',
+                            isMs ? 'Dibuka Hari Ini \u00B7 8:00 PG \u2013 12:15 PTG' : 'Open Today \u00B7 8:00 AM \u2013 12:15 PM',
+                            isMs ? 'Dibuka' : 'Open',
+                            'rgba(16, 185, 129, 0.15)',
+                            '#10b981'
+                        );
+                    } else if (day === 5 && timeMinutes >= 885) {
+                        applyPill(
+                            'glow-parcel-open',
+                            '\u{1F4E6}',
+                            isMs ? 'Dibuka Hari Ini \u00B7 2:45 PTG \u2013 5:00 PTG' : 'Open Today \u00B7 2:45 PM \u2013 5:00 PM',
+                            isMs ? 'Dibuka' : 'Open',
+                            'rgba(16, 185, 129, 0.15)',
+                            '#10b981'
+                        );
+                    } else {
+                        applyPill(
+                            'glow-parcel-open',
+                            '\u{1F4E6}',
+                            isMs ? 'Dibuka Hari Ini \u00B7 8:00 PG \u2013 5:00 PTG' : 'Open Today \u00B7 8:00 AM \u2013 5:00 PM',
+                            isMs ? 'Dibuka' : 'Open',
+                            'rgba(16, 185, 129, 0.15)',
+                            '#10b981'
+                        );
+                    }
+                    return;
+                }
+
+                // Case 7: Evening After Closing (5:00 PM onwards)
+                if (day === 5) {
+                    applyPill(
+                        'glow-parcel-closed',
+                        '\u{1F512}',
+                        isMs ? 'Ditutup \u00B7 Dibuka Isnin 8:00 PG' : 'Closed \u00B7 Reopens Mon 8:00 AM',
+                        isMs ? 'Ditutup' : 'Closed',
+                        'rgba(148, 163, 184, 0.15)',
+                        '#94a3b8'
+                    );
+                } else {
+                    applyPill(
+                        'glow-parcel-closed',
+                        '\u{1F512}',
+                        isMs ? 'Ditutup Malam Ini \u00B7 Dibuka 8:00 PG' : 'Closed Tonight \u00B7 Reopens 8:00 AM',
+                        isMs ? 'Ditutup' : 'Closed',
+                        'rgba(148, 163, 184, 0.15)',
+                        '#94a3b8'
+                    );
+                }
+            }
+
+            // Click-to-scroll down to Unit Mel Pickup Hours card
+            const parcelPill = document.getElementById('parcelHoursPill');
+            if (parcelPill && !parcelPill.dataset.listenerAttached) {
+                parcelPill.dataset.listenerAttached = 'true';
+                parcelPill.addEventListener('click', () => {
+                    const target = document.getElementById('titlePickupHours');
+                    if (target) {
+                        const card = target.closest('.card');
+                        if (card) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            card.style.boxShadow = '0 0 0 3px rgba(212, 175, 55, 0.45)';
+                            card.style.transition = 'box-shadow 0.3s ease';
+                            setTimeout(() => { card.style.boxShadow = ''; }, 1500);
+                        }
+                    }
+                });
             }
 
             window.updateUnitMelStatus = updateUnitMelStatus;
