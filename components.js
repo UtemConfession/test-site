@@ -30,16 +30,16 @@ const UCPMHeaderHTML = `<!-- Mobile Header (Full Width Sticky Top Bar) -->
             </div>
         </div>
         <div class="mobile-lang-wrapper" style="display: flex; align-items: center; gap: 6px;">
-            <button class="theme-toggle-btn" id="mobileThemeToggle" type="button" aria-label="Choose Theme" title="Choose Theme" style="padding: 4px 8px; font-size: 11px; height: 28px; display: inline-flex; align-items: center; gap: 4px;">
-                <span class="theme-icon">🎨</span>
-                <span class="theme-label-short">Theme</span>
-            </button>
             <button class="btn btn-secondary btn-sm lang-toggle-btn" id="mobileLangToggle" aria-label="Switch Language / Tukar Bahasa" style="padding: 4px 9px; font-size: 11px; height: 28px; display: inline-flex; align-items: center; gap: 3px;">
                 <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="margin: 0;">
                     <path
                         d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2.1l1.1-3h4.6l1.1 3H23l-4.5-12zm-2.62 7l1.62-4.41L19.12 17h-3.24z" />
                 </svg>
                 <span>BM</span>
+            </button>
+            <button class="theme-toggle-btn" id="mobileThemeToggle" type="button" aria-label="Choose Theme" title="Choose Theme" style="padding: 4px 8px; font-size: 11px; height: 28px; display: inline-flex; align-items: center; gap: 4px;">
+                <span class="theme-icon">🎨</span>
+                <span class="theme-label-short">Theme</span>
             </button>
         </div>
     </header>`;
@@ -51,14 +51,9 @@ const UCPMSidebarHTML = `<!-- Desktop Sidebar Navigation -->
                 <h1 class="brand-title">UTeM Confessions</h1>
                 <span class="brand-subtitle">Pro Max</span>
             </div>
-            <!-- Sidebar Controls (Theme & Language) -->
+            <!-- Sidebar Controls (Language & Theme) -->
             <div class="sidebar-ctrl-wrapper"
                 style="padding: 0 16px 12px 16px; display: flex; gap: 8px; justify-content: center; border-bottom: 1px solid var(--border-color); margin-bottom: 12px;">
-                <button class="theme-toggle-btn desktop-theme-btn" id="desktopThemeToggle" type="button" aria-label="Choose Theme" title="Choose Theme"
-                    style="flex: 1; padding: 4px 8px; font-size: 11.5px; font-weight: 700; border-color: rgba(var(--accent-gold-rgb), 0.4); color: var(--accent-gold); background: rgba(var(--accent-gold-rgb), 0.05); border-radius: 6px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer;">
-                    <span class="theme-icon">🎨</span>
-                    <span class="theme-label">Theme</span>
-                </button>
                 <button class="btn btn-secondary btn-sm lang-toggle-btn" id="desktopLangToggle" aria-label="Switch Language / Tukar Bahasa"
                     style="flex: 1.1; min-width: 70px; padding: 4px 8px; font-size: 11.5px; font-weight: 700; border-color: rgba(var(--accent-gold-rgb), 0.4); color: var(--accent-gold); background: rgba(var(--accent-gold-rgb), 0.05); border-radius: 6px; transition: all 0.2s; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
                     <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="margin: 0;">
@@ -66,6 +61,11 @@ const UCPMSidebarHTML = `<!-- Desktop Sidebar Navigation -->
                             d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2.1l1.1-3h4.6l1.1 3H23l-4.5-12zm-2.62 7l1.62-4.41L19.12 17h-3.24z" />
                     </svg>
                     <span>BM</span>
+                </button>
+                <button class="theme-toggle-btn desktop-theme-btn" id="desktopThemeToggle" type="button" aria-label="Choose Theme" title="Choose Theme"
+                    style="flex: 1; padding: 4px 8px; font-size: 11.5px; font-weight: 700; border-color: rgba(var(--accent-gold-rgb), 0.4); color: var(--accent-gold); background: rgba(var(--accent-gold-rgb), 0.05); border-radius: 6px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer;">
+                    <span class="theme-icon">🎨</span>
+                    <span class="theme-label">Theme</span>
                 </button>
             </div>
 
@@ -235,18 +235,18 @@ const UCPMDrawerHTML = `<!-- Slide-Up "More" Tools Drawer Modal -->
                             d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z" />
                     </svg>
                     <span id="drawerHeaderTitle" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14.5px;">Services</span>
-                    <button class="theme-toggle-btn drawer-theme-btn" id="drawerThemeToggle" type="button" aria-label="Choose Theme" title="Choose Theme"
-                        style="padding: 2px 7px; font-size: 11px; margin-left: auto; border-color: rgba(212, 175, 55, 0.4); color: var(--accent-gold); background: rgba(212, 175, 55, 0.05); border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; height: 24px; cursor: pointer; flex-shrink: 0; white-space: nowrap;">
-                        <span class="theme-icon">🎨</span>
-                        <span class="theme-label-short">Theme</span>
-                    </button>
                     <button class="btn btn-secondary btn-sm lang-toggle-btn" id="drawerLangToggle" type="button" aria-label="Switch Language / Tukar Bahasa"
-                        style="padding: 2px 7px; font-size: 11px; margin-left: 5px; border-color: rgba(212, 175, 55, 0.4); color: var(--accent-gold); background: rgba(212, 175, 55, 0.05); border-radius: 6px; display: inline-flex; align-items: center; gap: 3px; height: 24px; cursor: pointer; flex-shrink: 0; white-space: nowrap;">
+                        style="padding: 2px 7px; font-size: 11px; margin-left: auto; border-color: rgba(212, 175, 55, 0.4); color: var(--accent-gold); background: rgba(212, 175, 55, 0.05); border-radius: 6px; display: inline-flex; align-items: center; gap: 3px; height: 24px; cursor: pointer; flex-shrink: 0; white-space: nowrap;">
                         <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor" style="margin: 0;">
                             <path
                                 d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2.1l1.1-3h4.6l1.1 3H23l-4.5-12zm-2.62 7l1.62-4.41L19.12 17h-3.24z" />
                         </svg>
                         <span>BM</span>
+                    </button>
+                    <button class="theme-toggle-btn drawer-theme-btn" id="drawerThemeToggle" type="button" aria-label="Choose Theme" title="Choose Theme"
+                        style="padding: 2px 7px; font-size: 11px; margin-left: 5px; border-color: rgba(212, 175, 55, 0.4); color: var(--accent-gold); background: rgba(212, 175, 55, 0.05); border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; height: 24px; cursor: pointer; flex-shrink: 0; white-space: nowrap;">
+                        <span class="theme-icon">🎨</span>
+                        <span class="theme-label-short">Theme</span>
                     </button>
                 </div>
                 <button id="closeMobileDrawerBtn" class="mobile-drawer-close-btn" type="button"
@@ -869,6 +869,12 @@ function initThemePresetSystem() {
                 }
                 themeModalCloseTimer = setTimeout(() => {
                     closeThemePaletteModal();
+                    // Also dismiss mobile drawer if open so user sees their new theme
+                    const drawer = document.getElementById('mobileMoreDrawer');
+                    if (drawer && drawer.classList.contains('active')) {
+                        drawer.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
                     themeModalCloseTimer = null;
                 }, 950);
             }
@@ -963,35 +969,38 @@ function applyThemePreset(targetTheme, e) {
         }
     };
 
-    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (document.startViewTransition && !prefersReducedMotion) {
-        let x = window.innerWidth / 2;
-        let y = window.innerHeight / 2;
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
 
-        if (e) {
-            if (typeof e.clientX === 'number' && (e.clientX > 0 || e.clientY > 0)) {
-                x = e.clientX;
-                y = e.clientY;
-            } else if (e.touches && e.touches.length > 0) {
-                x = e.touches[0].clientX;
-                y = e.touches[0].clientY;
-            } else {
-                const targetEl = (e.target && e.target.closest) 
-                    ? e.target.closest('.theme-card-option, .theme-toggle-btn') 
-                    : (e.currentTarget || e.target);
-                if (targetEl && typeof targetEl.getBoundingClientRect === 'function') {
-                    const rect = targetEl.getBoundingClientRect();
-                    x = rect.left + rect.width / 2;
-                    y = rect.top + rect.height / 2;
-                }
+    if (e) {
+        if (typeof e.clientX === 'number' && (e.clientX > 0 || e.clientY > 0)) {
+            x = e.clientX;
+            y = e.clientY;
+        } else if (e.touches && e.touches.length > 0) {
+            x = e.touches[0].clientX;
+            y = e.touches[0].clientY;
+        } else if (e.changedTouches && e.changedTouches.length > 0) {
+            x = e.changedTouches[0].clientX;
+            y = e.changedTouches[0].clientY;
+        } else {
+            const targetEl = (e.target && e.target.closest) 
+                ? e.target.closest('.theme-card-option, .theme-toggle-btn') 
+                : (e.currentTarget || e.target);
+            if (targetEl && typeof targetEl.getBoundingClientRect === 'function') {
+                const rect = targetEl.getBoundingClientRect();
+                x = rect.left + rect.width / 2;
+                y = rect.top + rect.height / 2;
             }
         }
+    }
 
-        const endRadius = Math.hypot(
-            Math.max(x, window.innerWidth - x),
-            Math.max(y, window.innerHeight - y)
-        );
+    const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+    );
 
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (document.startViewTransition && !prefersReducedMotion) {
         document.documentElement.classList.add('theme-ripple-active');
         const transition = document.startViewTransition(() => {
             applyDOMChanges();
@@ -1025,6 +1034,60 @@ function applyThemePreset(targetTheme, e) {
             cleanupRipple();
             applyDOMChanges();
         });
+    } else if (!prefersReducedMotion) {
+        // Universal Mobile Fallback Ripple (iOS Safari, Telegram WebViews, older mobile browsers)
+        const themeBgColors = {
+            classic: '#060b19',
+            oled: '#000000',
+            monochrome: '#080808',
+            sakura: '#000000',
+            synthwave: '#0b0217',
+            peach: '#150e12',
+            arcade: '#090510',
+            dracula: '#0d081a',
+            catppuccin: '#11111b',
+            nebula: '#0f051d',
+            cyberpunk: '#05131a',
+            tokyo: '#0d101d',
+            abyssal: '#030d1a',
+            cobalt: '#050814',
+            matrix: '#000000',
+            eva: '#0e081c',
+            sepia: '#15110e',
+            cathedral: '#0c0b0e'
+        };
+        const bgColor = themeBgColors[targetTheme] || '#060b19';
+        const rippleSize = endRadius * 2.2;
+
+        const rippleEl = document.createElement('div');
+        rippleEl.style.cssText = `
+            position: fixed;
+            left: ${x - rippleSize / 2}px;
+            top: ${y - rippleSize / 2}px;
+            width: ${rippleSize}px;
+            height: ${rippleSize}px;
+            border-radius: 50%;
+            background-color: ${bgColor};
+            pointer-events: none;
+            z-index: 99999999;
+            transform: scale(0);
+            opacity: 0.95;
+            transition: transform 750ms cubic-bezier(0.4, 0, 0.2, 1), opacity 350ms ease 550ms;
+        `;
+        document.body.appendChild(rippleEl);
+
+        requestAnimationFrame(() => {
+            rippleEl.style.transform = 'scale(1)';
+            rippleEl.style.opacity = '0';
+        });
+
+        applyDOMChanges();
+
+        setTimeout(() => {
+            if (rippleEl && rippleEl.parentNode) {
+                rippleEl.parentNode.removeChild(rippleEl);
+            }
+        }, 950);
     } else {
         applyDOMChanges();
     }
