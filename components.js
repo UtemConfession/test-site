@@ -1035,29 +1035,10 @@ function applyThemePreset(targetTheme, e) {
             applyDOMChanges();
         });
     } else if (!prefersReducedMotion) {
-        // Universal Mobile Fallback Ripple (iOS Safari, Telegram WebViews, older mobile browsers)
-        const themeBgColors = {
-            classic: '#060b19',
-            oled: '#000000',
-            monochrome: '#080808',
-            sakura: '#000000',
-            synthwave: '#0b0217',
-            peach: '#150e12',
-            arcade: '#090510',
-            dracula: '#0d081a',
-            catppuccin: '#11111b',
-            nebula: '#0f051d',
-            cyberpunk: '#05131a',
-            tokyo: '#0d101d',
-            abyssal: '#030d1a',
-            cobalt: '#050814',
-            matrix: '#000000',
-            eva: '#0e081c',
-            sepia: '#15110e',
-            cathedral: '#0c0b0e'
-        };
-        const bgColor = themeBgColors[targetTheme] || '#060b19';
-        const rippleSize = endRadius * 2.2;
+        // Universal iOS Safari / Telegram WebView Shockwave Ripple (Hardware Accelerated via Web Animations API)
+        const themeInfo = UCPM_THEMES[targetTheme] || UCPM_THEMES.classic;
+        const accentColor = themeInfo.color || '#d4af37';
+        const rippleSize = Math.max(endRadius * 2.4, 600);
 
         const rippleEl = document.createElement('div');
         rippleEl.style.cssText = `
@@ -1067,19 +1048,39 @@ function applyThemePreset(targetTheme, e) {
             width: ${rippleSize}px;
             height: ${rippleSize}px;
             border-radius: 50%;
-            background-color: ${bgColor};
             pointer-events: none;
-            z-index: 99999999;
+            z-index: 2147483647;
+            border: 4px solid ${accentColor};
+            background: radial-gradient(circle, ${accentColor}55 0%, ${accentColor}25 45%, transparent 70%);
+            box-shadow: 0 0 50px ${accentColor}, inset 0 0 30px ${accentColor};
             transform: scale(0);
-            opacity: 0.95;
-            transition: transform 750ms cubic-bezier(0.4, 0, 0.2, 1), opacity 350ms ease 550ms;
+            opacity: 1;
+            will-change: transform, opacity;
         `;
         document.body.appendChild(rippleEl);
 
-        requestAnimationFrame(() => {
-            rippleEl.style.transform = 'scale(1)';
-            rippleEl.style.opacity = '0';
-        });
+        try {
+            const anim = rippleEl.animate([
+                { transform: 'scale(0)', opacity: 1 },
+                { transform: 'scale(0.55)', opacity: 0.9, offset: 0.4 },
+                { transform: 'scale(1)', opacity: 0 }
+            ], {
+                duration: 850,
+                easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                fill: 'forwards'
+            });
+
+            anim.onfinish = () => {
+                if (rippleEl && rippleEl.parentNode) {
+                    rippleEl.parentNode.removeChild(rippleEl);
+                }
+            };
+        } catch (animErr) {
+            // Fallback for older engines
+            if (rippleEl && rippleEl.parentNode) {
+                rippleEl.parentNode.removeChild(rippleEl);
+            }
+        }
 
         applyDOMChanges();
 
@@ -1087,7 +1088,7 @@ function applyThemePreset(targetTheme, e) {
             if (rippleEl && rippleEl.parentNode) {
                 rippleEl.parentNode.removeChild(rippleEl);
             }
-        }, 950);
+        }, 900);
     } else {
         applyDOMChanges();
     }
