@@ -489,10 +489,227 @@ function renderMilestonePill() {
     }
 }
 
+// Dynamic Academic Week & Semester Progress Tracker
+function renderAcademicWeekTracker() {
+    const tracker = document.getElementById("academicWeekTracker");
+    if (!tracker) return;
+
+    const icon = document.getElementById("weekTrackerIcon");
+    const badge = document.getElementById("weekTrackerBadge");
+    const semLabel = document.getElementById("weekTrackerSemLabel");
+    const title = document.getElementById("weekTrackerTitle");
+    const desc = document.getElementById("weekTrackerDesc");
+    const daysVal = document.getElementById("weekTrackerDaysVal");
+    const daysLbl = document.getElementById("weekTrackerDaysLbl");
+    const progressFill = document.getElementById("weekProgressFill");
+    const progressLeft = document.getElementById("weekProgressLabelLeft");
+    const progressRight = document.getElementById("weekProgressLabelRight");
+    const segmentsGrid = document.getElementById("weekSegmentsGrid");
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const isMs = (typeof currentLang !== 'undefined' && currentLang === 'ms') || document.documentElement.lang === 'ms';
+
+    // Semester 1 Key Milestones (2026/2027)
+    const sem1Start = new Date("2026-09-28T00:00:00");
+    const sem1MidBreakStart = new Date("2026-11-07T00:00:00");
+    const sem1MidBreakEnd = new Date("2026-11-15T23:59:59");
+    const sem1Phase2Start = new Date("2026-11-16T00:00:00");
+    const sem1Phase2End = new Date("2027-01-08T23:59:59");
+    const sem1StudyStart = new Date("2027-01-09T00:00:00");
+    const sem1StudyEnd = new Date("2027-01-17T23:59:59");
+    const sem1ExamStart = new Date("2027-01-18T00:00:00");
+    const sem1ExamEnd = new Date("2027-01-31T23:59:59");
+    const sem1BreakStart = new Date("2027-02-01T00:00:00");
+    const sem1BreakEnd = new Date("2027-03-21T23:59:59");
+
+    // Semester 2 Key Milestones (2026/2027)
+    const sem2Start = new Date("2027-03-22T00:00:00");
+    const sem2MidBreakStart = new Date("2027-05-08T00:00:00");
+    const sem2MidBreakEnd = new Date("2027-05-16T23:59:59");
+    const sem2Phase2Start = new Date("2027-05-17T00:00:00");
+    const sem2Phase2End = new Date("2027-07-02T23:59:59");
+    const sem2StudyStart = new Date("2027-07-03T00:00:00");
+    const sem2StudyEnd = new Date("2027-07-11T23:59:59");
+    const sem2ExamStart = new Date("2027-07-12T00:00:00");
+    const sem2ExamEnd = new Date("2027-07-25T23:59:59");
+
+    let statusType = "break";
+    let statusBadgeText = "";
+    let statusTitleText = "";
+    let statusDescText = "";
+    let countdownNumber = 0;
+    let countdownLabel = "";
+    let currentIconChar = "🏖️";
+    let activeWeek = 0;
+    let progressPct = 0;
+    let labelLeft = "";
+    let labelRight = "";
+
+    if (today < sem1Start) {
+        // Inter-session Semester Break before Sem 1 begins
+        statusType = "break";
+        currentIconChar = "🏖️";
+        const daysLeft = Math.ceil((sem1Start - today) / (1000 * 60 * 60 * 24));
+        countdownNumber = daysLeft;
+        countdownLabel = isMs ? "Hari ke Sem 1" : "Days to Sem 1";
+        statusBadgeText = isMs ? "Cuti Semester (Antara Sesi)" : "Semester Break (Inter-Session)";
+        statusTitleText = isMs 
+            ? `${daysLeft} Hari Sehingga Kuliah Sem 1 Bermula` 
+            : `${daysLeft} Days until Semester 1 Begins`;
+        statusDescText = isMs
+            ? "Kampus kini dalam cuti semester. Kuliah Semester 1 (Sesi 2026/2027) akan bermula secara rasmi pada Isnin, 28 Sept 2026."
+            : "Campus is currently on semester break. Official undergraduate lectures commence on Monday, 28 Sept 2026.";
+        
+        const breakStart = new Date("2026-08-31T00:00:00");
+        const totalBreakDays = Math.max(1, Math.ceil((sem1Start - breakStart) / (1000 * 60 * 60 * 24)));
+        const elapsed = Math.max(0, Math.ceil((today - breakStart) / (1000 * 60 * 60 * 24)));
+        progressPct = Math.min(100, Math.max(10, Math.round((elapsed / totalBreakDays) * 100)));
+        labelLeft = isMs ? "Kemajuan Cuti Semester" : "Semester Break Progress";
+        labelRight = isMs ? `${progressPct}% Selesai` : `${progressPct}% Completed`;
+        activeWeek = 0;
+    } else if (today >= sem1Start && today < sem1MidBreakStart) {
+        // Sem 1 — Lecture Phase 1 (Weeks 1 to 6)
+        statusType = "active";
+        currentIconChar = "📚";
+        const msElapsed = today - sem1Start;
+        activeWeek = Math.min(6, Math.floor(msElapsed / (1000 * 60 * 60 * 24 * 7)) + 1);
+        progressPct = Math.round((activeWeek / 14) * 100);
+        statusBadgeText = isMs ? `Minggu ${activeWeek} / 14 • Fasa 1` : `Week ${activeWeek} of 14 • Phase 1`;
+        statusTitleText = isMs 
+            ? `Minggu ${activeWeek} Kuliah — Fasa 1 (Semester 1)` 
+            : `Week ${activeWeek} of 14 — Lecture Phase 1 (Sem 1)`;
+        statusDescText = activeWeek <= 2 
+            ? (isMs ? "Tempoh Pendaftaran & Tambah/Gugur Kursus (Add/Drop) di portal SMPWeb." : "Course Registration & Add/Drop period active on SMPWeb.")
+            : (isMs ? "Kuliah berjalan seperti biasa. Semak jadual tugasan & kuiz berterusan." : "Regular lecture & lab sessions in progress. Check continuous assessments.");
+        const daysToMidBreak = Math.ceil((sem1MidBreakStart - today) / (1000 * 60 * 60 * 24));
+        countdownNumber = daysToMidBreak;
+        countdownLabel = isMs ? "Hari ke Cuti Sem" : "Days to Mid-Break";
+        labelLeft = isMs ? `Kemajuan Semester (${activeWeek}/14 Minggu)` : `Semester Progress (${activeWeek}/14 Weeks)`;
+        labelRight = `${progressPct}%`;
+    } else if (today >= sem1MidBreakStart && today <= sem1MidBreakEnd) {
+        // Sem 1 — Mid-Semester Break
+        statusType = "break";
+        currentIconChar = "🏖️";
+        activeWeek = 6;
+        progressPct = Math.round((6 / 14) * 100);
+        statusBadgeText = isMs ? "Cuti Pertengahan Sem 1" : "Mid-Semester 1 Break";
+        statusTitleText = isMs ? "Cuti Pertengahan Semester (Rehat 9 Hari)" : "Mid-Semester Break (9-Day Recess)";
+        const daysToResume = Math.ceil((sem1Phase2Start - today) / (1000 * 60 * 60 * 24));
+        countdownNumber = daysToResume;
+        countdownLabel = isMs ? "Hari ke Minggu 7" : "Days to Week 7";
+        statusDescText = isMs
+            ? "Rehat pertengahan semester. Kuliah Minggu 7 akan bersambung pada Isnin, 16 Nov 2026."
+            : "Mid-semester recess. Lectures resume for Week 7 on Monday, 16 Nov 2026.";
+        labelLeft = isMs ? "Fasa 1 Selesai (6 Minggu)" : "Phase 1 Completed (6 Weeks)";
+        labelRight = "43%";
+    } else if (today >= sem1Phase2Start && today <= sem1Phase2End) {
+        // Sem 1 — Lecture Phase 2 (Weeks 7 to 14)
+        statusType = "active";
+        currentIconChar = "📚";
+        const msElapsed = today - sem1Phase2Start;
+        const phase2Week = Math.floor(msElapsed / (1000 * 60 * 60 * 24 * 7));
+        activeWeek = Math.min(14, 7 + phase2Week);
+        progressPct = Math.round((activeWeek / 14) * 100);
+        statusBadgeText = isMs ? `Minggu ${activeWeek} / 14 • Fasa 2` : `Week ${activeWeek} of 14 • Phase 2`;
+        statusTitleText = isMs 
+            ? `Minggu ${activeWeek} Kuliah — Fasa 2 (Semester 1)` 
+            : `Week ${activeWeek} of 14 — Lecture Phase 2 (Sem 1)`;
+        statusDescText = activeWeek >= 12
+            ? (isMs ? "Minggu akhir kuliah & penyerahan laporan projek/FYP. Bersedia untuk minggu ulang kaji." : "Final lecture weeks & FYP/project submissions. Prepare for revision week.")
+            : (isMs ? "Kuliah fasa 2 berjalan. Penilaian berterusan dan ujian pertengahan." : "Phase 2 lectures in progress. Continuous assessments and midterm tests.");
+        const daysToStudy = Math.ceil((sem1StudyStart - today) / (1000 * 60 * 60 * 24));
+        countdownNumber = daysToStudy;
+        countdownLabel = isMs ? "Hari ke Ulang Kaji" : "Days to Study Wk";
+        labelLeft = isMs ? `Kemajuan Semester (${activeWeek}/14 Minggu)` : `Semester Progress (${activeWeek}/14 Weeks)`;
+        labelRight = `${progressPct}%`;
+    } else if (today >= sem1StudyStart && today <= sem1StudyEnd) {
+        // Sem 1 — Study & Revision Week
+        statusType = "break";
+        currentIconChar = "📖";
+        activeWeek = 14;
+        progressPct = 100;
+        statusBadgeText = isMs ? "Minggu Ulang Kaji" : "Study & Revision Week";
+        statusTitleText = isMs ? "Minggu Ulang Kaji Peperiksaan Akhir" : "Study & Revision Week (Finals Prep)";
+        statusDescText = isMs 
+            ? "Semua 14 minggu kuliah telah selesai! Peperiksaan akhir bermula pada 18 Jan 2027."
+            : "All 14 lecture weeks completed! Final examinations commence on 18 Jan 2027.";
+        const daysToExams = Math.ceil((sem1ExamStart - today) / (1000 * 60 * 60 * 24));
+        countdownNumber = daysToExams;
+        countdownLabel = isMs ? "Hari ke Final" : "Days to Finals";
+        labelLeft = isMs ? "Kuliah 100% Selesai" : "Lectures 100% Completed";
+        labelRight = "100%";
+    } else if (today >= sem1ExamStart && today <= sem1ExamEnd) {
+        // Sem 1 — Final Examinations
+        statusType = "exam";
+        currentIconChar = "🎯";
+        activeWeek = 14;
+        progressPct = 100;
+        statusBadgeText = isMs ? "Musim Peperiksaan Akhir" : "Final Examination Period";
+        statusTitleText = isMs ? "Peperiksaan Akhir Semester 1" : "Semester 1 Final Examinations";
+        statusDescText = isMs
+            ? "Musim peperiksaan akhir sedang berlangsung. Semoga berjaya dalam setiap kertas!"
+            : "Examination period in session. Best of luck on your examination papers!";
+        const daysToBreak = Math.ceil((sem1BreakStart - today) / (1000 * 60 * 60 * 24));
+        countdownNumber = daysToBreak;
+        countdownLabel = isMs ? "Hari ke Cuti Sem" : "Days to Sem Break";
+        labelLeft = isMs ? "Peperiksaan Akhir" : "Final Examinations";
+        labelRight = "Finals";
+    } else {
+        // Inter-semester break
+        statusType = "break";
+        currentIconChar = "🏖️";
+        const daysToSem2 = Math.ceil((sem2Start - today) / (1000 * 60 * 60 * 24));
+        countdownNumber = Math.max(0, daysToSem2);
+        countdownLabel = isMs ? "Hari ke Sem 2" : "Days to Sem 2";
+        statusBadgeText = isMs ? "Cuti Antara Semester" : "Inter-Semester Break";
+        statusTitleText = isMs ? "Cuti Akhir Semester 1 (7 Minggu)" : "Inter-Semester Vacation (7 Weeks)";
+        statusDescText = isMs
+            ? "Semester 1 selesai. Semester 2 akan bermula pada 22 Mac 2027."
+            : "Semester 1 complete. Semester 2 commences on 22 March 2027.";
+        labelLeft = isMs ? "Cuti Antara Semester" : "Inter-Semester Vacation";
+        labelRight = isMs ? "Cuti Sem" : "Break";
+    }
+
+    if (icon) icon.textContent = currentIconChar;
+    if (badge) {
+        badge.textContent = statusBadgeText;
+        badge.className = `week-tracker-status-badge status-${statusType}`;
+    }
+    if (semLabel) semLabel.textContent = isMs ? "Sesi Akademik 2026/2027" : "Academic Session 2026/2027";
+    if (title) title.textContent = statusTitleText;
+    if (desc) desc.textContent = statusDescText;
+    if (daysVal) daysVal.textContent = countdownNumber;
+    if (daysLbl) daysLbl.textContent = countdownLabel;
+    if (progressFill) progressFill.style.width = `${progressPct}%`;
+    if (progressLeft) progressLeft.textContent = labelLeft;
+    if (progressRight) progressRight.textContent = labelRight;
+
+    // Render 14 Segmented Week Pills
+    if (segmentsGrid) {
+        segmentsGrid.innerHTML = "";
+        for (let w = 1; w <= 14; w++) {
+            const pill = document.createElement("div");
+            let cls = "week-segment-pill";
+            if (activeWeek > 0 && w < activeWeek) {
+                cls += " completed";
+            } else if (activeWeek > 0 && w === activeWeek) {
+                cls += " current";
+            }
+            pill.className = cls;
+            pill.textContent = `W${w}`;
+            pill.title = isMs ? `Minggu Kuliah ${w}` : `Lecture Week ${w}`;
+            segmentsGrid.appendChild(pill);
+        }
+    }
+}
+
 // Initial render
 function initCalendar() {
     renderCalendarEvents();
     renderMilestonePill();
+    renderAcademicWeekTracker();
 }
 
 if (document.readyState === "loading") {
@@ -503,3 +720,4 @@ if (document.readyState === "loading") {
 
 
 window.renderMilestonePill = renderMilestonePill;
+window.renderAcademicWeekTracker = renderAcademicWeekTracker;

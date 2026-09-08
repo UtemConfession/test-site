@@ -1,4 +1,4 @@
-﻿// translation.js — All UI strings (EN/BM) and setLanguage / toggleLanguage
+// translation.js — All UI strings (EN/BM) and setLanguage / toggleLanguage
 
 const translations = {
     en: {
@@ -2478,6 +2478,10 @@ function setLanguage(lang) {
     try {
         if (typeof updateBusScheduleDisplay === 'function') updateBusScheduleDisplay();
         if (typeof updateM10ANextDeparture === 'function') updateM10ANextDeparture();
+        if (typeof renderMilestonePill === 'function') renderMilestonePill();
+        else if (typeof window.renderMilestonePill === 'function') window.renderMilestonePill();
+        if (typeof renderAcademicWeekTracker === 'function') renderAcademicWeekTracker();
+        else if (typeof window.renderAcademicWeekTracker === 'function') window.renderAcademicWeekTracker();
         if (typeof renderCalendarEvents === 'function') {
             const activeCalBtn = document.querySelector(".cal-filter-btn.active");
             const category = activeCalBtn ? activeCalBtn.getAttribute("data-category") : 'all';

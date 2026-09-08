@@ -123,6 +123,40 @@
                     </div>
                 </div>
 
+                <!-- Live Academic Week & Semester Progress Tracker Banner -->
+                <div class="academic-week-tracker-card" id="academicWeekTracker">
+                    <div class="week-tracker-header">
+                        <div class="week-tracker-left">
+                            <span class="week-tracker-icon" id="weekTrackerIcon">🏖️</span>
+                            <div class="week-tracker-info">
+                                <div class="week-tracker-badge-row">
+                                    <span class="week-tracker-status-badge status-break" id="weekTrackerBadge">Semester Break</span>
+                                    <span class="week-tracker-semester-label" id="weekTrackerSemLabel">Academic Session 2026/2027</span>
+                                </div>
+                                <h3 class="week-tracker-title" id="weekTrackerTitle">20 Days until Semester 1 Begins</h3>
+                                <p class="week-tracker-desc" id="weekTrackerDesc">Campus is currently on inter-session break. Lectures officially commence on Monday, 28 Sept 2026.</p>
+                            </div>
+                        </div>
+                        <div class="week-tracker-countdown-box" id="weekTrackerCountdownBox">
+                            <span class="countdown-days-val" id="weekTrackerDaysVal">20</span>
+                            <span class="countdown-days-lbl" id="weekTrackerDaysLbl">Days to Sem 1</span>
+                        </div>
+                    </div>
+                    <!-- 14-Week Segmented Progress Bar -->
+                    <div class="week-progress-wrapper" id="weekProgressWrapper">
+                        <div class="week-progress-labels">
+                            <span id="weekProgressLabelLeft">Semester Break Progress</span>
+                            <span id="weekProgressLabelRight" style="color: var(--accent-gold); font-weight: 700;">71%</span>
+                        </div>
+                        <div class="week-progress-track">
+                            <div class="week-progress-fill" id="weekProgressFill" style="width: 71%;"></div>
+                        </div>
+                        <div class="week-segments-grid" id="weekSegmentsGrid">
+                            <!-- Populated dynamically: 14 segmented pills representing W1 - W14 -->
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
                         <h2 class="card-title" style="margin-bottom: 0;">
