@@ -138,6 +138,63 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mobileToggle) mobileToggle.addEventListener("click", handleToggle);
     if (drawerToggle) drawerToggle.addEventListener("click", handleToggle);
 
+    // Dynamic Time-Based Greeting for Campus Hero Banner
+    function updateHeroGreeting(lang) {
+        const heroGreetingTitle = document.getElementById("heroGreetingTitle");
+        const heroTimeIcon = document.getElementById("heroTimeIcon");
+        const heroGreetingSubtitle = document.getElementById("heroGreetingSubtitle");
+        const weatherBadge = document.getElementById("weatherLiveBadge");
+        if (!heroGreetingTitle) return;
+
+        const currentLanguage = lang || (typeof currentLang !== 'undefined' ? currentLang : localStorage.getItem("lang")) || "en";
+        const hour = new Date().getHours();
+        let timeKey = "evening";
+        let icon = "🌆";
+
+        if (hour >= 5 && hour < 12) {
+            timeKey = "morning";
+            icon = "🌅";
+        } else if (hour >= 12 && hour < 17) {
+            timeKey = "afternoon";
+            icon = "☀️";
+        } else if (hour >= 17 && hour < 21) {
+            timeKey = "evening";
+            icon = "🌆";
+        } else {
+            timeKey = "night";
+            icon = "🌙";
+        }
+
+        if (heroTimeIcon) heroTimeIcon.textContent = icon;
+
+        const greetings = {
+            en: {
+                morning: "Good Morning, UTeMians",
+                afternoon: "Good Afternoon, UTeMians",
+                evening: "Good Evening, UTeMians",
+                night: "Late Night at Campus?",
+                subtitle: "Your safe, 100% anonymous space for campus confessions, rants & peer stories.",
+                weather_badge: "Live Weather"
+            },
+            ms: {
+                morning: "Selamat Pagi, Warga UTeM",
+                afternoon: "Selamat Tengah Hari, Warga UTeM",
+                evening: "Selamat Petang, Warga UTeM",
+                night: "Sesi Malam Kampus?",
+                subtitle: "Ruang selamat & 100% tanpa nama untuk luahan, kehidupan kampus & suara mahasiswa.",
+                weather_badge: "Cuaca Terkini"
+            }
+        };
+
+        const dict = greetings[currentLanguage] || greetings.en;
+        heroGreetingTitle.textContent = dict[timeKey];
+        if (heroGreetingSubtitle) heroGreetingSubtitle.textContent = dict.subtitle;
+        if (weatherBadge) weatherBadge.textContent = dict.weather_badge;
+    }
+
+    window.updateHeroGreeting = updateHeroGreeting;
+    updateHeroGreeting(currentLang);
+
     // UTeM Live Campus Weather & Imminent Next Bus Ticker
     async function initCampusTicker() {
         const weatherPill = document.getElementById("campusWeatherPill");
