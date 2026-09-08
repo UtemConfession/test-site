@@ -263,23 +263,12 @@ function updateBusScheduleDisplay() {
 
 // Standalone function for Bus M10A Live Countdown (runs independently of internal shuttle returns)
 function updateM10ANextDeparture() {
-    const m10aLiveBadge = document.getElementById("m10aLiveBadge");
     const now = new Date();
     const dayOfWeek = now.getDay();
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6;
     const currentFormattedTime = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
 
     const isMs = typeof currentLang !== 'undefined' && currentLang === 'ms';
-
-    if (m10aLiveBadge) {
-        if (isWeekend) {
-            m10aLiveBadge.style.background = "#e74e9f";
-            m10aLiveBadge.textContent = isMs ? "🟢 Servis Jumaat-Ahad (Zoo Melaka ⇄ UTeM)" : "🟢 Friday-Sunday Service Active (Zoo Melaka ⇄ UTeM)";
-        } else {
-            m10aLiveBadge.style.background = "#3b82f6";
-            m10aLiveBadge.textContent = isMs ? "🟡 Laluan Isnin-Khamis (Melaka Sentral ⇄ MITC)" : "🟡 Mon-Thu Route Active (Melaka Sentral ⇄ MITC)";
-        }
-    }
 
     const m10aUTeMTimes = ["07:30","09:30","11:30","13:30","15:30","17:30","19:30"];
     const m10aNextBusTimeVal = document.getElementById("m10aNextBusTimeVal");

@@ -24,6 +24,7 @@ const imageCaptionInput = document.getElementById("imageCaptionInput");
 const imageCharCount = document.getElementById("imageCharCount");
 const agreeImageRules = document.getElementById("agreeImageRules");
 const submitImageBtn = document.getElementById("submitImageBtn");
+const chooseImageBtn = document.getElementById("chooseImageBtn");
 
 // State Variable for Selected Image File
 let selectedImageFile = null;
@@ -66,6 +67,10 @@ async function fetchWithRetry(url, options, maxRetries = 2) {
 // 1. Mode Sub-Tab Switcher Logic (Segmented Control)
 // -------------------------------------------------------------
 function switchSubMode(mode) {
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try { navigator.vibrate(8); } catch (e) {}
+    }
+
     const segmentedControl = document.getElementById("confessionSegmentedControl");
     if (segmentedControl) {
         segmentedControl.setAttribute("data-active", mode);
@@ -77,6 +82,9 @@ function switchSubMode(mode) {
         }
         if (tabImageMode) {
             tabImageMode.classList.remove("active");
+        }
+        if (chooseImageBtn) {
+            chooseImageBtn.style.display = "none";
         }
         if (textSubmissionPanel) {
             textSubmissionPanel.style.display = "block";
@@ -95,6 +103,9 @@ function switchSubMode(mode) {
         }
         if (tabTextMode) {
             tabTextMode.classList.remove("active");
+        }
+        if (chooseImageBtn) {
+            chooseImageBtn.style.display = "inline-flex";
         }
         if (imageSubmissionPanel) {
             imageSubmissionPanel.style.display = "block";
@@ -265,6 +276,9 @@ if (submitBtn) {
             if (!result) {
                 showStatus("Failed to receive structured response from server. Please try again.", "error");
             } else if (result.status === "success") {
+                if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                    try { navigator.vibrate([15, 50, 25]); } catch (e) {}
+                }
                 showStatus(result.message || "Confession published successfully!", "success");
                 confessionText.value = "";
                 clearDraftConfession();
@@ -356,7 +370,6 @@ if (removeImageBtn) {
     removeImageBtn.addEventListener("click", clearImageSelection);
 }
 
-const chooseImageBtn = document.getElementById("chooseImageBtn");
 if (chooseImageBtn && imageFileInput) {
     chooseImageBtn.addEventListener("click", () => imageFileInput.click());
 }
@@ -553,6 +566,9 @@ if (submitImageBtn) {
             });
 
             if (result && result.status === "success") {
+                if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                    try { navigator.vibrate([15, 50, 25]); } catch (e) {}
+                }
                 showStatus(result.message || "Image confession published successfully!", "success");
                 clearImageSelection();
                 if (imageCaptionInput) imageCaptionInput.value = "";

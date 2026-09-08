@@ -1,0 +1,317 @@
+// wifi.js - UTeM Campus Network Latency & Portal Health Diagnostic Engine
+// Real-time latency measurement and reachability checker for official UTeM portals and campus gateways.
+
+(function () {
+    'use strict';
+
+    // 1. Diagnostic Endpoints Configuration (Focused on core student daily tools)
+    const TARGET_SERVICES = [
+        {
+            id: 'portal',
+            name: 'i-UTeM Student Portal',
+            url: 'https://portal.utem.edu.my/iutem/',
+            desc: 'Academic OAS, exam slips & results'
+        },
+        {
+            id: 'ulearn',
+            name: 'UTeM uLearn Hub',
+            url: 'https://ulearn.utem.edu.my/hub/',
+            desc: 'LMS, lecture slides & quizzes'
+        },
+        {
+            id: 'internet',
+            name: 'Internet Backbone',
+            url: 'https://1.1.1.1/cdn-cgi/trace',
+            desc: 'Global web latency baseline'
+        }
+    ];
+
+    let isTesting = false;
+
+    // 2. DOM Elements
+    const btnRun = document.getElementById('btnRunNetworkTest');
+    const btnText = document.getElementById('btnRunTestText');
+    const radarIconBox = document.getElementById('radarIconBox');
+    const deviceStatusDot = document.getElementById('deviceStatusDot');
+    const deviceStatusText = document.getElementById('deviceStatusText');
+    const deviceTechBadge = document.getElementById('deviceTechBadge');
+    const verdictIconBadge = document.getElementById('verdictIconBadge');
+    const verdictTitle = document.getElementById('verdictTitle');
+    const verdictDesc = document.getElementById('verdictDesc');
+    const verdictTime = document.getElementById('verdictTime');
+
+    // 3. Update Local Device Status (Online/Offline & Network Type)
+    function updateDeviceStatus() {
+        const isOnline = navigator.onLine;
+
+        if (deviceStatusDot) {
+            deviceStatusDot.className = 'pulse-indicator-dot ' + (isOnline ? 'online' : 'offline');
+        }
+
+        if (deviceStatusText) {
+            deviceStatusText.textContent = isOnline ? 'Online' : 'Offline';
+        }
+
+        if (deviceTechBadge) {
+            if (!isOnline) {
+                deviceTechBadge.textContent = 'Disconnected';
+                deviceTechBadge.style.background = 'rgba(239, 68, 68, 0.15)';
+                deviceTechBadge.style.color = '#ef4444';
+            } else if (navigator.connection) {
+                const conn = navigator.connection;
+                const type = conn.effectiveType ? conn.effectiveType.toUpperCase() : 'Wi-Fi';
+                const downlink = conn.downlink ? (' \u2022 ' + conn.downlink + 'M') : '';
+                deviceTechBadge.textContent = type + downlink;
+                deviceTechBadge.style.background = 'rgba(56, 189, 248, 0.15)';
+                deviceTechBadge.style.color = '#38bdf8';
+            } else {
+                deviceTechBadge.textContent = 'Active';
+                deviceTechBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+                deviceTechBadge.style.color = '#10b981';
+            }
+        }
+    }
+
+    // 4. Ping Service Utility via Fetch Timing
+    async function pingService(url, timeoutMs = 4500) {
+        if (!navigator.onLine) {
+            return { status: 'offline', latency: null };
+        }
+
+        const startTime = performance.now();
+        const cacheBuster = (url.includes('?') ? '&' : '?') + '_t=' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+        const targetUrl = url + cacheBuster;
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+            await fetch(targetUrl, {
+                method: 'GET',
+                mode: 'no-cors',
+                cache: 'no-store',
+                signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            const latency = Math.round(performance.now() - startTime);
+            return { status: 'online', latency: Math.max(8, latency) };
+        } catch (err) {
+            clearTimeout(timeoutId);
+            const duration = Math.round(performance.now() - startTime);
+            if (err.name === 'AbortError') {
+                return { status: 'timeout', latency: null };
+            }
+            if (navigator.onLine && duration < timeoutMs) {
+                return { status: 'online', latency: Math.max(12, duration) };
+            }
+            return { status: 'unreachable', latency: null };
+        }
+    }
+
+    // 5. Update Single Service Card UI
+    function setServiceTesting(id) {
+        const badge = document.getElementById(`status-badge-${id}`);
+        const latencyVal = document.getElementById(`latency-${id}`);
+        const meter = document.getElementById(`meter-${id}`);
+
+        if (badge) {
+            badge.className = 'service-status-pill status-testing';
+            badge.innerHTML = '<span class="status-dot"></span><span class="status-label">Pinging...</span>';
+        }
+        if (latencyVal) latencyVal.textContent = '...';
+        if (meter) {
+            meter.style.width = '30%';
+            meter.className = 'service-meter-bar testing';
+        }
+    }
+
+    function setServiceResult(id, result) {
+        const badge = document.getElementById(`status-badge-${id}`);
+        const latencyVal = document.getElementById(`latency-${id}`);
+        const meter = document.getElementById(`meter-${id}`);
+
+        if (result.status === 'online' && typeof result.latency === 'number') {
+            const ms = result.latency;
+            let statusClass = 'status-optimal';
+            let statusLabel = 'Optimal';
+            let meterPct = Math.min(100, Math.max(15, Math.round((1 - (ms / 600)) * 100)));
+
+            if (ms > 350) {
+                statusClass = 'status-slow';
+                statusLabel = 'High Ping';
+            } else if (ms > 160) {
+                statusClass = 'status-moderate';
+                statusLabel = 'Moderate';
+            }
+
+            if (badge) {
+                badge.className = `service-status-pill ${statusClass}`;
+                badge.innerHTML = `<span class="status-dot"></span><span class="status-label">${statusLabel}</span>`;
+            }
+            if (latencyVal) {
+                latencyVal.textContent = `${ms} ms`;
+                latencyVal.style.color = statusClass === 'status-optimal' ? '#10b981' : (statusClass === 'status-moderate' ? '#f59e0b' : '#ef4444');
+            }
+            if (meter) {
+                meter.className = `service-meter-bar ${statusClass.replace('status-', '')}`;
+                meter.style.width = `${meterPct}%`;
+            }
+        } else if (result.status === 'timeout') {
+            if (badge) {
+                badge.className = 'service-status-pill status-timeout';
+                badge.innerHTML = '<span class="status-dot"></span><span class="status-label">Timeout</span>';
+            }
+            if (latencyVal) {
+                latencyVal.textContent = '> 4500 ms';
+                latencyVal.style.color = '#ef4444';
+            }
+            if (meter) {
+                meter.className = 'service-meter-bar timeout';
+                meter.style.width = '6%';
+            }
+        } else {
+            if (badge) {
+                badge.className = 'service-status-pill status-unreachable';
+                badge.innerHTML = '<span class="status-dot"></span><span class="status-label">Unreachable</span>';
+            }
+            if (latencyVal) {
+                latencyVal.textContent = 'No Signal';
+                latencyVal.style.color = '#94a3b8';
+            }
+            if (meter) {
+                meter.className = 'service-meter-bar unreachable';
+                meter.style.width = '0%';
+            }
+        }
+    }
+
+    // 6. Verdict Banner State Updater (Crisp Inline SVGs)
+    function setVerdictUI(state, title, desc) {
+        if (verdictTitle) verdictTitle.textContent = title;
+        if (verdictDesc) verdictDesc.textContent = desc;
+
+        if (!verdictIconBadge) return;
+        verdictIconBadge.className = 'verdict-icon-badge' + (state ? ' ' + state : '');
+
+        let svgHtml = '';
+        if (state === 'optimal') {
+            // Checkmark in circle
+            svgHtml = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+        } else if (state === 'warning') {
+            // Alert circle
+            svgHtml = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+        } else if (state === 'offline') {
+            // Alert diamond / cross
+            svgHtml = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+        } else if (state === 'testing') {
+            // Pulse wave
+            svgHtml = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>';
+        } else {
+            // Lightning bolt
+            svgHtml = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>';
+        }
+        verdictIconBadge.innerHTML = svgHtml;
+    }
+
+    // 7. Run Complete Diagnostic Sequence with Smart Crash / Overload Intelligence
+    async function runDiagnostics() {
+        if (isTesting) return;
+        isTesting = true;
+
+        updateDeviceStatus();
+
+        if (btnRun) {
+            btnRun.disabled = true;
+            btnRun.classList.add('running');
+        }
+        if (btnText) btnText.textContent = 'Testing...';
+        if (radarIconBox) radarIconBox.classList.add('radar-active');
+
+        setVerdictUI('testing', 'Measuring Network Latency...', 'Sending real-time network packets to i-UTeM Portal, uLearn Hub, and internet backbone.');
+
+        // Set all to testing state
+        TARGET_SERVICES.forEach(s => setServiceTesting(s.id));
+
+        const results = {};
+        const pings = TARGET_SERVICES.map(async (service) => {
+            const res = await pingService(service.url);
+            results[service.id] = res;
+            setServiceResult(service.id, res);
+            return res;
+        });
+
+        await Promise.all(pings);
+
+        const isInternetUp = results.internet && results.internet.status === 'online';
+        const isPortalUp = results.portal && results.portal.status === 'online';
+        const isUlearnUp = results.ulearn && results.ulearn.status === 'online';
+
+        // Smart Crash, Overload & Congestion Analysis
+        if (!navigator.onLine || !isInternetUp) {
+            // Case 1: Local Device has no internet
+            setVerdictUI('offline', 'Local Device Offline / No Internet', 'Your device cannot reach the external internet. Check your connection to eduroam, WiFi UTeM Net, or toggle your mobile data.');
+        } else if (!isPortalUp && !isUlearnUp) {
+            // Case 2: Both campus servers down / crashed (Internet is working)
+            setVerdictUI('offline', 'Campus Servers Down / Traffic Crash Detected', 'Both i-UTeM Portal and uLearn Hub are unreachable. Your internet is working normally, but university servers are offline or overloaded (likely Course Registration Add/Drop or Exam Slip surge). Avoid repeated refreshing; try again in 15\u201330 minutes.');
+        } else if (!isPortalUp && isUlearnUp) {
+            // Case 3: Only i-UTeM is down
+            setVerdictUI('warning', 'i-UTeM Student Portal Overloaded / Down', 'i-UTeM portal timed out (>4500 ms). This typically occurs during Course Registration Add/Drop surges or Exam Slip releases. uLearn Hub and external internet are working normally.');
+        } else if (isPortalUp && !isUlearnUp) {
+            // Case 4: Only uLearn is down
+            setVerdictUI('warning', 'uLearn Hub Unresponsive / Submission Rush', 'uLearn Hub is not responding. Often caused by heavy concurrent traffic near midnight assignment submission deadlines or scheduled LMS maintenance. i-UTeM portal remains accessible.');
+        } else if (results.portal.latency > 350 || results.ulearn.latency > 350) {
+            // Case 5: Heavy queuing / throttling
+            const portalMs = results.portal.latency;
+            const ulearnMs = results.ulearn.latency;
+            setVerdictUI('warning', 'Heavy Server Congestion / Throttling Detected', `Campus portals are responding slowly (i-UTeM: ${portalMs} ms, uLearn: ${ulearnMs} ms). Expect delays when submitting forms or loading slips\u2014avoid refreshing while pages are loading.`);
+        } else if (results.portal.latency > 160 || results.ulearn.latency > 160) {
+            // Case 6: Moderate latency
+            const avgMs = Math.round((results.portal.latency + results.ulearn.latency) / 2);
+            setVerdictUI('warning', `Campus Portals Operational (Avg ${avgMs} ms)`, 'Portals are accessible and responding normally, with moderate network transit latency.');
+        } else {
+            // Case 7: All optimal
+            const avgMs = Math.round((results.portal.latency + results.ulearn.latency + results.internet.latency) / 3);
+            setVerdictUI('optimal', `All Core Campus Portals Operational (Avg ${avgMs} ms)`, 'i-UTeM Portal and uLearn Hub are responsive with low round-trip latency. Ready for course registration, exam slip downloads, and assignment submissions.');
+        }
+
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        if (verdictTime) verdictTime.textContent = `Updated ${timeStr}`;
+
+        if (btnRun) {
+            btnRun.disabled = false;
+            btnRun.classList.remove('running');
+        }
+        if (btnText) btnText.textContent = 'Re-Test';
+        if (radarIconBox) radarIconBox.classList.remove('radar-active');
+
+        isTesting = false;
+    }
+
+    // 8. Event Listeners & Auto-Run
+    window.addEventListener('online', updateDeviceStatus);
+    window.addEventListener('offline', updateDeviceStatus);
+
+    if (btnRun) {
+        btnRun.addEventListener('click', runDiagnostics);
+    }
+
+    // Expose for testing/debugging in browser console
+    window.ucpmNetworkRadar = {
+        run: runDiagnostics,
+        pingService: pingService,
+        updateDeviceStatus: updateDeviceStatus
+    };
+
+    // Auto-run on load with slight delay for silky smooth page rendering
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDeviceStatus();
+            setTimeout(runDiagnostics, 650);
+        });
+    } else {
+        updateDeviceStatus();
+        setTimeout(runDiagnostics, 650);
+    }
+
+})();

@@ -1,4 +1,4 @@
-// translation.js — All UI strings (EN/BM) and setLanguage / toggleLanguage
+﻿// translation.js — All UI strings (EN/BM) and setLanguage / toggleLanguage
 
 const translations = {
     en: {
@@ -684,6 +684,9 @@ const translations = {
         health_rel3_desc: "Shuttle routes between Durian Tunggal and Ayer Keroh clinics.",
 
         descImportantLinks: "Quick access to campus Wi-Fi credentials, LibProxy registration, VPN setup, official portals, and student channels.",
+        wifiRadarTitle: "Campus Network & Portal Health Radar",
+        wifiRadarSub: "Live latency diagnostics & reachability check for UTeM portals and gateway servers",
+        btnRunTestText: "Test Latency",
         libproxyTitle: "UTeM LibProxy (Off-Campus)",
         libproxySub: "Single Sign-On Access",
         libproxyDesc: "Access IEEE Xplore, ScienceDirect, and past year exams from home without network blocks.",
@@ -742,7 +745,6 @@ const translations = {
         semToggleRegular: "🗓️ Regular Semester",
         labelRadarTitle: "UTeM Bus Route",
         titlePublicBus: "Pink Bus M10A Official Timetable",
-        m10aLiveBadge: "Weekend Service to UTeM",
         labelRouteTimeline: "M10A Route Stops",
         labelWeekend1: "Fri-Sun Only",
         labelWeekend2: "Fri-Sun Only",
@@ -1521,6 +1523,9 @@ const translations = {
 
         // --- Important Links Card Elements (wifi.html) (BM) ---
         descImportantLinks: "Akses pantas ke kelayakan Wi-Fi kampus, pendaftaran LibProxy, persediaan VPN, portal rasmi, dan saluran pelajar.",
+        wifiRadarTitle: "Radar Kesihatan Rangkaian & Portal Kampus",
+        wifiRadarSub: "Diagnostik kependaman langsung & semakan capaian portal dan pelayan get laluan UTeM",
+        btnRunTestText: "Uji Kependaman",
         libproxyTitle: "UTeM LibProxy (Luar Kampus)",
         libproxySub: "Akses Log Masuk Tunggal",
         libproxyDesc: "Akses IEEE Xplore, ScienceDirect, dan kertas soalan lepas dari rumah tanpa sekatan rangkaian.",
@@ -1586,7 +1591,6 @@ const translations = {
         semToggleRegular: "🗓️ Semester Biasa",
         labelRadarTitle: "Laluan Bas UTeM",
         titlePublicBus: "Jadual Rasmi Bas Pink M10A",
-        m10aLiveBadge: "Perkhidmatan Hujung Minggu ke UTeM",
         labelRouteTimeline: "Hentian Laluan M10A",
         labelWeekend1: "Jumaat-Ahad Sahaja",
         labelWeekend2: "Jumaat-Ahad Sahaja",
@@ -1908,6 +1912,13 @@ function setLanguage(lang) {
 
     const descImportantLinks = document.getElementById("descImportantLinks");
     if (descImportantLinks) descImportantLinks.textContent = t.desc_important_links || "Quick access to essential official campus portals, VPN clients, student council channels, and academic systems.";
+
+    const wifiRadarTitle = document.getElementById("wifiRadarTitle");
+    if (wifiRadarTitle && t.wifiRadarTitle) wifiRadarTitle.textContent = t.wifiRadarTitle;
+    const wifiRadarSub = document.getElementById("wifiRadarSub");
+    if (wifiRadarSub && t.wifiRadarSub) wifiRadarSub.textContent = t.wifiRadarSub;
+    const btnRunTestText = document.getElementById("btnRunTestText");
+    if (btnRunTestText && t.btnRunTestText) btnRunTestText.textContent = t.btnRunTestText;
 
     const libproxyTitle = document.getElementById("libproxyTitle");
     if (libproxyTitle) libproxyTitle.textContent = t.card_libproxy_title;
