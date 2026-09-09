@@ -13,9 +13,14 @@
     Rebuild and re-minify all assets regardless of file modification timestamps.
 .PARAMETER Check
     Audit and report synchronization status without writing any changes.
+.PARAMETER BumpCache
+    Increment the Service Worker cache version (CACHE_NAME in sw.js) even if no files changed.
+.PARAMETER NoBumpCache
+    Prevent automatic cache version incrementing when files are updated.
 .EXAMPLE
     .\build.ps1
     .\build.ps1 -Check
+    .\build.ps1 -BumpCache
     .\build.ps1 -Target css
     .\build.ps1 -File script.js -Force
 #>
@@ -29,7 +34,11 @@ param(
 
     [switch]$Force,
 
-    [switch]$Check
+    [switch]$Check,
+
+    [switch]$BumpCache,
+
+    [switch]$NoBumpCache
 )
 
 # Set console output encoding to UTF-8
@@ -164,6 +173,11 @@ public static class UCPMMinifier {
 
             // Line comment //
             if (c == '/' && next == '/') {
+                if (i > 0 && (source[i - 1] == ':' || source[i - 1] == '\\')) {
+                    sb.Append(c);
+                    i++;
+                    continue;
+                }
                 i += 2;
                 while (i < len && source[i] != '\n' && source[i] != '\r') i++;
                 continue;
@@ -377,5 +391,51 @@ if ($Check) {
     $totalPct = if ($totalOrigBytes -gt 0) { ($totalSaved / $totalOrigBytes) * 100 } else { 0 }
     Write-Host ("SUMMARY: {0} updated, {1} already up to date." -f $updatedCount, $upToDateCount) -ForegroundColor Green
     Write-Host ("TOTAL SIZE: {0:N1} KB -> {1:N1} KB (Saved {2:N1} KB / {3:N1}%)" -f ($totalOrigBytes / 1KB), ($totalMinBytes / 1KB), ($totalSaved / 1KB), $totalPct) -ForegroundColor Cyan
+}
+
+# Service Worker Cache Integrity & Version Management
+$swPath = Join-Path $workspaceRoot "sw.js"
+if (Test-Path $swPath) {
+    $swRaw = [System.IO.File]::ReadAllText($swPath, [System.Text.Encoding]::UTF8)
+    
+    # Check for untracked minified production assets in sw.js ASSETS_TO_CACHE
+    $missingAssets = @()
+    foreach ($pair in $pairs) {
+        $minFileName = $pair.MinName
+        if ($swRaw -notmatch [regex]::Escape($minFileName)) {
+            $missingAssets += $minFileName
+        }
+    }
+    if ($missingAssets.Count -gt 0) {
+        Write-Host ""
+        Write-Host ("[WARNING] Service Worker: {0} production asset(s) not found in sw.js ASSETS_TO_CACHE:" -f $missingAssets.Count) -ForegroundColor Yellow
+        foreach ($ma in $missingAssets) {
+            Write-Host ("   - {0}" -f $ma) -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host ""
+        Write-Host "[OK] Service Worker: 100% of production minified assets are tracked in sw.js ASSETS_TO_CACHE." -ForegroundColor DarkCyan
+    }
+
+    # Automatic or Explicit Cache Bumping
+    $shouldBump = (-not $Check) -and (-not $NoBumpCache) -and ($updatedCount -gt 0 -or $BumpCache)
+    if ($shouldBump) {
+        if ($swRaw -match 'const\s+CACHE_NAME\s*=\s*''ucpm-cache-v(\d+)'';') {
+            $oldVer = [int]$matches[1]
+            $newVer = $oldVer + 1
+            $patternToReplace = 'const\s+CACHE_NAME\s*=\s*''ucpm-cache-v\d+'';'
+            $replacementString = "const CACHE_NAME = 'ucpm-cache-v$newVer';"
+            $newSw = [regex]::Replace($swRaw, $patternToReplace, $replacementString)
+            $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+            [System.IO.File]::WriteAllText($swPath, $newSw, $utf8NoBom)
+            Write-Host ("[CACHE BUMPED] sw.js CACHE_NAME incremented: 'ucpm-cache-v{0}' -> 'ucpm-cache-v{1}'" -f $oldVer, $newVer) -ForegroundColor Magenta
+        } else {
+            Write-Host "[WARNING] Could not automatically parse 'ucpm-cache-vXX' in sw.js" -ForegroundColor Yellow
+        }
+    } elseif ($Check) {
+        if ($swRaw -match 'const\s+CACHE_NAME\s*=\s*''([^'']+)''') {
+            Write-Host ("[INFO] Active Service Worker Cache: {0}" -f $matches[1]) -ForegroundColor DarkGray
+        }
+    }
 }
 Write-Host "=========================================================================`n" -ForegroundColor Cyan

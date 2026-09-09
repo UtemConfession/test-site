@@ -1,6 +1,5 @@
 // calendar.js — Academic calendar timeline rendering logic with date range support
 
-const calendarSearch = document.getElementById("calendarSearch");
 const calendarFilterButtons = document.querySelectorAll(".cal-filter-btn");
 const calendarTimeline = document.getElementById("calendarTimeline");
 
@@ -106,7 +105,6 @@ const academicEvents = [
     },
 
     // --- PUBLIC HOLIDAYS & SPECIAL DATES ---
-    { startDate: "2026-08-31", endDate: "2026-08-31", title: "National Day (Hari Kebangsaan)", category: "holiday", duration: "1 Day" },
     { startDate: "2026-09-16", endDate: "2026-09-16", title: "Malaysia Day Holiday", category: "holiday", duration: "1 Day" },
     { startDate: "2026-09-24", endDate: "2026-09-24", title: "Prophet Muhammad's Birthday (Maulidur Rasul)", category: "holiday", duration: "1 Day" },
     { startDate: "2026-11-08", endDate: "2026-11-08", title: "Deepavali Festival Holiday", category: "holiday", duration: "1 Day" },
@@ -160,7 +158,7 @@ function formatDateParts(dateString) {
     return { day, month, year };
 }
 
-function renderCalendarEvents(filterCategory = 'all', searchQuery = '') {
+function renderCalendarEvents(filterCategory = 'all') {
     const timeline = document.getElementById("calendarTimeline");
     if (!timeline) return;
     timeline.innerHTML = '';
@@ -169,9 +167,7 @@ function renderCalendarEvents(filterCategory = 'all', searchQuery = '') {
 
     // Update filter buttons & labels if present
     const syncLabel = document.getElementById("syncCalendarLabel");
-    if (syncLabel) syncLabel.textContent = isMs ? "Segerak ke Kalendar (.ics)" : "Sync to Calendar (.ics)";
-    const calSearchInput = document.getElementById("calendarSearch");
-    if (calSearchInput) calSearchInput.placeholder = isMs ? "Cari acara kalendar..." : "Search calendar events...";
+    if (syncLabel) syncLabel.textContent = isMs ? "Segerak (.ics)" : "Sync (.ics)";
 
     const filterLabels = isMs ? { all: "Semua", academic: "Kuliah", exam: "Peperiksaan", break: "Cuti", holiday: "Cuti Am" }
                               : { all: "All", academic: "Lectures", exam: "Exams", break: "Breaks", holiday: "Holidays" };
@@ -180,19 +176,27 @@ function renderCalendarEvents(filterCategory = 'all', searchQuery = '') {
         if (cat && filterLabels[cat]) btn.textContent = filterLabels[cat];
     });
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     const sorted = [...academicEvents].sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-    const query = searchQuery.toLowerCase().trim();
     let eventsFound = 0;
 
     sorted.forEach(ev => {
-        const titleText = getEventTitle(ev, isMs);
+        const isRange = ev.startDate !== ev.endDate;
+
+        // Auto-remove single-day dates that have already passed (keep periods of time)
+        if (!isRange) {
+            const evEnd = new Date(ev.endDate + "T23:59:59");
+            if (evEnd < today) return;
+        }
+
         if (filterCategory !== 'all' && ev.category !== filterCategory) return;
-        if (query && !ev.title.toLowerCase().includes(query) && !titleText.toLowerCase().includes(query) && !ev.startDate.includes(query) && !ev.endDate.includes(query)) return;
+        const titleText = getEventTitle(ev, isMs);
 
         eventsFound++;
         const start = formatDateParts(ev.startDate);
         const end = formatDateParts(ev.endDate);
-        const isRange = ev.startDate !== ev.endDate;
 
         const categoryLabels = isMs ? {
             academic: "Kuliah Akademik",
@@ -251,17 +255,9 @@ calendarFilterButtons.forEach(btn => {
     btn.addEventListener("click", () => {
         calendarFilterButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
-        renderCalendarEvents(btn.getAttribute("data-category"), calendarSearch ? calendarSearch.value : '');
+        renderCalendarEvents(btn.getAttribute("data-category"));
     });
 });
-
-if (calendarSearch) {
-    calendarSearch.addEventListener("input", () => {
-        const activeBtn = document.querySelector(".cal-filter-btn.active");
-        const category = activeBtn ? activeBtn.getAttribute("data-category") : 'all';
-        renderCalendarEvents(category, calendarSearch.value);
-    });
-}
 
 // --- 1-CLICK CALENDAR SYNC (.ICS GENERATOR) ---
 function exportCalendarICS() {
@@ -471,12 +467,7 @@ function renderMilestonePill() {
                 if (allBtn) allBtn.click();
             }
 
-            // Clear search if it filtered out the event
-            const searchInput = document.getElementById("calendarSearch");
-            if (searchInput && searchInput.value.trim() !== "") {
-                searchInput.value = "";
-                renderCalendarEvents("all", "");
-            }
+
 
             const targetCard = document.querySelector(`.calendar-event-card[data-start-date="${targetDate}"]`);
             if (targetCard) {
@@ -556,13 +547,13 @@ function renderAcademicWeekTracker() {
         countdownLabel = isMs ? "Hari ke Sem 1" : "Days to Sem 1";
         statusBadgeText = isMs ? "Cuti Semester (Antara Sesi)" : "Semester Break (Inter-Session)";
         statusTitleText = isMs 
-            ? `${daysLeft} Hari Sehingga Kuliah Sem 1 Bermula` 
-            : `${daysLeft} Days until Semester 1 Begins`;
+            ? "Cuti Semester & Persediaan Sesi" 
+            : "Semester Break & Vacation";
         statusDescText = isMs
             ? "Kampus kini dalam cuti semester. Kuliah Semester 1 (Sesi 2026/2027) akan bermula secara rasmi pada Isnin, 28 Sept 2026."
             : "Campus is currently on semester break. Official undergraduate lectures commence on Monday, 28 Sept 2026.";
         
-        const breakStart = new Date("2026-08-31T00:00:00");
+        const breakStart = new Date("2026-07-27T00:00:00");
         const totalBreakDays = Math.max(1, Math.ceil((sem1Start - breakStart) / (1000 * 60 * 60 * 24)));
         const elapsed = Math.max(0, Math.ceil((today - breakStart) / (1000 * 60 * 60 * 24)));
         progressPct = Math.min(100, Math.max(10, Math.round((elapsed / totalBreakDays) * 100)));

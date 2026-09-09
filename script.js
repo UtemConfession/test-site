@@ -297,8 +297,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             },
             m10a: {
-                weekday: ["06:30","08:30","10:30","12:30","14:30","16:30","18:30","20:00"],
-                weekend: ["07:30","09:30","11:30","13:30","15:30","17:30","19:30"]
+                weekday: ["05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30"],
+                weekend: ["05:30","07:30","09:30","11:30","13:30","15:30","17:30","19:30"]
             }
         };
 
@@ -308,8 +308,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const day = now.getDay(); // 0 = Sun, 1 = Mon, ..., 5 = Fri, 6 = Sat
             const isFriSatSun = (day === 0 || day === 5 || day === 6);
 
-            // Nighttime blackout: If before 7:00 AM or after 10:00 PM (22:00), no buses running
-            if (now.getHours() < 7 || now.getHours() >= 22) {
+            // Nighttime blackout: If before 5:00 AM or after 10:00 PM (22:00), no buses running
+            if (now.getHours() < 5 || now.getHours() >= 22) {
                 return null;
             }
 
@@ -330,11 +330,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const key = ("" + routeKey).toLowerCase();
 
                 if (key === "m10a") {
-                    if (isFri || isSatSun) {
-                        return { type: "m10a", name: "M10A", times: busSchedulesMaster.m10a.weekend };
-                    } else {
-                        return { type: "m10a", name: "M10A", times: [] };
-                    }
+                    const times = (isFri || isSatSun) ? busSchedulesMaster.m10a.weekend : busSchedulesMaster.m10a.weekday;
+                    return { type: "m10a", name: "M10A", times: times };
                 }
 
                 if (sem === "regular") {

@@ -288,6 +288,245 @@
         isTesting = false;
     }
 
+    // --- 9. DEVICE WI-FI CONFIGURATOR & APPLE MOBILECONFIG ENGINE ---
+    const wifiOsGuides = {
+        android: {
+            title: "🤖 Android 11, 12, 13 & 14+ Setup Settings",
+            badge: "Android Enterprise",
+            badgeColor: "#34d399",
+            items: [
+                { k: "Wi-Fi Network (SSID)", v: "<strong>UTeM-Wifi</strong> or <strong>eduroam</strong>" },
+                { k: "EAP Method", v: "<code>PEAP</code>" },
+                { k: "Phase 2 Authentication", v: "<code>MSCHAPv2</code>" },
+                { k: "CA Certificate", v: "<strong>Use system certificates</strong> (or <em>Do not validate</em> on older devices)" },
+                { k: "Online Certificate Status", v: "<code>Do not verify</code> (or <em>Request status</em>)" },
+                { k: "Domain", v: "<code style='color: var(--accent-gold); font-weight: 700;'>utem.edu.my</code> <em>(Crucial: Android 11+ fails without this domain)</em>" },
+                { k: "Identity", v: "Student ID (e.g. <code>b032110000</code> for UTeM-Wifi, or <code>b032110000@student.utem.edu.my</code> for eduroam)" },
+                { k: "Anonymous Identity", v: "<em>Leave empty</em>" },
+                { k: "Password", v: "Your official Student Portal password" }
+            ],
+            note: "💡 <strong>Randomized MAC Note:</strong> If your Android phone disconnects randomly, open Wi-Fi network settings, set <em>Privacy / MAC Address</em> from 'Randomized MAC' to <strong>'Use Device/Phone MAC'</strong>."
+        },
+        apple: {
+            title: "🍎 Apple iOS (iPhone / iPad) & macOS",
+            badge: "1-Tap Profile Ready",
+            badgeColor: "#60a5fa",
+            isApple: true,
+            items: [
+                { k: "Method 1 (Instant 1-Tap Setup)", v: "Download our pre-configured Apple Configuration Profile. Once downloaded, open <strong>iOS Settings ➔ Profile Downloaded ➔ Install</strong>. You will only be asked for your Student ID and Password!" },
+                { k: "Method 2 (Manual Settings)", v: "Select <strong>UTeM-Wifi</strong> in Wi-Fi settings. Enter your Student ID and Password. When the certificate prompt for <strong>*.utem.edu.my</strong> appears, tap <strong>Trust</strong> in the upper right corner." }
+            ],
+            note: "🍎 <strong>Private Wi-Fi Address:</strong> You can keep Private Wi-Fi Address enabled. If login loops on campus, toggle Private Address OFF for UTeM-Wifi."
+        },
+        windows: {
+            title: "🪟 Windows 10 & 11 Instructions",
+            badge: "Windows Setup",
+            badgeColor: "#38bdf8",
+            items: [
+                { k: "1. Connect", v: "Click the Wi-Fi icon in the taskbar and select <strong>UTeM-Wifi</strong> or <strong>eduroam</strong>." },
+                { k: "2. Credentials", v: "Username: <code>Student ID</code> (or <code>ID@student.utem.edu.my</code> for eduroam). Password: <code>Student Portal Password</code>." },
+                { k: "3. Trust Certificate", v: "When Windows asks <em>'Continue connecting? Server certificate issued to *.utem.edu.my'</em>, click <strong>Connect</strong>." }
+            ],
+            note: "💡 <strong>Fix 'Can't connect to this network':</strong> Go to <strong>Settings ➔ Network & Internet ➔ Wi-Fi ➔ Manage known networks</strong>, select UTeM-Wifi, click <strong>Forget</strong>, and reconnect."
+        },
+        console: {
+            title: "🎮 Gaming Consoles, Smart TVs & IoT (Satria & Lestari)",
+            badge: "Hostel MAC Whitelist",
+            badgeColor: "#f59e0b",
+            items: [
+                { k: "Why Consoles Fail", v: "PlayStation (PS4/PS5), Nintendo Switch, Xbox, and Smart TVs do not support enterprise 802.1X PEAP authentication." },
+                { k: "Solution 1: PTM MAC Registration", v: "Find the <strong>MAC Address</strong> of your console/TV in its Network Settings. Submit a device whitelist request to the UTeM PTM Helpdesk or the internal hostel MAC registration portal." },
+                { k: "Solution 2: Laptop Hotspot (Instant)", v: "Connect your Windows laptop to UTeM-Wifi or hostel LAN, turn on <strong>Mobile Hotspot</strong> in Windows Settings, and connect your console/TV to your laptop's personal Wi-Fi hotspot." },
+                { k: "Solution 3: Travel Mini-Router", v: "Use a pocket travel router (e.g. GL.iNet) in WISP Repeater mode to broadcast a private WPA2-Personal Wi-Fi network inside your room." }
+            ],
+            note: "⚡ <strong>Low Latency Gaming:</strong> The wall Ethernet RJ45 jacks in Kolej Satria & Lestari offer significantly lower ping and stable jitter for online gaming compared to campus Wi-Fi."
+        }
+    };
+
+    function generateAppleMobileConfig() {
+        const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadDisplayName</key>
+    <string>UTeM Campus Wi-Fi (UTeM-Wifi &amp; eduroam)</string>
+    <key>PayloadDescription</key>
+    <string>Configures Universiti Teknikal Malaysia Melaka (UTeM) enterprise 802.1X wireless networks.</string>
+    <key>PayloadIdentifier</key>
+    <string>my.edu.utem.wifi.profile</string>
+    <key>PayloadOrganization</key>
+    <string>Universiti Teknikal Malaysia Melaka</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>4F2A1C3B-8E9D-4B2E-9C3A-7F1E5D8A4B2C</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadContent</key>
+    <array>
+        <!-- UTeM-Wifi Payload -->
+        <dict>
+            <key>AutoJoin</key>
+            <true/>
+            <key>EncryptionType</key>
+            <string>WPA2</string>
+            <key>HIDDEN_NETWORK</key>
+            <false/>
+            <key>PayloadDisplayName</key>
+            <string>UTeM-Wifi</string>
+            <key>PayloadIdentifier</key>
+            <string>my.edu.utem.wifi.network</string>
+            <key>PayloadType</key>
+            <string>com.apple.wifi.managed</string>
+            <key>PayloadUUID</key>
+            <string>5A3B2C1D-7E8F-4A1B-8C2D-6E5F4A3B2C1D</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>SSID_STR</key>
+            <string>UTeM-Wifi</string>
+            <key>EAPClientConfiguration</key>
+            <dict>
+                <key>AcceptEAPTypes</key>
+                <array>
+                    <integer>25</integer>
+                </array>
+                <key>EAPFASTUsePAC</key>
+                <false/>
+                <key>EAPFASTProvisionPAC</key>
+                <false/>
+                <key>OuterIdentity</key>
+                <string></string>
+                <key>TTLSInnerAuthentication</key>
+                <string>MSCHAPv2</string>
+            </dict>
+        </dict>
+        <!-- eduroam Payload -->
+        <dict>
+            <key>AutoJoin</key>
+            <true/>
+            <key>EncryptionType</key>
+            <string>WPA2</string>
+            <key>HIDDEN_NETWORK</key>
+            <false/>
+            <key>PayloadDisplayName</key>
+            <string>eduroam</string>
+            <key>PayloadIdentifier</key>
+            <string>my.edu.utem.eduroam.network</string>
+            <key>PayloadType</key>
+            <string>com.apple.wifi.managed</string>
+            <key>PayloadUUID</key>
+            <string>6B4C3D2E-8F9A-4B2C-9D3E-7F6A5B4C3D2E</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>SSID_STR</key>
+            <string>eduroam</string>
+            <key>EAPClientConfiguration</key>
+            <dict>
+                <key>AcceptEAPTypes</key>
+                <array>
+                    <integer>25</integer>
+                </array>
+                <key>EAPFASTUsePAC</key>
+                <false/>
+                <key>EAPFASTProvisionPAC</key>
+                <false/>
+                <key>OuterIdentity</key>
+                <string></string>
+                <key>TTLSInnerAuthentication</key>
+                <string>MSCHAPv2</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>`;
+
+        const blob = new Blob([xml], { type: "application/x-apple-as-config;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "UTeM_Wifi_Setup.mobileconfig");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        if (typeof showToast === "function") {
+            showToast("Apple profile downloaded! Open Settings > Profile Downloaded > Install.", "success", 5000);
+        } else {
+            alert("Apple profile downloaded! Open Settings > Profile Downloaded > Install.");
+        }
+    }
+
+    function renderWifiOsGuide(osKey) {
+        const box = document.getElementById('wifiOsContentBox');
+        if (!box) return;
+
+        const g = wifiOsGuides[osKey] || wifiOsGuides.android;
+
+        let html = `
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                <strong style="font-size: 13.5px; color: var(--accent-gold);">${g.title}</strong>
+                <span style="background: ${g.badgeColor}22; color: ${g.badgeColor}; padding: 2px 8px; border-radius: 6px; font-size: 10.5px; font-weight: 700;">${g.badge}</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+        `;
+
+        g.items.forEach(item => {
+            html += `
+                <div style="display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap;">
+                    <span style="color: var(--text-muted); min-width: 140px; font-weight: 600; font-size: 12px;">${item.k}:</span>
+                    <span style="color: var(--text-primary); flex: 1; font-size: 12.5px;">${item.v}</span>
+                </div>
+            `;
+        });
+
+        html += `</div>`;
+
+        if (g.isApple) {
+            html += `
+                <div style="margin: 14px 0 10px 0; padding: 12px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <strong style="color: #60a5fa; display: block; font-size: 12.5px;">Apple Configuration Profile (.mobileconfig)</strong>
+                        <span style="color: var(--text-secondary); font-size: 11.5px;">Auto-configures UTeM-Wifi and eduroam encryption and authentication profiles on iPhones, iPads, and MacBooks.</span>
+                    </div>
+                    <button type="button" id="btnDownloadAppleProfile" class="btn btn-primary btn-sm" style="font-size: 11.5px; padding: 6px 14px; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;">
+                        <span>📥</span> Download Apple Profile
+                    </button>
+                </div>
+            `;
+        }
+
+        if (g.note) {
+            html += `
+                <div style="font-size: 11.5px; color: var(--text-secondary); background: rgba(255, 255, 255, 0.03); border-radius: 6px; padding: 8px 10px; line-height: 1.5;">
+                    ${g.note}
+                </div>
+            `;
+        }
+
+        box.innerHTML = html;
+
+        if (g.isApple) {
+            const dlBtn = document.getElementById('btnDownloadAppleProfile');
+            if (dlBtn) {
+                dlBtn.addEventListener('click', generateAppleMobileConfig);
+            }
+        }
+    }
+
+    function initWifiOsSelector() {
+        const buttons = document.querySelectorAll('.wifi-os-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const os = btn.getAttribute('data-os');
+                renderWifiOsGuide(os);
+            });
+        });
+        renderWifiOsGuide('android');
+    }
+
     // 8. Event Listeners & Auto-Run
     window.addEventListener('online', updateDeviceStatus);
     window.addEventListener('offline', updateDeviceStatus);
@@ -307,10 +546,12 @@
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             updateDeviceStatus();
+            initWifiOsSelector();
             setTimeout(runDiagnostics, 650);
         });
     } else {
         updateDeviceStatus();
+        initWifiOsSelector();
         setTimeout(runDiagnostics, 650);
     }
 

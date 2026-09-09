@@ -213,6 +213,44 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            <!-- INTERACTIVE DEVICE SETUP ASSISTANT & AUTO-CONFIGURATOR -->
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 14px;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                                    <div>
+                                        <h4 style="font-size: 13.5px; font-weight: 700; color: var(--accent-gold); margin: 0; display: flex; align-items: center; gap: 6px;" id="labelWifiAssistant">
+                                            🛠️ Device Enterprise Configurator &amp; Smart Bypass
+                                        </h4>
+                                        <span style="font-size: 11.5px; color: var(--text-muted);" id="subWifiAssistant">
+                                            Select your OS for exact drop-down parameters or download a 1-tap Apple profile:
+                                        </span>
+                                    </div>
+                                    <span style="font-size: 10.5px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-weight: 700;">
+                                        WPA2 Enterprise 802.1X
+                                    </span>
+                                </div>
+
+                                <!-- Segmented OS Selector Pills -->
+                                <div class="wifi-os-selector" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+                                    <button type="button" class="wifi-os-btn active" data-os="android">
+                                        🤖 Android 11–14+
+                                    </button>
+                                    <button type="button" class="wifi-os-btn" data-os="apple">
+                                        🍎 iOS / macOS (1-Tap Profile)
+                                    </button>
+                                    <button type="button" class="wifi-os-btn" data-os="windows">
+                                        🪟 Windows 10/11
+                                    </button>
+                                    <button type="button" class="wifi-os-btn" data-os="console">
+                                        🎮 Hostel Consoles &amp; Smart TV
+                                    </button>
+                                </div>
+
+                                <!-- Dynamic OS Content Box (Rendered by wifi.js) -->
+                                <div id="wifiOsContentBox" style="background: rgba(13, 21, 39, 0.85); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; font-size: 12.5px; line-height: 1.6;">
+                                    <!-- Injected by wifi.js -->
+                                </div>
+                            </div>
                         </div>
 
                         <!-- INTERACTIVE CAMPUS NETWORK LATENCY & PORTAL HEALTH CHECK -->
