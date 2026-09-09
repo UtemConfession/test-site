@@ -244,9 +244,12 @@ function updateBusHolidayNotice() {
         banner.className = "bus-holiday-alert";
         if (iconEl) iconEl.textContent = "🗓️";
         if (titleEl) {
+            const dayText = days === 1
+                ? (isMs ? "Esok" : "Tomorrow")
+                : (isMs ? (days + " hari lagi") : ("in " + days + " days"));
             titleEl.textContent = isMs
-                ? `Pemberitahuan Cuti Akan Datang: ${title} (${days === 1 ? 'Esok' : `${days} hari lagi`})`
-                : `Upcoming Holiday Notice: ${title} (${days === 1 ? 'Tomorrow' : `in ${days} days`})`;
+                ? `Pemberitahuan Cuti Akan Datang: ${title} (${dayText})`
+                : `Upcoming Holiday Notice: ${title} (${dayText})`;
         }
         if (badgeEl) {
             badgeEl.className = "bus-status-tag holiday-reduced";

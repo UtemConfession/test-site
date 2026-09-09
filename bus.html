@@ -41,7 +41,116 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
+    <style>
+        .bus-holiday-alert {
+            background: rgba(234, 179, 8, 0.08);
+            border: 1px solid rgba(234, 179, 8, 0.28);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .bus-holiday-alert.is-holiday {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.32);
+            border-left-color: #ef4444;
+        }
+        .bus-holiday-alert.is-holiday #busHolidayBadge {
+            background: rgba(239, 68, 68, 0.18);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.35);
+        }
+        .bus-holiday-alert.is-holiday #busHolidayTitle {
+            color: #f87171;
+        }
+        .bus-holiday-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .bus-holiday-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            flex: 1;
+            min-width: 260px;
+        }
+        .bus-holiday-icon {
+            font-size: 24px;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .bus-holiday-text {
+            flex: 1;
+        }
+        .bus-holiday-heading-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+        #busHolidayTitle {
+            color: var(--accent-gold);
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+        #busHolidayDesc {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 12.5px;
+            line-height: 1.5;
+        }
+        #busHolidayTip {
+            margin-top: 6px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+        .bus-holiday-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .bus-holiday-btn-m10a {
+            font-size: 11.5px;
+            padding: 6px 12px;
+            white-space: nowrap;
+            border: 1px solid rgba(231, 78, 159, 0.5) !important;
+            color: #e74e9f !important;
+            background: rgba(231, 78, 159, 0.08) !important;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .bus-holiday-btn-m10a:hover {
+            background: rgba(231, 78, 159, 0.2) !important;
+        }
+        .bus-holiday-dismiss-btn {
+            background: transparent !important;
+            border: none !important;
+            color: var(--text-muted) !important;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px 8px;
+            line-height: 1;
+            border-radius: 6px;
+            transition: color 0.2s, background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bus-holiday-dismiss-btn:hover {
+            color: var(--text-primary) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+    </style>
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1444529930367815"
         crossorigin="anonymous"></script>
@@ -161,7 +270,7 @@
                             <button type="button" id="busHolidaySwitchM10A" class="btn btn-secondary btn-sm bus-holiday-btn-m10a">
                                 💖 Check BAS.MY M10A
                             </button>
-                            <button type="button" id="busHolidayDismiss" class="bus-holiday-dismiss-btn" aria-label="Dismiss notice" title="Dismiss">
+                            <button type="button" id="busHolidayDismiss" class="bus-holiday-dismiss-btn" aria-label="Dismiss notice" title="Dismiss" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; padding: 4px 8px; line-height: 1; border-radius: 6px;">
                                 ✕
                             </button>
                         </div>
