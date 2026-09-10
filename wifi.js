@@ -27,6 +27,12 @@
     ];
 
     let isTesting = false;
+    let autoScanActive = true;
+    let autoScanTimer = null;
+    let countdownTimer = null;
+    let nextScanIn = 0;
+    const AUTO_SCAN_INTERVAL_MS = 5000;
+    let lastScanTimeStr = '';
 
     // 2. DOM Elements
     const btnRun = document.getElementById('btnRunNetworkTest');
@@ -220,11 +226,6 @@
 
         updateDeviceStatus();
 
-        if (btnRun) {
-            btnRun.disabled = true;
-            btnRun.classList.add('running');
-        }
-        if (btnText) btnText.textContent = 'Testing...';
         if (radarIconBox) radarIconBox.classList.add('radar-active');
 
         setVerdictUI('testing', 'Measuring Network Latency...', 'Sending real-time network packets to i-UTeM Portal, uLearn Hub, and internet backbone.');
@@ -275,17 +276,78 @@
         }
 
         const now = new Date();
-        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        if (verdictTime) verdictTime.textContent = `Updated ${timeStr}`;
+        lastScanTimeStr = `Updated ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
+        if (verdictTime) verdictTime.textContent = lastScanTimeStr;
 
-        if (btnRun) {
-            btnRun.disabled = false;
-            btnRun.classList.remove('running');
-        }
-        if (btnText) btnText.textContent = 'Re-Test';
         if (radarIconBox) radarIconBox.classList.remove('radar-active');
 
         isTesting = false;
+    }
+
+    // 7b. Auto-Scan Engine — 2-second interval
+    function updateAutoScanButtonUI() {
+        if (!btnRun) return;
+        if (autoScanActive) {
+            // Show pause icon (two vertical bars)
+            btnRun.innerHTML = `
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+                <span id="btnRunTestText">Pause</span>`;
+            btnRun.setAttribute('title', 'Pause auto-scan');
+        } else {
+            // Show play icon
+            btnRun.innerHTML = `
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span id="btnRunTestText">Resume</span>`;
+            btnRun.setAttribute('title', 'Resume auto-scan');
+        }
+    }
+
+    function startCountdown() {
+        clearInterval(countdownTimer);
+        nextScanIn = AUTO_SCAN_INTERVAL_MS / 1000;
+        countdownTimer = setInterval(() => {
+            if (!autoScanActive) { clearInterval(countdownTimer); return; }
+            nextScanIn = Math.max(0, nextScanIn - 1);
+            if (verdictTime && !isTesting) {
+                verdictTime.textContent = `${lastScanTimeStr} • next scan in ${nextScanIn}s`;
+            }
+        }, 1000);
+    }
+
+    function startAutoScan() {
+        clearInterval(autoScanTimer);
+        clearInterval(countdownTimer);
+        autoScanActive = true;
+        updateAutoScanButtonUI();
+        // Immediate first scan
+        runDiagnostics().then(() => startCountdown());
+        autoScanTimer = setInterval(() => {
+            if (!autoScanActive) return;
+            runDiagnostics().then(() => startCountdown());
+        }, AUTO_SCAN_INTERVAL_MS);
+    }
+
+    function pauseAutoScan() {
+        clearInterval(autoScanTimer);
+        clearInterval(countdownTimer);
+        autoScanActive = false;
+        updateAutoScanButtonUI();
+        if (verdictTime && lastScanTimeStr) {
+            verdictTime.textContent = `${lastScanTimeStr} • Paused`;
+        }
+    }
+
+    function toggleAutoScan() {
+        if (autoScanActive) {
+            pauseAutoScan();
+        } else {
+            startAutoScan();
+        }
     }
 
     // --- 9. DEVICE WI-FI CONFIGURATOR & APPLE MOBILECONFIG ENGINE ---
@@ -527,32 +589,37 @@
         renderWifiOsGuide('android');
     }
 
-    // 8. Event Listeners & Auto-Run
+    // 8. Event Listeners & Auto-Scan Start
     window.addEventListener('online', updateDeviceStatus);
     window.addEventListener('offline', updateDeviceStatus);
 
     if (btnRun) {
-        btnRun.addEventListener('click', runDiagnostics);
+        btnRun.addEventListener('click', toggleAutoScan);
     }
 
     // Expose for testing/debugging in browser console
     window.ucpmNetworkRadar = {
         run: runDiagnostics,
+        startAutoScan: startAutoScan,
+        pauseAutoScan: pauseAutoScan,
+        toggleAutoScan: toggleAutoScan,
         pingService: pingService,
         updateDeviceStatus: updateDeviceStatus
     };
 
-    // Auto-run on load with slight delay for silky smooth page rendering
+    // Auto-scan starts on load with a slight delay for silky smooth page rendering
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             updateDeviceStatus();
             initWifiOsSelector();
-            setTimeout(runDiagnostics, 650);
+            updateAutoScanButtonUI();
+            setTimeout(startAutoScan, 650);
         });
     } else {
         updateDeviceStatus();
         initWifiOsSelector();
-        setTimeout(runDiagnostics, 650);
+        updateAutoScanButtonUI();
+        setTimeout(startAutoScan, 650);
     }
 
 })();
