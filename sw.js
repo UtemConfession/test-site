@@ -11,7 +11,7 @@ try {
 }
 
 // sw.js — UTeM Confessions Pro Max Service Worker (Offline Support)
-const CACHE_NAME = 'ucpm-cache-v118';
+const CACHE_NAME = 'ucpm-cache-v119';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -50,7 +50,6 @@ const ASSETS_TO_CACHE = [
     './activities-data.min.js',
     './activities.min.js',
     './marketplace.min.js',
-    './popunder.min.js',
     './updates-data.min.js',
     './updates.min.js',
     './script.min.js',

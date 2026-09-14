@@ -390,28 +390,28 @@ const UCPMThemeModalHTML = `<!-- Curated Theme Palette Selection Modal -->
                         <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     </div>
                 </button>
-                <!-- Group 2: Apple & Liquid Glassmorphism -->
-                <!-- 4. iOS Liquid Glass -->
+                <!-- Group 2: Blue & Violet Glassmorphism -->
+                <!-- 4. Blue Glassmorphism -->
                 <button type="button" class="theme-card-option" data-theme-id="ios-glass">
                     <div class="theme-swatch-ring" style="border-color: #0a84ff; background: #070a13;">
                         <span class="theme-swatch-core" style="background: #0a84ff; box-shadow: 0 0 6px #0a84ff;"></span>
                     </div>
                     <div class="theme-card-info">
-                        <span class="theme-card-name"><span class="theme-card-emoji">📱</span> iOS Liquid Glass</span>
-                        <span class="theme-card-desc">Frosted Glass & Apple Blue</span>
+                        <span class="theme-card-name"><span class="theme-card-emoji">💠</span> Blue Glassmorphism</span>
+                        <span class="theme-card-desc">Frosted Glass & Cobalt Blue</span>
                     </div>
                     <div class="theme-check-circle" aria-hidden="true">
                         <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     </div>
                 </button>
-                <!-- 5. Apple Intelligence -->
+                <!-- 5. Violet Prism -->
                 <button type="button" class="theme-card-option" data-theme-id="siri-glow">
                     <div class="theme-swatch-ring" style="border-color: #bf5af2; background: #080614;">
                         <span class="theme-swatch-core" style="background: linear-gradient(135deg, #0a84ff, #bf5af2, #ff375f); box-shadow: 0 0 6px #bf5af2;"></span>
                     </div>
                     <div class="theme-card-info">
-                        <span class="theme-card-name"><span class="theme-card-emoji">🪄</span> Apple Intelligence</span>
-                        <span class="theme-card-desc">Frosted Glass & Siri Aura</span>
+                        <span class="theme-card-name"><span class="theme-card-emoji">🔮</span> Violet Prism</span>
+                        <span class="theme-card-desc">Frosted Glass & Purple Glow</span>
                     </div>
                     <div class="theme-check-circle" aria-hidden="true">
                         <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -471,19 +471,7 @@ const UCPMThemeModalHTML = `<!-- Curated Theme Palette Selection Modal -->
                         <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     </div>
                 </button>
-                <!-- 10. Cosmic Nebula -->
-                <button type="button" class="theme-card-option" data-theme-id="nebula">
-                    <div class="theme-swatch-ring" style="border-color: #d946ef; background: #080414;">
-                        <span class="theme-swatch-core" style="background: #d946ef; box-shadow: 0 0 6px #d946ef;"></span>
-                    </div>
-                    <div class="theme-card-info">
-                        <span class="theme-card-name"><span class="theme-card-emoji">🪐</span> Cosmic Nebula</span>
-                        <span class="theme-card-desc">Interstellar & Ultraviolet</span>
-                    </div>
-                    <div class="theme-check-circle" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                    </div>
-                </button>
+
                 <!-- Group 4: Blue / Cyan / Teal / Marine -->
                 <!-- 11. Cyberpunk Cyan -->
                 <button type="button" class="theme-card-option" data-theme-id="cyberpunk">
@@ -758,16 +746,16 @@ const UCPM_THEMES = {
     classic: { id: 'classic', name: 'Classic', icon: '🌕', fullName: 'Classic UCPM', color: '#d4af37' },
     oled: { id: 'oled', name: 'Eclipse', icon: '🌑', fullName: 'Midnight Eclipse', color: '#ffd700' },
     monochrome: { id: 'monochrome', name: 'Mono', icon: '⚪', fullName: 'Minimal Monochrome', color: '#ffffff' },
-    // 2. Apple & Liquid Glassmorphism
-    'ios-glass': { id: 'ios-glass', name: 'iOS Glass', icon: '📱', fullName: 'iOS Liquid Glass', color: '#0a84ff' },
-    'siri-glow': { id: 'siri-glow', name: 'Apple AI', icon: '🪄', fullName: 'Apple Intelligence', color: '#bf5af2' },
+    // 2. Blue & Violet Glassmorphism
+    'ios-glass': { id: 'ios-glass', name: 'Blue Glass', icon: '💠', fullName: 'Blue Glassmorphism', color: '#0a84ff' },
+    'siri-glow': { id: 'siri-glow', name: 'Violet', icon: '🔮', fullName: 'Violet Prism', color: '#bf5af2' },
     // 2. Pink / Magenta / Red / Peach
     sakura: { id: 'sakura', name: 'Sakura', icon: '🌸', fullName: 'Sakura Neon', color: '#ff6b8b' },
     peach: { id: 'peach', name: 'Peach', icon: '🍑', fullName: 'Peach Blossom', color: '#fb7185' },
     arcade: { id: 'arcade', name: 'Arcade', icon: '🕹️', fullName: 'Arcade 1984', color: '#ff2a6d' },
     // 3. Purple / Lilac / Ultraviolet
     catppuccin: { id: 'catppuccin', name: 'Mocha', icon: '☕', fullName: 'Pastel Mocha', color: '#cba6f7' },
-    nebula: { id: 'nebula', name: 'Nebula', icon: '🪐', fullName: 'Cosmic Nebula', color: '#d946ef' },
+
     // 4. Blue / Cyan / Teal / Marine
     cyberpunk: { id: 'cyberpunk', name: 'Cyberpunk', icon: '💎', fullName: 'Cyberpunk Cyan', color: '#00f5d4' },
     tokyo: { id: 'tokyo', name: 'Tokyo', icon: '🗼', fullName: 'Tokyo Night', color: '#7aa2f7' },

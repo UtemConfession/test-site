@@ -4881,7 +4881,7 @@ iframe[style*="position:fixed"] {
    MODEL B: 6 CURATED THEME PRESETS SYSTEM
    ========================================================================== */
 
-/* 0A. IOS LIQUID GLASS THEME ([data-theme="ios-glass"]) */
+/* 0A. BLUE GLASSMORPHISM THEME ([data-theme="ios-glass"]) */
 [data-theme="ios-glass"] {
     --bg-primary: #070a13;
     --bg-secondary: rgba(12, 18, 34, 0.72);
@@ -4903,7 +4903,7 @@ iframe[style*="position:fixed"] {
     --accent-gold-rgb: 10, 132, 255;
 }
 
-/* 0B. APPLE INTELLIGENCE SIRI GLOW THEME ([data-theme="siri-glow"]) */
+/* 0B. VIOLET PRISM THEME ([data-theme="siri-glow"]) */
 [data-theme="siri-glow"] {
     --bg-primary: #080614;
     --bg-secondary: rgba(18, 12, 34, 0.72);
@@ -5124,27 +5124,6 @@ iframe[style*="position:fixed"] {
 }
 
 
-/* 25. COSMIC NEBULA THEME ([data-theme="nebula"]) */
-[data-theme="nebula"] {
-    --bg-primary: #080414;
-    --bg-secondary: #110829;
-    --bg-card: #1c0e40;
-    --bg-card-hover: #281459;
-    --border-color: rgba(217, 70, 239, 0.28);
-    --border-hover: rgba(217, 70, 239, 0.7);
-    --input-bg: #05020c;
-    --input-border: rgba(217, 70, 239, 0.3);
-    --dark-gradient: linear-gradient(135deg, #1c0e40 0%, #080414 100%);
-    --gold-gradient: linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%);
-    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.9);
-    --glow-shadow: 0 0 22px rgba(217, 70, 239, 0.45);
-    --text-primary: #ffffff;
-    --text-secondary: #fae8ff;
-    --text-muted: #e879f9;
-    --accent-gold: #d946ef;
-    --accent-gold-hover: #f0abfc;
-    --accent-gold-rgb: 217, 70, 239;
-}
 
 
 /* 9. MINIMAL MONOCHROME THEME ([data-theme="monochrome"]) */
@@ -5287,7 +5266,7 @@ iframe[style*="position:fixed"] {
 }
 
 /* ==========================================================================
-   IOS FROSTED GLASSMORPHISM ENGINE ([data-theme="ios-glass"] & [data-theme="siri-glow"])
+   FROSTED GLASSMORPHISM ENGINE ([data-theme="ios-glass"] & [data-theme="siri-glow"])
    ========================================================================== */
 
 /* 1. Dynamic Ambient Radiant Canvas (essential for frosted refraction) */

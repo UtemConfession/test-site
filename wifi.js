@@ -590,7 +590,51 @@
     }
 
     // 8. Event Listeners & Auto-Scan Start
-    window.addEventListener('online', updateDeviceStatus);
+
+    // 8a. iOS Safari Fix: visibilitychange + pageshow Recovery
+    // iOS Safari completely suspends setInterval when the tab is backgrounded or the
+    // screen is locked. Missed callbacks are silently dropped (not queued).
+    // When the user returns, we must detect the wake-up and restart the scan loop.
+    let wasAutoScanActiveBeforeHidden = false;
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            // Tab is being hidden — remember whether auto-scan was active, then pause
+            // timers to avoid stale/frozen intervals that won't fire on iOS anyway.
+            wasAutoScanActiveBeforeHidden = autoScanActive;
+            if (autoScanActive) {
+                clearInterval(autoScanTimer);
+                clearInterval(countdownTimer);
+            }
+        } else {
+            // Tab is visible again — if auto-scan was active before, restart it
+            // with an immediate fresh scan so the user sees up-to-date results instantly.
+            if (wasAutoScanActiveBeforeHidden && autoScanActive) {
+                startAutoScan();
+            }
+            // Always refresh device online/offline status on wake
+            updateDeviceStatus();
+        }
+    });
+
+    // pageshow with persisted=true fires when iOS Safari restores a page from
+    // its back-forward cache (bfcache), which does NOT trigger visibilitychange.
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            updateDeviceStatus();
+            if (autoScanActive) {
+                startAutoScan();
+            }
+        }
+    });
+
+    window.addEventListener('online', () => {
+        updateDeviceStatus();
+        // Connectivity restored — trigger immediate scan if auto-scan is active
+        if (autoScanActive && !isTesting) {
+            startAutoScan();
+        }
+    });
     window.addEventListener('offline', updateDeviceStatus);
 
     if (btnRun) {
@@ -622,4 +666,4 @@
         setTimeout(startAutoScan, 650);
     }
 
-})();
+})();
