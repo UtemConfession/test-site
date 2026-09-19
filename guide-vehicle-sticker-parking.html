@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google Analytics 4 (GA4) -->
@@ -12,6 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#060b19">
 
     <title>UTeM Vehicle Sticker & Campus Parking Guide | UTeM Confessions Pro Max</title>
     <meta name="description" content="Complete guide to applying for UTeM student vehicle stickers (Pelekat Kenderaan Pelajar), motorcycle & car parking zones, traffic summons, and safety rules.">
@@ -23,8 +24,10 @@
     <meta property="og:title" content="UTeM Vehicle Sticker & Campus Parking Guide | UTeM Confessions Pro Max">
     <meta property="og:description" content="Step-by-step instructions for UTeM undergraduates to register vehicles, apply for official parking stickers, and avoid campus traffic compounds.">
     <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
     <meta property="og:url" content="https://utemconfession.github.io/guide-vehicle-sticker-parking.html">
     <meta property="og:image" content="https://utemconfession.github.io/UCPMLogo.png">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- Custom Style System -->
         <!-- Google Fonts Preconnect & Stylesheet -->
@@ -451,12 +454,12 @@ document.addEventListener("DOMContentLoaded", () => {
         function shareWhatsApp() {
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent(document.title + "\n\n" + url);
-            window.open("https://api.whatsapp.com/send?text=" + text, "_blank");
+            window.open("https://api.whatsapp.com/send?text=" + text, "_blank", "noopener,noreferrer");
         }
         function shareTelegram() {
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent(document.title);
-            window.open("https://t.me/share/url?url=" + url + "&text=" + text, "_blank");
+            window.open("https://t.me/share/url?url=" + url + "&text=" + text, "_blank", "noopener,noreferrer");
         }
         function copyGuideLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
