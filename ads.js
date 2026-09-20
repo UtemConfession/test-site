@@ -1,19 +1,25 @@
 /**
  * =============================================================
  * SITE-WIDE AD MONETIZATION LOADER
- * ads.js — Centralized loader for AdSense ads.
- *
- * AdSense:  Add <ins class="adsbygoogle" ...> inside the container. 
- *           Do NOT add inline (adsbygoogle = window.adsbygoogle || []).push({});
- *
- * Device filtering is handled via CSS visibility AND JS prevention:
- *   - Containers with "ad-slot--mobile-only" won't load on desktop
- *   - Containers with "ad-slot--desktop-only" won't load on mobile
+ * ads.js — Centralized loader for Infolinks & site ad monetization.
  * =============================================================
  */
 
 (function () {
     'use strict';
+
+    // --- Infolinks Global Configuration ---
+    window.infolinks_pid = 3448001;
+    window.infolinks_wsid = 0;
+
+    // Dynamically inject Infolinks main script across all pages if not already injected statically
+    if (!document.querySelector('script[src*="resources.infolinks.com/js/infolinks_main.js"]')) {
+        var infolinksScript = document.createElement('script');
+        infolinksScript.type = 'text/javascript';
+        infolinksScript.async = true;
+        infolinksScript.src = 'https://resources.infolinks.com/js/infolinks_main.js';
+        document.head.appendChild(infolinksScript);
+    }
 
     // --- Device Detection ---
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
