@@ -22,6 +22,18 @@ let activeCategory = "all";
 let activeType = "all";
 let activeSort = "recommended";
 let searchQuery = "";
+window.handleActivityImageError = function(img) {
+    if (!img) return;
+    if (!img.dataset.fallbackTried) {
+        img.dataset.fallbackTried = '1';
+        if (img.src.indexOf('.webp') !== -1) {
+            var fallbackExt = (img.src.indexOf('zoo%20mel') !== -1 || img.src.indexOf('zoo mel') !== -1) ? '.jpeg' : '.jpg';
+            img.src = img.src.replace(/\.webp($|\?)/i, fallbackExt + '$1');
+            return;
+        }
+    }
+    img.style.display = 'none';
+};
 
 function initActivitiesPage() {
     initActivitiesUI();
@@ -242,7 +254,7 @@ function renderActivities() {
             let imageTag = "";
             if (item.image) {
                 const safeName = String(name).replace(new RegExp('"', 'g'), '&quot;');
-                imageTag = `<img src="${item.image}" alt="${safeName}" referrerpolicy="no-referrer" decoding="async" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" loading="lazy">`;
+                imageTag = `<img src="${item.image}" alt="${safeName}" referrerpolicy="no-referrer" decoding="async" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="window.handleActivityImageError(this)" loading="lazy">`;
             }
             const imgHTML = `
                 <div style="position: relative; width: 100%; height: 160px; background: var(--bg-card-hover); display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-size: 40px; overflow: hidden;">
@@ -392,7 +404,7 @@ function openActivityModal(item) {
         const safeName = String(name).replace(new RegExp('"', 'g'), '&quot;');
         imgHTML = `
             <div style="width:100%; height:240px; overflow:hidden; position:relative; background: var(--bg-card-hover);">
-                <img src="${item.image}" alt="${safeName}" referrerpolicy="no-referrer" decoding="async" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'" loading="lazy">
+                <img src="${item.image}" alt="${safeName}" referrerpolicy="no-referrer" decoding="async" style="width:100%; height:100%; object-fit:cover;" onerror="window.handleActivityImageError(this)" loading="lazy">
             </div>
         `;
     }

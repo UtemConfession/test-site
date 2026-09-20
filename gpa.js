@@ -192,42 +192,6 @@ function calculateGpa() {
         }
     }
 
-    // Dynamic Academic Standing Status Banner (KB / KS / KG)
-    const standingBadge = document.getElementById("academicStandingBadge") || document.getElementById("academicStandingPill");
-    if (standingBadge) {
-        if (totalCredits > 0 || (prevCredits && prevCredits > 0)) {
-            standingBadge.style.display = "flex";
-            const isEn = (typeof currentLang !== "undefined" && currentLang === "en") || document.documentElement.lang === "en";
-            if (targetCGPA >= 2.00) {
-                standingBadge.textContent = isEn 
-                    ? "🟢 Academic Standing: KB (Good Standing) · Eligible to continue studies" 
-                    : "🟢 Kedudukan Akademik: KB (Kedudukan Baik) · Layak meneruskan pengajian";
-                standingBadge.style.background = "linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%)";
-                standingBadge.style.color = "#10b981";
-                standingBadge.style.border = "1px solid rgba(16, 185, 129, 0.35)";
-                standingBadge.style.boxShadow = "0 0 12px rgba(16, 185, 129, 0.1)";
-            } else if (targetCGPA >= 1.67) {
-                standingBadge.textContent = isEn 
-                    ? "🟡 Academic Standing: KS (Academic Probation) · Academic warning (CGPA < 2.00)" 
-                    : "🟡 Kedudukan Akademik: KS (Kedudukan Bersyarat) · Amaran akademik (PNGK < 2.00)";
-                standingBadge.style.background = "linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%)";
-                standingBadge.style.color = "#f59e0b";
-                standingBadge.style.border = "1px solid rgba(245, 158, 11, 0.35)";
-                standingBadge.style.boxShadow = "0 0 12px rgba(245, 158, 11, 0.1)";
-            } else {
-                standingBadge.textContent = isEn 
-                    ? "🔴 Academic Standing: KG (Academic Dismissal) · Faculty action required (CGPA < 1.67)" 
-                    : "🔴 Kedudukan Akademik: KG (Kedudukan Gagal) · Tindakan fakulti (PNGK < 1.67)";
-                standingBadge.style.background = "linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%)";
-                standingBadge.style.color = "#ef4444";
-                standingBadge.style.border = "1px solid rgba(239, 68, 68, 0.35)";
-                standingBadge.style.boxShadow = "0 0 12px rgba(239, 68, 68, 0.1)";
-            }
-        } else {
-            standingBadge.style.display = "none";
-        }
-    }
-
     if (gpaEstimationNote) {
         if (noteText) {
             gpaEstimationNote.style.display = "block";
