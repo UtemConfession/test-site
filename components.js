@@ -577,6 +577,31 @@ customElements.define('ucpm-mobile-nav', UCPMMobileNav);
 class UCPMMobileDrawer extends HTMLElement { connectedCallback() { this.insertAdjacentHTML('afterend', UCPMDrawerHTML); this.remove(); } }
 customElements.define('ucpm-mobile-drawer', UCPMMobileDrawer);
 
+const UCPMFooterHTML = `<!-- Universal Legal & Editorial Footer -->
+    <div class="editorial-footer" style="color: var(--text-muted); text-align: center; margin-top: 30px; padding: 15px; border-top: 1px solid var(--border-color); line-height: 1.5; padding-bottom: 20px;">
+        <strong id="ed_transparency_title">Author / Editorial Transparency:</strong> <span id="ed_transparency_desc">Maintained by senior UTeM engineering & computing undergraduates. All guides verified against official UTeM Academic Regulations Handbooks.</span><br>
+        <strong id="ed_disclaimer_title">Editorial Disclaimer:</strong> <span id="ed_disclaimer_desc">UTeM Confessions Pro Max is an independent student resource and is not affiliated with, endorsed by, or sponsored by Universiti Teknikal Malaysia Melaka (UTeM).</span><br>
+        <strong id="ed_contact_title">Contact & Takedown Channel:</strong> <span id="ed_contact_desc">For inquiries, DMCA, or content takedown requests, please email</span> <a href="mailto:utemconfessionpromax@duck.com" style="color: var(--text-muted); text-decoration: underline;">utemconfessionpromax@duck.com</a>.
+    </div>
+
+    <footer>
+        <div>
+            <strong id="footerBrand">UTeM Confessions Pro Max</strong> &copy; <span id="footerText">Unofficial Student Resource & Confessions Platform.</span>
+        </div>
+        <div class="footer-links">
+            <a href="index.html" id="footerHome">Home</a>
+            <a href="guides.html" id="footerGuides">Student Guides</a>
+            <a href="about.html" id="footerAbout">About Us</a>
+            <a href="rules.html" id="footerRules">Confession Rules</a>
+            <a href="telegram-terms.html" id="footerTelegram">Telegram Policy</a>
+            <a href="privacy.html" id="footerPrivacy">Privacy Policy</a>
+            <a href="terms.html" id="footerTerms">Terms of Service</a>
+        </div>
+    </footer>`;
+
+class UCPMFooter extends HTMLElement { connectedCallback() { this.insertAdjacentHTML('afterend', UCPMFooterHTML); this.remove(); } }
+customElements.define('ucpm-footer', UCPMFooter);
+
 document.addEventListener('DOMContentLoaded', () => {
     let currentPage = window.location.pathname.split("/").pop();
     if (!currentPage || currentPage === "") currentPage = "index.html";
