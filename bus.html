@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -277,7 +277,14 @@
 
                 <!-- Route Filter Selection Pills -->
                 <div class="routes-container">
-                    <span id="label_routes" class="routes-title">Select Route:</span>
+                    <div class="routes-header">
+                        <span id="label_routes" class="routes-title">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
+                            Select Route:
+                        </span>
+                    </div>
 
                     <!-- Semester 1 (2026/2027) Route Pills -->
                     <div id="pillsSpecialSem" class="bus-routes-selector">
@@ -292,9 +299,10 @@
                         <div class="bus-route-pill" data-route="satria_regular">Satria ⇄ Fakulti</div>
                         <div class="bus-route-pill" data-route="lestari_regular">Lestari ⇄ Fakulti</div>
                     </div>
+                </div>
 
-                                        <!-- CONCEPT 1: Static Shuttle Route Radar & Transit Vector Map -->
-                    <div class="transit-radar-card">
+                <!-- CONCEPT 1: Static Shuttle Route Radar & Transit Vector Map -->
+                <div class="transit-radar-card">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
                             <span style="font-size: 13px; font-weight: 700; color: var(--accent-gold); display: flex; align-items: center; gap: 6px;">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -383,7 +391,7 @@
                                 <span class="radar-arrow">➔</span>
                                 <span class="radar-chip chip-ftmk">★ FTMK Hub</span>
                                 <span class="radar-arrow">➔</span>
-                                <span class="radar-chip chip-aj">Al-Jazari</span>
+                                <span class="radar-chip chip-aj">AJ (Al-Jazari)</span>
                                 <span class="radar-arrow">➔</span>
                                 <span class="radar-chip chip-lestari">Lestari</span>
                                 <span class="radar-arrow">➔</span>
@@ -414,7 +422,7 @@
                             </table>
                             <div id="busTableFootnotes" style="margin-top: 10px; padding: 10px 14px; background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--border-color); border-radius: 8px; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; display: none;">
                                 <strong style="color: var(--accent-gold);">* Keterangan:</strong> 
-                                <span style="margin-left: 6px;"><strong style="color: var(--text-primary);">AL:</strong> Kolej Kediaman Al-Jazari</span> &bull; 
+                                <span style="margin-left: 6px;"><strong style="color: var(--text-primary);">AJ:</strong> Kolej Kediaman Al-Jazari</span> &bull; 
                                 <span style="margin-left: 6px;"><strong style="color: var(--text-primary);">KSU:</strong> Kompleks Sukan UTeM</span> &bull; 
                                 <span style="margin-left: 6px;"><strong style="color: var(--text-primary);">FACT:</strong> Fakulti dalam Kampus Induk</span>
                             </div>
@@ -442,7 +450,7 @@
                             <span><strong style="color: var(--accent-gold);">KI:</strong> Kampus Induk (Hop On Campus)</span>
                             <span><strong style="color: var(--accent-gold);">KT:</strong> Kampus Teknologi</span>
                             <span><strong style="color: var(--accent-gold);">EP:</strong> Emerald Park (Kediaman Luar)</span>
-                            <span><strong style="color: var(--accent-gold);">AJ / AL:</strong> Kolej Kediaman Al-Jazari</span>
+                            <span><strong style="color: var(--accent-gold);">AJ:</strong> Kolej Kediaman Al-Jazari</span>
                             <span><strong style="color: var(--accent-gold);">KSU:</strong> Kompleks Sukan</span>
                             <span><strong style="color: var(--accent-gold);">FACT:</strong> Fakulti Kampus Induk</span>
                         </div>
@@ -450,7 +458,6 @@
                             📞 Hotline: 011-11494251
                         </a>
                     </div>
-                </div>
             </div>
 
                         <!-- SUB-PANEL 2: PUBLIC BUS M10A (BAS.MY Melaka & Panorama Melaka) -->

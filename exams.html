@@ -122,34 +122,28 @@
 
                 <div class="exam-page-container">
 
-                    <!-- Page Title & Intro Header -->
-                    <header class="exam-page-header">
-                        <h1 class="exam-page-title">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 18.5c-3.73 0-6.95-1.95-8.66-4.9L12 21l8.66-4.4c-1.71 2.95-4.93 4.9-8.66 4.9z" />
-                            </svg>
-                            <span id="titlePastExamsTab">UTeM Past Year Exam Papers</span>
-                        </h1>
-                        <p class="exam-page-subtitle" id="descPastExamsTab">
-                            Access the official UTeM library repository to search, browse, and download past semester examination papers for your courses.
-                        </p>
-                    </header>
-
                     <!-- PRIMARY FOCAL POINT: The Hero Search Card -->
                     <section class="card exam-hero-card" aria-label="Course Exam Search">
-                        <div class="exam-hero-badge">
-                            <span>🔍</span> Direct Repository Access
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                            <h2 class="card-title" style="margin: 0; padding-bottom: 0; border-bottom: none;">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 18.5c-3.73 0-6.95-1.95-8.66-4.9L12 21l8.66-4.4c-1.71 2.95-4.93 4.9-8.66 4.9z" />
+                                </svg>
+                                <span id="titlePastExamsTab">UTeM Past Year Exam Papers</span>
+                            </h2>
+                            <span style="font-size: 11.5px; padding: 4px 12px; background: rgba(var(--accent-gold-rgb), 0.15); color: var(--accent-gold); border-radius: 999px; border: 1px solid rgba(var(--accent-gold-rgb), 0.3); font-weight: 700;">
+                                🔍 Direct Repository Access
+                            </span>
                         </div>
-                        <h2 class="exam-hero-title">Direct Course Exam Search</h2>
-                        <p class="exam-hero-desc">
-                            Type your subject code or title below to generate a pre-filtered search link directly into the UTeM Library Exam Repository.
+                        <p class="subtitle" id="descPastExamsTab" style="color: var(--text-secondary); font-size: 13.5px; margin: 0 0 20px 0; line-height: 1.55;">
+                            Access the official UTeM library repository to search, browse, and download past semester examination papers for your courses.
                         </p>
 
                         <div class="exam-search-bar">
-                            <input type="text" id="examSubjectInput" class="exam-search-input"
+                            <input type="text" id="examSubjectInput" class="form-control exam-search-input"
                                 placeholder="e.g. BITM, Software Engineering, BITP 1113..."
                                 aria-label="Search past year exam papers">
-                            <button type="button" id="btnSearchExams" class="exam-search-btn">
+                            <button type="button" id="btnSearchExams" class="btn btn-primary exam-search-btn">
                                 <span>🔍 Search Papers ➔</span>
                             </button>
                         </div>
@@ -225,11 +219,11 @@
                         </p>
 
                         <!-- Input & Action -->
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
-                            <input type="text" id="courseDecoderInput" class="exam-search-input"
+                        <div class="exam-search-bar" style="margin-bottom: 16px;">
+                            <input type="text" id="courseDecoderInput" class="form-control exam-search-input"
                                 placeholder="Enter code (e.g. BITP 1113, BMMT 2323, BLHC 4032...)"
                                 style="text-transform: uppercase; letter-spacing: 0.5px;">
-                            <button type="button" id="btnDecodeCourse" class="exam-search-btn" style="padding: 0 24px;">
+                            <button type="button" id="btnDecodeCourse" class="btn btn-primary exam-search-btn">
                                 <span>Decode Code ➔</span>
                             </button>
                         </div>

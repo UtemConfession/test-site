@@ -68,28 +68,26 @@
             <div class="tab-content active" id="links-tab">
                 <div class="wifi-main-layout">
 
-                    <!-- 1. PAGE HEADER -->
-                    <header class="wifi-page-header">
-                        <h1 class="wifi-page-title card-title" style="margin-bottom: 6px;">
-                            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-                                <path
-                                    d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
-                            </svg>
-                            UTeM Wi-Fi &amp; Campus Links
-                        </h1>
-                        <p class="wifi-page-subtitle" id="descImportantLinks">
-                            Quick access to essential official campus portals, VPN clients, student council channels, and
-                            academic systems.
-                        </p>
-                    </header>
-
                     <!-- 2. HERO: WIRELESS NETWORKS & DEVICE ENTERPRISE CONFIGURATOR -->
-                    <section class="card" style="position: relative; overflow: hidden; border-radius: 18px; padding: 26px 28px; box-shadow: var(--card-shadow);">
-                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3.5px; background: linear-gradient(90deg, #3b82f6 0%, #10b981 50%, #a855f7 100%);"></div>
+                    <section class="card" style="position: relative; overflow: hidden; border-radius: 16px; padding: 28px; box-shadow: var(--card-shadow);">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3.5px; background: var(--gold-gradient);"></div>
+
+                        <div style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
+                            <h2 class="card-title" style="margin-bottom: 6px; padding-bottom: 0; border-bottom: none;">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                    <path
+                                        d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
+                                </svg>
+                                <span>UTeM Wi-Fi &amp; Campus Links</span>
+                            </h2>
+                            <p class="subtitle" id="descImportantLinks" style="color: var(--text-secondary); font-size: 13.5px; margin: 0; line-height: 1.55;">
+                                Quick access to essential official campus portals, VPN clients, student council channels, and academic systems.
+                            </p>
+                        </div>
 
                         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;">
                             <div style="display: flex; align-items: center; gap: 12px;">
-                                <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(59, 130, 246, 0.15); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
                                     <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                                         <path
                                             d="M12 3C6.95 3 2.55 5.37 0 9l2.14 2.85C4.28 8.87 7.92 7 12 7s7.72 1.87 9.86 4.85L24 9c-2.55-3.63-6.95-6-12-6zm0 6c-3.32 0-6.28 1.55-8.18 3.96L6.03 16C7.45 14.77 9.61 14 12 14s4.55.77 5.97 2l2.21-3.04C18.28 10.55 15.32 9 12 9zm0 6c-1.66 0-3.14.76-4.14 1.94L12 22l4.14-5.06C15.14 15.76 13.66 15 12 15z" />
@@ -104,7 +102,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <span style="background: rgba(59, 130, 246, 0.12); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.25); padding: 4px 12px; border-radius: 12px; font-size: 11.5px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                            <span style="background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); border: 1px solid rgba(var(--accent-gold-rgb), 0.25); padding: 4px 12px; border-radius: 12px; font-size: 11.5px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
                                 <span>📶</span> Wi-Fi &amp; Passwords
                             </span>
                         </div>
@@ -120,7 +118,7 @@
                                     <ul style="margin: 0; padding-left: 18px; color: var(--text-secondary); line-height: 1.6; font-size: 13px;">
                                         <li>
                                             <strong>Password:</strong> 
-                                            <code style="color: var(--accent-gold); font-weight: 700; font-size: 13px; background: rgba(var(--accent-gold-rgb), 0.1); padding: 2px 6px; border-radius: 4px;">1UTeM@PPPK</code>
+                                             <code style="color: var(--accent-gold); font-weight: 700; font-size: 13px; background: rgba(var(--accent-gold-rgb), 0.1); padding: 2px 6px; border-radius: 4px;">1UTeM@PPPK</code>
                                             <button type="button" class="btn-copy-chip" data-copy="1UTeM@PPPK" title="Copy password">📋 Copy</button>
                                         </li>
                                         <li><strong>Type:</strong> Web Captive Portal (Browser Login)</li>
@@ -131,13 +129,13 @@
                             <!-- Network 2: MyUTeM App -->
                             <div class="wifi-network-box">
                                 <div>
-                                    <strong style="color: #34d399; display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px;">
+                                    <strong style="color: var(--accent-gold); display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px;">
                                         <span>🔑</span> MyUTeM App
                                     </strong>
                                     <ul style="margin: 0; padding-left: 18px; color: var(--text-secondary); line-height: 1.6; font-size: 13px;">
                                         <li>
                                             <strong>Password:</strong> 
-                                            <code style="color: #34d399; font-weight: 700; font-size: 13px; background: rgba(52, 211, 153, 0.1); padding: 2px 6px; border-radius: 4px;">1234@Abcd</code>
+                                            <code style="color: var(--accent-gold); font-weight: 700; font-size: 13px; background: rgba(var(--accent-gold-rgb), 0.1); padding: 2px 6px; border-radius: 4px;">1234@Abcd</code>
                                             <button type="button" class="btn-copy-chip" data-copy="1234@Abcd" title="Copy password">📋 Copy</button>
                                         </li>
                                         <li><strong>Purpose:</strong> Mobile App Initial Authentication</li>
@@ -148,7 +146,7 @@
                             <!-- Network 3: UTeM-Wifi -->
                             <div class="wifi-network-box">
                                 <div>
-                                    <strong style="color: #60a5fa; display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px;">
+                                    <strong style="color: var(--accent-gold); display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px;">
                                         <span>🏫</span> Network: UTeM-Wifi
                                     </strong>
                                     <ul style="margin: 0; padding-left: 18px; color: var(--text-secondary); line-height: 1.6; font-size: 13px;">
@@ -161,7 +159,7 @@
                             <!-- Network 4: eduroam -->
                             <div class="wifi-network-box">
                                 <div>
-                                    <strong style="color: #a855f7; display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px;">
+                                    <strong style="color: var(--accent-gold); display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px;">
                                         <span>🌐</span> Network: eduroam
                                     </strong>
                                     <ul style="margin: 0; padding-left: 18px; color: var(--text-secondary); line-height: 1.6; font-size: 13px;">
@@ -187,7 +185,7 @@
                                         Select your OS for exact drop-down parameters or download a 1-tap Apple profile:
                                     </span>
                                 </div>
-                                <span style="font-size: 11px; background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25); padding: 3px 10px; border-radius: 8px; font-weight: 700;">
+                                <span style="font-size: 11px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); border: 1px solid rgba(var(--accent-gold-rgb), 0.25); padding: 3px 10px; border-radius: 8px; font-weight: 700;">
                                     WPA2 Enterprise 802.1X
                                 </span>
                             </div>
@@ -391,7 +389,7 @@
                         <a href="https://help.utem.edu.my" target="_blank" rel="noopener noreferrer"
                             class="btn btn-primary btn-sm"
                             style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; width: fit-content; padding: 9px 18px;">
-                            Open UTeM Helpdesk Portal âž”
+                            Open UTeM Helpdesk Portal ➔
                         </a>
                     </section>
 
@@ -411,7 +409,7 @@
                             <div class="wifi-portal-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
                                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path
                                                     d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" />
@@ -421,7 +419,7 @@
                                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0;" id="libproxyTitle">
                                                 LibProxy Account Registration
                                             </h3>
-                                            <span style="font-size: 11.5px; color: var(--accent-gold); font-weight: 600;" id="libproxySub">
+                                            <span style="font-size: 11.5px; color: var(--text-muted);" id="libproxySub">
                                                 Off-Campus EZProxy Access
                                             </span>
                                         </div>
@@ -433,9 +431,9 @@
                                 </div>
                                 <a href="https://youtu.be/jlTi0i_-HQY" target="_blank" rel="noopener noreferrer"
                                     class="btn btn-primary btn-sm"
-                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; background: #ef4444; border: none; color: #fff; font-weight: 700; width: 100%;"
+                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; width: 100%; font-weight: 700;"
                                     id="libproxyBtn">
-                                    â–¶ Watch Video Guide âž”
+                                    ▶ Watch Video Guide ➔
                                 </a>
                             </div>
 
@@ -443,7 +441,7 @@
                             <div class="wifi-portal-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(59, 130, 246, 0.15); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
                                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path
                                                     d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8s0 0 0 0z" />
@@ -467,7 +465,7 @@
                                     target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm"
                                     style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; width: 100%; font-weight: 700;"
                                     id="vpnBtn">
-                                    Download SoftEther VPN âž”
+                                    Download SoftEther VPN ➔
                                 </a>
                             </div>
 
@@ -498,7 +496,7 @@
                                     target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"
                                     style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; width: 100%; font-weight: 700;"
                                     id="staffDirBtn">
-                                    Open Staff Directory âž”
+                                    Open Staff Directory ➔
                                 </a>
                             </div>
 
@@ -529,7 +527,7 @@
                                     rel="noopener noreferrer" class="btn btn-primary btn-sm"
                                     style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; background: linear-gradient(135deg, #e74e9f 0%, #f39c12 100%); border: none; color: #fff; width: 100%; font-weight: 700;"
                                     id="mppBtn">
-                                    Visit MPP Instagram âž”
+                                    Visit MPP Instagram ➔
                                 </a>
                             </div>
 
@@ -537,7 +535,7 @@
                             <div class="wifi-portal-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
                                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path
                                                     d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z" />
@@ -558,9 +556,9 @@
                                 </div>
                                 <a href="https://mohe.spab.gov.my/eApps/system/index.do" target="_blank"
                                     rel="noopener noreferrer" class="btn btn-primary btn-sm"
-                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; background: #10b981; border: none; color: #fff; width: 100%; font-weight: 700;"
+                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; width: 100%; font-weight: 700;"
                                     id="aduanBtn">
-                                    Open e-Aduan Portal âž”
+                                    Open e-Aduan Portal ➔
                                 </a>
                             </div>
 
@@ -568,7 +566,7 @@
                             <div class="wifi-portal-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(168, 85, 247, 0.15); color: #a855f7; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
                                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path
                                                     d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
@@ -589,9 +587,9 @@
                                 </div>
                                 <a href="https://konvo.utem.edu.my" target="_blank" rel="noopener noreferrer"
                                     class="btn btn-secondary btn-sm"
-                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-weight: 700; color: #a855f7; border-color: rgba(168, 85, 247, 0.3); width: 100%;"
+                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-weight: 700; width: 100%;"
                                     id="konvoBtn">
-                                    Open Konvo Portal âž”
+                                    Open Konvo Portal ➔
                                 </a>
                             </div>
 
@@ -599,7 +597,7 @@
                             <div class="wifi-portal-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
                                             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                                                 <path
                                                     d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
@@ -620,9 +618,9 @@
                                 </div>
                                 <a href="https://hep.utem.edu.my/wp-content/uploads/BORANG%20PERMOHONAN%20MEMBAWA%20KENDERAAN%20PELAJAR_SEMAKAN%204.pdf"
                                     target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm"
-                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-weight: 700; color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); width: 100%;"
+                                    style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-weight: 700; width: 100%;"
                                     id="vehicleBtn">
-                                    Download Form âž”
+                                    Download Form ➔
                                 </a>
                             </div>
                         </div>
@@ -695,7 +693,7 @@
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
                                 <!-- Android Box -->
                                 <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px;">
-                                    <h4 style="color: #34d399; font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_android_title">
+                                    <h4 style="color: var(--accent-gold); font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_android_title">
                                         🤖 Android (Android 11, 12, 13, 14 &amp; 15)
                                     </h4>
                                     <ol style="color: var(--text-secondary); font-size: 12.8px; line-height: 1.6; margin: 0; padding-left: 20px;" id="wifi_android_steps">
@@ -708,11 +706,11 @@
                                         <li><strong>Identity:</strong> <code>YourID@student.utem.edu.my</code> (for eduroam) or Matric ID.</li>
                                         <li><strong>Password:</strong> Active SMPWeb student portal password.</li>
                                     </ol>
-                                    <div style="margin-top: 14px; padding: 10px 12px; background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                                    <div style="margin-top: 14px; padding: 10px 12px; background: rgba(var(--accent-gold-rgb), 0.08); border: 1px solid rgba(var(--accent-gold-rgb), 0.25); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
                                         <span style="font-size: 12px; color: var(--text-secondary);">
                                             ⚡ <strong>1-Tap Auto Setup:</strong> Skip manual parameters with the official GEANT profile:
                                         </span>
-                                        <a href="https://cat.eduroam.org/?idp=5623" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="font-size: 11.5px; padding: 5px 12px; background: #059669; border-color: #10b981; display: inline-flex; align-items: center; gap: 5px;">
+                                        <a href="https://cat.eduroam.org/?idp=5623" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="font-size: 11.5px; padding: 5px 12px; display: inline-flex; align-items: center; gap: 5px;">
                                             <span>📥</span> UTeM eduroam CAT &#10142;
                                         </a>
                                     </div>
@@ -720,7 +718,7 @@
 
                                 <!-- Windows Box -->
                                 <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px;">
-                                    <h4 style="color: #60a5fa; font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_win_title">
+                                    <h4 style="color: var(--accent-gold); font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_win_title">
                                         💻 Windows 11 &amp; Windows 10
                                     </h4>
                                     <ol style="color: var(--text-secondary); font-size: 12.8px; line-height: 1.6; margin: 0; padding-left: 20px;" id="wifi_win_steps">
@@ -734,7 +732,7 @@
 
                                 <!-- Apple iOS / macOS Box -->
                                 <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px;">
-                                    <h4 style="color: #f43f5e; font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_apple_title">
+                                    <h4 style="color: var(--accent-gold); font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_apple_title">
                                         🍎 Apple iOS, iPadOS &amp; macOS
                                     </h4>
                                     <ol style="color: var(--text-secondary); font-size: 12.8px; line-height: 1.6; margin: 0; padding-left: 20px;" id="wifi_apple_steps">
@@ -747,7 +745,7 @@
 
                                 <!-- Linux Box -->
                                 <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px;">
-                                    <h4 style="color: #fbbf24; font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_linux_title">
+                                    <h4 style="color: var(--accent-gold); font-size: 14px; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;" id="wifi_p_linux_title">
                                         🐧 Linux (Ubuntu, Debian &amp; Fedora)
                                     </h4>
                                     <ol style="color: var(--text-secondary); font-size: 12.8px; line-height: 1.6; margin: 0; padding-left: 20px;" id="wifi_linux_steps">

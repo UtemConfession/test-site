@@ -119,21 +119,20 @@
 
                 <div class="health-main-layout">
 
-                    <!-- Page Title & Intro Header -->
-                    <header class="health-page-header">
-                        <h1 class="health-page-title">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z" />
-                            </svg>
-                            <span id="titleHealthTab">Pusat Kesihatan UTeM (PKU)</span>
-                        </h1>
-                        <p class="health-page-subtitle">
-                            Official campus medical center directory, 24/7 emergency response vehicle dispatch, clinic consultation hours, dental e-appointments, and medical leave endorsement guides.
-                        </p>
-                    </header>
-
                     <!-- SECTION 1: HERO (Clinic Hours & 24/7 Emergency Dispatch) -->
-                    <section class="health-hero-card" aria-label="Operating Hours & Emergency Hotline">
+                    <section class="card health-hero-card" aria-label="Operating Hours & Emergency Hotline">
+                        <div style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
+                            <h2 class="card-title" style="margin-bottom: 6px; padding-bottom: 0; border-bottom: none;">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z" />
+                                </svg>
+                                <span id="titleHealthTab">Pusat Kesihatan UTeM (PKU)</span>
+                            </h2>
+                            <p class="subtitle" style="color: var(--text-secondary); font-size: 13.5px; margin: 0; line-height: 1.55;">
+                                Official campus medical center directory, 24/7 emergency response vehicle dispatch, clinic consultation hours, dental e-appointments, and medical leave endorsement guides.
+                            </p>
+                        </div>
+
                         <div class="health-hero-grid">
                             
                             <!-- Left: Clinic Operating Hours -->
@@ -146,7 +145,7 @@
                                             </svg>
                                             <span id="labelHealthHours">Operating Hours</span>
                                         </h2>
-                                        <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; border: 1px solid rgba(16, 185, 129, 0.25);">
+                                        <span style="background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; border: 1px solid rgba(var(--accent-gold-rgb), 0.25);">
                                             Campus Clinics
                                         </span>
                                     </div>
@@ -170,7 +169,7 @@
                                     </div>
 
                                     <!-- Daily Rest Breaks -->
-                                    <div class="health-hours-item" style="border-left: 3px solid #eab308;">
+                                    <div class="health-hours-item" style="border-left: 3px solid var(--accent-gold);">
                                         <strong id="labelHealthBreaks">Daily Rest &amp; Prayer Breaks:</strong>
                                         <span id="labelHoursBreakMonThu">Mon - Thu: 1:00 PM - 2:00 PM</span><br>
                                         <span id="labelHoursBreakFri">Friday: 12:15 PM - 2:45 PM (Solat Jumaat)</span>
@@ -204,7 +203,7 @@
                                             <strong id="labelHealthSecHotline1">Security Hotline 1: 06-270 1200</strong>
                                             <span>Pejabat Keselamatan (Incident Dispatch)</span>
                                         </div>
-                                        <a href="tel:062701200" class="btn btn-primary btn-sm" style="background: #ef4444; border: none; font-weight: 800; padding: 7px 14px; white-space: nowrap; color: #fff; text-decoration: none;">
+                                        <a href="tel:062701200" class="btn btn-primary btn-sm" style="font-weight: 800; padding: 7px 14px; white-space: nowrap; text-decoration: none;">
                                             📞 06-270 1200
                                         </a>
                                     </div>
@@ -215,7 +214,7 @@
                                             <strong id="labelHealthSecHotline2">Security Hotline 2: 06-270 1300</strong>
                                             <span>PKU Medical Hotline &amp; Ambulance</span>
                                         </div>
-                                        <a href="tel:062701300" class="btn btn-primary btn-sm" style="background: #10b981; border: none; font-weight: 800; padding: 7px 14px; white-space: nowrap; color: #fff; text-decoration: none;">
+                                        <a href="tel:062701300" class="btn btn-primary btn-sm" style="font-weight: 800; padding: 7px 14px; white-space: nowrap; text-decoration: none;">
                                             📞 06-270 1300
                                         </a>
                                     </div>
@@ -226,7 +225,7 @@
                                             <strong id="labelHealthNatEmerg">National Emergency: 999</strong>
                                             <span>Ambulance, Fire &amp; Police Triage</span>
                                         </div>
-                                        <a href="tel:999" class="btn btn-secondary btn-sm" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4); font-weight: 800; padding: 7px 14px; white-space: nowrap; text-decoration: none;">
+                                        <a href="tel:999" class="btn btn-secondary btn-sm" style="font-weight: 800; padding: 7px 14px; white-space: nowrap; text-decoration: none;">
                                             🚑 Call 999
                                         </a>
                                     </div>
@@ -241,10 +240,10 @@
                         <div class="health-services-grid">
                             
                             <!-- Card 1: Outpatient & Dispensary -->
-                            <div class="health-service-card">
+                            <div class="card health-service-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
                                             🩺
                                         </div>
                                         <div>
@@ -258,15 +257,15 @@
                                 </div>
                                 <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 12px;">
                                     <span style="font-size: 12px; color: var(--text-muted);">Walk-in during open hours</span>
-                                    <span style="font-size: 11px; background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 2px 8px; border-radius: 6px; font-weight: 700;">Zero Co-Pay</span>
+                                    <span style="font-size: 11px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); border: 1px solid rgba(var(--accent-gold-rgb), 0.25); padding: 2px 8px; border-radius: 6px; font-weight: 700;">Zero Co-Pay</span>
                                 </div>
                             </div>
 
                             <!-- Card 2: E-Appointments & Forms -->
-                            <div class="health-service-card">
+                            <div class="card health-service-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(59, 130, 246, 0.15); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
                                             🦷
                                         </div>
                                         <div>
@@ -292,22 +291,22 @@
                             </div>
 
                             <!-- Card 3: Counseling & Mental Health -->
-                            <div class="health-service-card">
+                            <div class="card health-service-card">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(168, 85, 247, 0.15); color: #a855f7; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
+                                        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(var(--accent-gold-rgb), 0.12); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
                                             🧠
                                         </div>
                                         <div>
                                             <h3 style="font-size: 15.5px; font-weight: 700; color: var(--text-primary); margin: 0;">Counseling &amp; Mental Health</h3>
-                                            <span style="font-size: 11.5px; color: #a855f7; font-weight: 600;">Unit Kaunseling &amp; Kerjaya</span>
+                                            <span style="font-size: 11.5px; color: var(--text-muted); font-weight: 600;">Unit Kaunseling &amp; Kerjaya</span>
                                         </div>
                                     </div>
                                     <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 14px 0;">
                                         Confidential, professional 1-on-1 counseling support for academic stress, personal wellbeing, and anxiety with registered UTeM counselors.
                                     </p>
                                 </div>
-                                <a href="mailto:kaunseling@utem.edu.my" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px; color: #a855f7; border-color: rgba(168, 85, 247, 0.4); font-weight: 700; width: fit-content;">
+                                <a href="mailto:kaunseling@utem.edu.my" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; width: fit-content;">
                                     ✉️ Email UTeM Counselor ➔
                                 </a>
                             </div>
@@ -316,7 +315,7 @@
                     </section>
 
                     <!-- SECTION 3: ACADEMIC MEDICAL LEAVE (MC) & POLICIES -->
-                    <section class="health-policy-card" aria-label="Medical Leave Policies">
+                    <section class="card health-policy-card" aria-label="Medical Leave Policies">
                         <div class="health-section-heading">
                             <h2 class="health-section-title">
                                 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
@@ -334,11 +333,11 @@
                                 <strong id="labelHealthExtMc">External Private-Clinic MCs:</strong>
                                 <span id="descHealthExtMc">Medical certificates (MC) from external private clinics must be endorsed/validated by PKU UTeM before they are accepted by faculties.</span>
                             </div>
-                            <div class="health-hours-item" style="border-left: 3px solid #ef4444;">
+                            <div class="health-hours-item" style="border-left: 3px solid var(--accent-gold);">
                                 <strong id="labelHealthExamAbsence">Examination Absence:</strong>
                                 <span id="descHealthExamAbsence">Absence from final exams due to medical reasons requires a verified MC/Endorsement submitted to your faculty/academic division.</span>
                             </div>
-                            <div class="health-hours-item" style="border-left: 3px solid #10b981;">
+                            <div class="health-hours-item" style="border-left: 3px solid var(--accent-gold);">
                                 <strong id="labelHealthCoverage">Student Medical Coverage:</strong>
                                 <span id="descHealthCoverage">Active/registered UTeM students are covered for outpatient treatment and basic dental care at PKU under the student health scheme.</span>
                             </div>
@@ -346,7 +345,7 @@
                     </section>
 
                     <!-- SECTION 4: CONTACT & OFFICIAL PORTAL -->
-                    <section class="health-policy-card" aria-label="PKU Contact Information">
+                    <section class="card health-policy-card" aria-label="PKU Contact Information">
                         <div class="health-section-heading">
                             <h2 class="health-section-title">
                                 <span>📞</span> <span id="labelHealthContact">Contact Information &amp; Official Channels</span>
