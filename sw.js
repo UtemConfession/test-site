@@ -11,7 +11,7 @@ try {
 }
 
 // sw.js — UTeM Confessions Pro Max Service Worker (Offline Support)
-const CACHE_NAME = 'ucpm-cache-v133';
+const CACHE_NAME = 'ucpm-cache-v148';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -34,16 +34,11 @@ const ASSETS_TO_CACHE = [
     './updates.html',
     './guides.html',
     './about.html',
-    './rules.html',
-    './privacy.html',
-    './terms.html',
-    './telegram-terms.html',
+    './legal.html',
     './components.js',
     './style.min.css',
-    './utils.min.js',
     './translation.min.js',
     './confessions.min.js',
-    './archive-data.min.js',
     './archive.min.js',
     './gpa.min.js',
     './health.min.js',
@@ -53,16 +48,12 @@ const ASSETS_TO_CACHE = [
     './calendar.min.js',
     './library.min.js',
     './scholarships.min.js',
-    './activities-data.min.js',
     './activities.min.js',
     './marketplace.min.js',
-    './updates-data.min.js',
     './updates.min.js',
     './script.min.js',
     './wifi.min.js',
     './authentication.min.js',
-    './ads.min.js',
-    './vignette.min.js',
     './UCPMLogo.webp',
     './UCPMLogo.png',
     './falsafah.webp',

@@ -70,7 +70,6 @@
     <!-- Google AdSense temporarily paused on tool pages during review -->
 
     <!-- Monetag Vignette Banner with 15 Min Cooldown -->
-    <script src="vignette.min.js" defer></script>
     <!-- PWA & SEO Additions -->
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
@@ -266,11 +265,10 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" style="margin-top: 8px;">
+                            <div class="form-group">
                                 <textarea id="imageCaptionInput" class="form-control"
-                                    placeholder="Write an optional caption..." maxlength="500"
-                                    style="min-height: 60px;"></textarea>
-                                <div class="char-count" id="imageCharCount">0 / 500 characters</div>
+                                    placeholder="Write an optional caption..." maxlength="10000"></textarea>
+                                <div class="char-count" id="imageCharCount">0 / 10000 characters</div>
                             </div>
 
                             <div class="form-group" style="margin-bottom: 6px;">
@@ -402,7 +400,7 @@
                             </div>
 
                             <!-- Link to Dedicated Policy Page -->
-                            <a href="telegram-terms.html" class="telegram-link-btn" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(42, 171, 238, 0.1); border: 1px solid rgba(42, 171, 238, 0.35); border-radius: 10px; color: #38bdf8; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.2s; margin-top: 18px;">
+                            <a href="legal.html#telegram" class="telegram-link-btn" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(42, 171, 238, 0.1); border: 1px solid rgba(42, 171, 238, 0.35); border-radius: 10px; color: #38bdf8; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.2s; margin-top: 18px;">
                                 <span style="display: flex; align-items: center; gap: 8px;">
                                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                                     <span id="tg_card_btn_policy">Read Full Telegram TOS & Rules Policy</span>
@@ -555,7 +553,6 @@
     <script src="authentication.min.js" defer></script>
 
     <!-- Utilities (must load first — helpers used by all modules) -->
-    <script src="utils.min.js" defer></script>
     <script src="translation.min.js?v=8.0" defer></script>
 
     <!-- Core modules -->
@@ -563,8 +560,6 @@
 
     <!-- Entry point: tab nav + DOMContentLoaded init (must load last) -->
     <script src="script.min.js?v=8.0" defer></script>
-
-    <script src="ads.min.js" defer></script>
 
     <!-- Infolinks Ad Network Tag -->
     <script type="text/javascript">

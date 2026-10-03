@@ -115,7 +115,6 @@
       }
     ]
     </script>
-    <script src="vignette.min.js" defer></script>
     <!-- PWA & SEO Additions -->
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
@@ -173,7 +172,7 @@
                         </div>
                     </div>
                     <div style="display: flex; gap: 12px; color: var(--text-muted); font-size: 11.5px; align-items: center;">
-                        <span id="eeatDate">Fact-Checked: August 2026</span>
+                        <span id="eeatDate">Fact-Checked: October 2026</span>
                         <span>•</span>
                         <a href="about.html" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;" id="eeatLink">Editorial Standards ➔</a>
                     </div>
@@ -215,6 +214,11 @@
                                     <td data-label="Distance">2–4 km to Kampus Teknologi</td>
                                     <td data-label="Estimated Rate">RM200–RM380/room • RM900–RM1,300/whole house</td>
                                 </tr>
+                                <tr>
+                                    <td data-label="Neighborhood"><strong>Pangsapuri Emerald Park (Kediaman Luar)</strong></td>
+                                    <td data-label="Distance">Direct free UTeM Shuttle Bus to KT & Kampus Induk</td>
+                                    <td data-label="Estimated Rate">RM180–RM350/room • Official university-serviced off-campus residence</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -241,7 +245,7 @@
                     <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 16px;">
                         <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px 18px;">
                             <strong style="color: var(--text-primary); font-size: 14px; display: block; margin-bottom: 4px;">Is public transit available from rental areas to UTeM?</strong>
-                            <span style="font-size: 13px; color: var(--text-secondary);">Dedicated UTeM shuttle buses service selected student residential areas during peak morning and evening lecture hours. Check our <a href="guide-campus-bus-transit.html" style="color: var(--accent-gold); font-weight: 700;">Bus Transit Guide</a> for route timetables.</span>
+                            <span style="font-size: 13px; color: var(--text-secondary);">Dedicated free UTeM shuttle buses directly service off-campus residential areas like <strong>Emerald Park</strong> (connecting to Kampus Teknologi and Kampus Induk), alongside BAS.MY M10A public buses. Check our live <a href="bus.html" style="color: var(--accent-gold); font-weight: 700;">Bus Timetables</a> and <a href="guide-campus-bus-transit.html" style="color: var(--accent-gold); font-weight: 700;">Transit Guide</a> for departure times.</span>
                         </div>
                         <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px 18px;">
                             <strong style="color: var(--text-primary); font-size: 14px; display: block; margin-bottom: 4px;">Where can I find housemates or vacant rooms for rent?</strong>
@@ -332,7 +336,7 @@
             ms: {
                 eeatTitle: "Panduan Disemak & Disahkan Fakta",
                 eeatDesc: "Ditulis oleh Mahasiswa Kanan UTeM & disahkan berpandukan buku panduan akademik rasmi universiti.",
-                eeatDate: "Disemak: Ogos 2026",
+                eeatDate: "Disemak: Oktober 2026",
                 eeatLink: "Piawaian Editorial ➔",
                 mobileSubtitle: "Panduan Rumah Sewa",
                 navHome: "Kembali ke Laman Utama",
@@ -384,7 +388,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (mobileToggle) mobileToggle.addEventListener("click", toggleLanguage);
         });
     </script>
-    <script src="ads.min.js" defer></script>
     <script>
         function shareWhatsApp() {
             const url = encodeURIComponent(window.location.href);

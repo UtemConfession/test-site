@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -90,7 +90,6 @@
     ]
     </script>
     <!-- Monetag Vignette Banner with 15 Min Cooldown -->
-    <script src="vignette.min.js" defer></script>
     <!-- PWA & SEO Additions -->
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
@@ -109,43 +108,44 @@
         <!-- Main Content Area -->
         <main class="main-content">
 
-            
             <!-- SCHOLARSHIPS MAIN CONTAINER -->
             <div class="tab-content active" id="scholarships-tab">
-                <div class="card">
-                    <h2 class="card-title">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
-                        </svg>
-                        <span id="titleScholarships">Scholarship &amp; Financial Aid</span>
-                    </h2>
+                <div class="scholarships-layout">
+                    <section class="card" style="padding: 26px 24px; margin-bottom: 24px;" aria-label="Scholarship Search and Filters">
+                        <h2 class="card-title">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+                            </svg>
+                            <span id="titleScholarships">Scholarship &amp; Financial Aid</span>
+                        </h2>
 
-                    <p style="margin-bottom: 24px; line-height: 1.6; color: var(--text-secondary);"
-                        id="descScholarships">
-                        Discover government loans, MARA schemes, state foundation grants, corporate awards, and
-                        university financial assistance available for UTeM and Malaysian university students.
-                    </p>
+                        <p style="margin-bottom: 20px; line-height: 1.6; color: var(--text-secondary);"
+                            id="descScholarships">
+                            Discover government loans, MARA schemes, state foundation grants, corporate awards, and
+                            university financial assistance available for UTeM and Malaysian university students.
+                        </p>
 
-                    <!-- Filter Controls Bar -->
-                    <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
-                        <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="schCategoryFilters">
-                            <button type="button" class="btn btn-secondary btn-sm sch-filter-btn active" data-category="all">All Aid</button>
-                            <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="mara">MARA & Federal</button>
-                            <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="ptptn">PTPTN Loan</button>
-                            <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="state">State Foundations</button>
-                            <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="utem">UTeM Internal Zakat</button>
-                            <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="corporate">Corporate Sponsorships</button>
+                        <!-- Filter Controls Bar -->
+                        <div style="display: flex; flex-direction: column; gap: 14px;">
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="schCategoryFilters">
+                                <button type="button" class="btn btn-secondary btn-sm sch-filter-btn active" data-category="all">All Aid</button>
+                                <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="mara">MARA & Federal</button>
+                                <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="ptptn">PTPTN Loan</button>
+                                <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="state">State Foundations</button>
+                                <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="utem">UTeM Internal Zakat</button>
+                                <button type="button" class="btn btn-secondary btn-sm sch-filter-btn" data-category="corporate">Corporate Sponsorships</button>
+                            </div>
+                            <input type="text" id="scholarshipSearch" class="form-control" placeholder="Search by scholarship title, sponsor, or keyword..." style="padding: 10px 16px; font-size: 14px;">
                         </div>
-                        <input type="text" id="scholarshipSearch" class="form-control" placeholder="Search by scholarship title, sponsor, or keyword..." style="padding: 10px 16px; font-size: 14px;">
-                    </div>
+                    </section>
 
                     <!-- Scholarship Cards Grid -->
                     <div class="scholarships-grid" id="scholarshipList"
-                        style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+                        style="display: grid; grid-template-columns: 1fr; gap: 18px;">
 
                         <!-- CARD 0: UTEM STUDENT WELFARE & ZAKAT EMERGENCY AID -->
                         <div class="scholarship-card" data-category="utem"
-                            style="background: rgba(13, 21, 39, 0.9); border: 1px solid var(--accent-gold); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition); box-shadow: 0 0 16px rgba(var(--accent-gold-rgb), 0.15);">
+                            style="background: var(--bg-secondary); border: 1.5px solid var(--accent-gold); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition); box-shadow: 0 4px 18px rgba(var(--accent-gold-rgb), 0.12);">
                             <div
                                 style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                 <div>
@@ -157,7 +157,7 @@
                                         UTeM Zakat & Emergency Student Welfare Fund (Tabung Kebajikan Pelajar UTeM)</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 800;">✦
+                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 800;">âœ¦
                                     Open All Year Round</span>
                             </div>
                             <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
@@ -171,13 +171,13 @@
                                     Undergraduates Facing Emergency Need</span>
                                 <a href="https://pusatislam.utem.edu.my" target="_blank" rel="noopener noreferrer"
                                     style="color: var(--accent-gold); font-weight: 800; text-decoration: none;">UTeM
-                                    Pusat Islam Portal ➔</a>
+                                    Pusat Islam Portal âž”</a>
                             </div>
                         </div>
 
                         <!-- CARD 1: MARA TESP / YTP -->
                         <div class="scholarship-card" data-category="mara"
-                            style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition);">
+                            style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition);">
                             <div
                                 style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                 <div>
@@ -189,7 +189,7 @@
                                         MARA TESP & Young Talent Programme (YTP)</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">✦
+                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">âœ¦
                                     Cycle Deadlines: March & August</span>
                             </div>
                             <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
@@ -203,13 +203,13 @@
                                     Bachelor Students</span>
                                 <a href="https://www.mara.gov.my" target="_blank" rel="noopener noreferrer"
                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Official
-                                    MARA Portal ➔</a>
+                                    MARA Portal âž”</a>
                             </div>
                         </div>
 
                         <!-- CARD 2: PTPTN LOAN -->
                         <div class="scholarship-card" data-category="ptptn"
-                            style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition);">
+                            style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px; transition: var(--transition);">
                             <div
                                 style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                 <div>
@@ -221,10 +221,9 @@
                                         PTPTN Higher Education Loan (Pinjaman PTPTN)</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">✦
+                                    style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">âœ¦
                                     Deadlines: April 30 & Sept 30</span>
                             </div>
-                            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
                                 Primary tertiary education loan scheme for Malaysian undergraduates. First-Class Honours
                                 graduates from UTeM may qualify for complete loan-to-scholarship conversion (bebas
                                 bayaran balik).
@@ -235,7 +234,7 @@
                                     Undergraduates</span>
                                 <a href="https://www.ptptn.gov.my" target="_blank" rel="noopener noreferrer"
                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">MyPTPTN
-                                    Application Portal ➔</a>
+                                    Application Portal âž”</a>
                             </div>
                         </div>
 
@@ -307,7 +306,7 @@
                                 <div class="state-panel" id="panel-state-johor"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -319,7 +318,7 @@
                                                     Biasiswa & Pinjaman Yayasan Pelajaran Johor (YPJ)</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -336,7 +335,7 @@
                                                 <a href="https://portal.ypj.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    Rasmi YPJ ➔</a>
+                                                    Rasmi YPJ âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -346,7 +345,7 @@
                                 <div class="state-panel" id="panel-state-kedah"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -358,7 +357,7 @@
                                                     Biasiswa Kerajaan Negeri Kedah & iPINJAM</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -375,7 +374,7 @@
                                                 <a href="https://www.zakatkedah.com.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    Zakat Kedah ➔</a>
+                                                    Zakat Kedah âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -385,7 +384,7 @@
                                 <div class="state-panel" id="panel-state-kelantan"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -397,7 +396,7 @@
                                                     Yayasan Kelantan Darulnaim (YAKIN)</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -414,7 +413,7 @@
                                                 <a href="https://espmb.kelantan.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Sistem
-                                                    eSPMB YAKIN ➔</a>
+                                                    eSPMB YAKIN âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -424,7 +423,7 @@
                                 <div class="state-panel" id="panel-state-melaka"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -436,7 +435,7 @@
                                                     Tabung Amanah Pendidikan Negeri Melaka (TAPEM)</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -452,7 +451,7 @@
                                                 <a href="https://tapem.melaka.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    Rasmi TAPEM ➔</a>
+                                                    Rasmi TAPEM âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -462,7 +461,7 @@
                                 <div class="state-panel" id="panel-state-negeri_sembilan"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -474,7 +473,7 @@
                                                     Yayasan Negeri Sembilan (YNS)</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -491,7 +490,7 @@
                                                 <a href="https://www.yns.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    Utama YNS ➔</a>
+                                                    Utama YNS âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -501,7 +500,7 @@
                                 <div class="state-panel" id="panel-state-pahang"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -513,7 +512,7 @@
                                                     Yayasan Pahang & eSiswa</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -530,11 +529,11 @@
                                                 <a href="https://www.yp.org.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Yayasan
-                                                    Pahang ➔</a>
+                                                    Pahang âž”</a>
                                                 <a href="https://esiswa.pahang.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    eSiswa Pahang ➔</a>
+                                                    eSiswa Pahang âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -544,7 +543,7 @@
                                 <div class="state-panel" id="panel-state-pulau_pinang"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -556,7 +555,7 @@
                                                     Penang Future Foundation (PFF)</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Annually</span>
                                         </div>
                                         <p
@@ -572,7 +571,7 @@
                                                 <a href="https://penangfuturefoundation.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    Rasmi PFF ➔</a>
+                                                    Rasmi PFF âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -582,7 +581,7 @@
                                 <div class="state-panel" id="panel-state-perak"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -594,7 +593,7 @@
                                                     Yayasan Perak & INSISYP</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -611,7 +610,7 @@
                                                 <a href="https://www.yayasanperak.com.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Laman
-                                                    Utama Yayasan Perak ➔</a>
+                                                    Utama Yayasan Perak âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -621,7 +620,7 @@
                                 <div class="state-panel" id="panel-state-perlis"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -633,7 +632,7 @@
                                                     Yayasan Islam Perlis & MAIPs</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -650,11 +649,11 @@
                                                 <a href="https://www.maips.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    Rasmi MAIPs ➔</a>
+                                                    Rasmi MAIPs âž”</a>
                                                 <a href="https://yips.perlis.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Yayasan
-                                                    Islam Perlis ➔</a>
+                                                    Islam Perlis âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -664,7 +663,7 @@
                                 <div class="state-panel" id="panel-state-sabah"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -676,7 +675,7 @@
                                                     Biasiswa Kerajaan Negeri Sabah (BKNS) & Yayasan Sabah</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -693,11 +692,11 @@
                                                 <a href="https://biasiswa.sabah.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    BKNS ➔</a>
+                                                    BKNS âž”</a>
                                                 <a href="https://www.yayasansabahgroup.org.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Yayasan
-                                                    Sabah ➔</a>
+                                                    Sabah âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -707,7 +706,7 @@
                                 <div class="state-panel" id="panel-state-sarawak"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -719,7 +718,7 @@
                                                     Yayasan Sarawak (YSSP)</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -737,7 +736,7 @@
                                                 <a href="https://yayasansarawak.org.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Yayasan
-                                                    Sarawak ➔</a>
+                                                    Sarawak âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -747,7 +746,7 @@
                                 <div class="state-panel" id="panel-state-selangor"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -759,7 +758,7 @@
                                                     Biasiswa Kerajaan Negeri Selangor & HPIPT</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -776,11 +775,11 @@
                                                 <a href="https://tkwbns.selangor.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    TKWBNS ➔</a>
+                                                    TKWBNS âž”</a>
                                                 <a href="https://www.yayasanselangor.org.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Yayasan
-                                                    Selangor ➔</a>
+                                                    Selangor âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -790,7 +789,7 @@
                                 <div class="state-panel" id="panel-state-terengganu"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -802,7 +801,7 @@
                                                     Yayasan Terengganu (YT) & TAE</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -819,7 +818,7 @@
                                                 <a href="https://www.yt.gov.my/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Portal
-                                                    Rasmi YT ➔</a>
+                                                    Rasmi YT âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -829,7 +828,7 @@
                                 <div class="state-panel" id="panel-state-wilayah_persekutuan"
                                     style="display: none; flex-direction: column; gap: 12px;">
                                     <div
-                                        style="background: rgba(13, 21, 39, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                                        class="state-panel-card">
                                         <div
                                             style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
                                             <div>
@@ -841,7 +840,7 @@
                                                     Yayasan Wilayah Persekutuan & MAIWP</h4>
                                             </div>
                                             <span
-                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">✦
+                                                style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">âœ¦
                                                 Deadlines: Open Quarterly</span>
                                         </div>
                                         <p
@@ -858,7 +857,7 @@
                                                 <a href="https://www.yayasanwp.org/" target="_blank"
                                                     rel="noopener noreferrer"
                                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Yayasan
-                                                    WP ➔</a>
+                                                    WP âž”</a>
                                             </div>
                                         </div>
                                     </div>
@@ -885,7 +884,7 @@
                                         Yayasan Tunku Abdul Rahman (YTAR) & Yayasan Bank Rakyat (YBR)</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">✦
+                                    style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">âœ¦
                                     Deadline: April - August Annually</span>
                             </div>
                             <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
@@ -900,11 +899,11 @@
                                 <div style="display: flex; gap: 12px;">
                                     <a href="https://www.yayasantar.org.my" target="_blank" rel="noopener noreferrer"
                                         style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">YTAR
-                                        Site ➔</a>
+                                        Site âž”</a>
                                     <a href="https://www.yayasanbankrakyat.com.my" target="_blank"
                                         rel="noopener noreferrer"
                                         style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">YBR
-                                        Site ➔</a>
+                                        Site âž”</a>
                                 </div>
                             </div>
                         </div>
@@ -923,7 +922,7 @@
                                         JPA MyScholarship (Program Penajaan JPA PIDN/LSPN)</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">✦
+                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">âœ¦
                                     Deadline: May - June Annually</span>
                             </div>
                             <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
@@ -937,7 +936,7 @@
                                     Degree Students</span>
                                 <a href="https://esilav2.jpa.gov.my" target="_blank" rel="noopener noreferrer"
                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">JPA
-                                    eSILA Portal ➔</a>
+                                    eSILA Portal âž”</a>
                             </div>
                         </div>
 
@@ -955,7 +954,7 @@
                                         UTeM Student Welfare Fund (Tabung Kebajikan Pelajar UTeM)</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">✦
+                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">âœ¦
                                     Status: Open Year-Round</span>
                             </div>
                             <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
@@ -969,7 +968,7 @@
                                     Students in Need</span>
                                 <a href="https://hep.utem.edu.my" target="_blank" rel="noopener noreferrer"
                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">UTeM HEP
-                                    Welfare Portal ➔</a>
+                                    Welfare Portal âž”</a>
                             </div>
                         </div>
 
@@ -987,7 +986,7 @@
                                         Biasiswa Gamuda Scholarship (Yayasan Gamuda)</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">✦
+                                    style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">âœ¦
                                     Cycle: April - May Annually</span>
                             </div>
                             <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
@@ -1004,11 +1003,11 @@
                                     <a href="https://gamuda.com.my/sustainability-esg/gamuda-foundation/scholarship/"
                                         target="_blank" rel="noopener noreferrer"
                                         style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Gamuda
-                                        Portal ➔</a>
+                                        Portal âž”</a>
                                     <a href="https://www.biasiswamalaysia.com/biasiswa-gamuda-scholarship/"
                                         target="_blank" rel="noopener noreferrer"
                                         style="color: var(--text-muted); font-weight: 600; text-decoration: none;">Info
-                                        Guide ➔</a>
+                                        Guide âž”</a>
                                 </div>
                             </div>
                         </div>
@@ -1027,7 +1026,7 @@
                                         Yayasan TM (YTM) Future Leaders Scholarship</h3>
                                 </div>
                                 <span
-                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">✦
+                                    style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">âœ¦
                                     Cycle: May - July Annually</span>
                             </div>
                             <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
@@ -1041,7 +1040,7 @@
                                     IT & Engineering Students</span>
                                 <a href="https://ytm.tm.com.my" target="_blank" rel="noopener noreferrer"
                                     style="color: var(--accent-gold); font-weight: 700; text-decoration: none;">Yayasan
-                                    TM Portal ➔</a>
+                                    TM Portal âž”</a>
                             </div>
                         </div>
 
@@ -1069,7 +1068,7 @@
 
                 <!-- Section 1: Major Financial Aid Schemes Breakdown -->
                 <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px;">
-                    <h3 style="color: var(--accent-gold); font-size: 15px; margin-top: 0; margin-bottom: 10px;">💰 Primary Financial Aid Categories</h3>
+                    <h3 style="color: var(--accent-gold); font-size: 15px; margin-top: 0; margin-bottom: 10px;">ðŸ’° Primary Financial Aid Categories</h3>
                     <ul style="color: var(--text-secondary); font-size: 13px; line-height: 1.65; margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
                         <li><strong>PTPTN Higher Education Loan:</strong> The universal loan covering tuition fees and living expenses, disbursed on a three-tier income scale: <em>B40 (Maximum up to RM6,800/yr for science/tech degrees)</em>, <em>M40 (75% tier)</em>, and <em>T20 (50% tier)</em>. Eligible for 100% complete waiver upon achieving First Class Honours.</li>
                         <li><strong>MARA TESP (Tertiary Education Sponsorship Programme):</strong> Convertible study loan for Bumiputera students pursuing engineering, computing, and technology degrees with competitive conversion rates based on final graduating CGPA.</li>
@@ -1081,7 +1080,7 @@
 
                 <!-- Section 2: Step-by-Step Application Checklist -->
                 <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px;">
-                    <h3 style="color: var(--accent-gold); font-size: 15px; margin-top: 0; margin-bottom: 10px;">📋 Application Documentation Checklist</h3>
+                    <h3 style="color: var(--accent-gold); font-size: 15px; margin-top: 0; margin-bottom: 10px;">ðŸ“‹ Application Documentation Checklist</h3>
                     <ol style="color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin: 0; padding-left: 20px;">
                         <li><strong>Offer Letter (Surat Tawaran):</strong> Official UTeM admission offer letter downloaded via the admission portal.</li>
                         <li><strong>Certified Income Proof:</strong> Latest salary slips (Penyata Gaji), EA/EC forms, or official Village Head/JKKK income declaration forms for self-employed parents.</li>
@@ -1091,7 +1090,7 @@
                 </div>
 
                 <!-- Section 3: Frequently Asked Questions -->
-                <h3 style="color: var(--accent-gold); font-size: 15px; margin: 24px 0 12px 0;">❓ Frequently Asked Questions (FAQ)</h3>
+                <h3 style="color: var(--accent-gold); font-size: 15px; margin: 24px 0 12px 0;">â“ Frequently Asked Questions (FAQ)</h3>
                 <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
                     <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px 18px;">
                         <strong style="color: var(--text-primary); font-size: 13.5px; display: block; margin-bottom: 4px;">Can I hold both a state foundation grant and a PTPTN loan simultaneously?</strong>
@@ -1108,25 +1107,24 @@
                 </div>
 
                 <!-- Section 4: Related Guides Cross-linking -->
-                <h3 style="color: var(--accent-gold); font-size: 15px; margin: 20px 0 10px 0;">🔗 Related Student Guides</h3>
+                <h3 style="color: var(--accent-gold); font-size: 15px; margin: 20px 0 10px 0;">ðŸ”— Related Student Guides</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 8px;">
                     <a href="guide-ptptn-loan.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
-                        <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">💰 PTPTN Loan & Exemption Guide</strong>
+                        <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">ðŸ’° PTPTN Loan & Exemption Guide</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Step-by-step application walkthrough and waiver tips.</span>
                     </a>
                     <a href="gpa.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
-                        <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">📊 GPA & CGPA Target Calculator</strong>
+                        <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">ðŸ“Š GPA & CGPA Target Calculator</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Calculate targets required for First Class degree honours.</span>
                     </a>
                     <a href="guide-budget-living-food.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
-                        <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">🍛 Student Budget & Makan Guide</strong>
+                        <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">ðŸ› Student Budget & Makan Guide</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Stretch your scholarship allowance in Durian Tunggal & Ayer Keroh.</span>
                     </a>
                 </div>
             </section>
 
             <!-- Universal Footer -->
-    <!-- Universal Footer -->
             <ucpm-footer></ucpm-footer>
             
         </main>
@@ -1138,14 +1136,11 @@
     <ucpm-mobile-drawer></ucpm-mobile-drawer>
 
     <!-- Core Utilities & Scholarships Logic Engine -->
-    <script src="utils.min.js" defer></script>
     <script src="scholarships.min.js" defer></script>
     <script src="translation.min.js?v=8.0" defer></script>
 
     <!-- Application Initialization & Shared Navigation -->
     <script src="script.min.js?v=8.0" defer></script>
-
-    <script src="ads.min.js" defer></script>
 
 </body>
 
