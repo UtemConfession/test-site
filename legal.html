@@ -33,7 +33,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1444529930367815" crossorigin="anonymous"></script>
@@ -42,22 +42,32 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "UTeM Legal Compliance, Guidelines & Terms",
+        "description": "Official platform terms, confession community rules, privacy policy, and channel safety guidelines for UTeM Confessions Pro Max.",
+        "url": "https://utemconfession.github.io/legal.html"
+      }
+    ]
+    </script>
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 
     <style>
 
-        .content-card {
-            max-width: 860px;
-            margin: 20px auto 40px auto;
-            width: 100%;
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
         .rules-category-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -156,18 +166,6 @@
         }
     
 
-        .content-card {
-            max-width: 860px;
-            margin: 20px auto 40px auto;
-            width: 100%;
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
         .tg-hero-banner {
             background: linear-gradient(135deg, rgba(42, 171, 238, 0.15) 0%, rgba(13, 21, 39, 0.95) 100%);
             border: 1px solid rgba(42, 171, 238, 0.35);
@@ -379,6 +377,16 @@
                 </a>
             </div>
 
+            <div class="legal-header" style="margin-bottom: 20px;">
+                <h1 class="card-title" style="font-size: 24px; font-weight: 800; color: var(--accent-gold); margin: 0 0 8px 0; display: flex; align-items: center; gap: 10px;">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <span id="pageTitleLegal">UTeM Legal Compliance, Guidelines &amp; Terms</span>
+                </h1>
+                <p style="font-size: 14px; color: var(--text-secondary); margin: 0; line-height: 1.6;" id="pageDescLegal">
+                    Official platform terms, confession community rules, privacy policy, and channel safety guidelines.
+                </p>
+            </div>
+
             <!-- Segmented Legal Tabs -->
             <div class="legal-tabs-bar" role="tablist" aria-label="Legal Sections">
                 <button class="legal-tab-btn active" data-tab="rules" onclick="switchLegalTab('rules')">
@@ -403,12 +411,12 @@
             <div id="panel-rules" class="legal-panel active">
                 <article class="card content-card">
 
-                <h1 class="card-title" style="font-size: 20px; margin-bottom: 12px;" id="mainTitle">
+                <h2 class="card-title" style="font-size: 20px; margin-bottom: 12px;" id="rules_mainTitle">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     UTeM Confessions Community Guidelines & Rules
-                </h1>
+                </h2>
                 
-                <p id="p_intro" style="margin-bottom: 20px; line-height: 1.65; color: var(--text-secondary); font-size: 14px;">
+                <p id="rules_p_intro" style="margin-bottom: 20px; line-height: 1.65; color: var(--text-secondary); font-size: 14px;">
                     <strong>UTeM Confessions Pro Max (UCPM)</strong> is dedicated to fostering an open, engaging, and supportive platform for the students and campus community of <strong>Universiti Teknikal Malaysia Melaka (UTeM)</strong>. To ensure this space remains safe, respectful, and legally compliant, all users must adhere to the following rules before submitting content.
                 </p>
 
@@ -472,79 +480,79 @@
             <div id="panel-terms" class="legal-panel">
                 <article class="card content-card">
 
-                <h1 class="card-title" style="font-size: 20px; margin-bottom: 12px;" id="mainTitle">
+                <h2 class="card-title" style="font-size: 20px; margin-bottom: 12px;" id="terms_mainTitle">
                     <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                     Terms of Service & End-User License Agreement (EULA)
-                </h1>
+                </h2>
                 
-                <p id="p_intro" style="margin-bottom: 22px; line-height: 1.7; color: var(--text-secondary); font-size: 14px;">
+                <p id="terms_p_intro" style="margin-bottom: 22px; line-height: 1.7; color: var(--text-secondary); font-size: 14px;">
                     This formal End-User License Agreement and Terms of Service constitutes a legally enforceable multilateral contractual covenant established between the executing end-user ("User", "Licensee", or "Client") and <strong>UTeM Confessions Pro Max (UCPM)</strong> regarding the access, execution, manipulation, and interaction with our web application, computational calculators, transit heuristics, and user-generated confession pipelines.
                 </p>
 
                 <!-- Section 1 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec1_h">1. Contractual Enforceability, Constructive Assent & Jurisprudential Capacity</div>
-                    <p class="terms-section-body" id="sec1_p">By initiating an HTTP/HTTPS network handshake, resolving domain Name Server (DNS) records pointing to <code>utemconfession.github.io</code>, or rendering DOM elements derived from this codebase, the User demonstrates unequivocal, irrevocable constructive assent to all statutory clauses, covenants, and restrictive disclaimers codified herein. Users deficient in requisite legal age, mental capacity, or statutory jurisdiction pursuant to the Malaysian Contracts Act 1950 (Act 136) and Electronic Commerce Act 2006 (Act 658) are expressly interdicted from invoking these computational assets.</p>
+                    <div class="terms-section-header" id="terms_sec1_h">1. Contractual Enforceability, Constructive Assent & Jurisprudential Capacity</div>
+                    <p class="terms-section-body" id="terms_sec1_p">By initiating an HTTP/HTTPS network handshake, resolving domain Name Server (DNS) records pointing to <code>utemconfession.github.io</code>, or rendering DOM elements derived from this codebase, the User demonstrates unequivocal, irrevocable constructive assent to all statutory clauses, covenants, and restrictive disclaimers codified herein. Users deficient in requisite legal age, mental capacity, or statutory jurisdiction pursuant to the Malaysian Contracts Act 1950 (Act 136) and Electronic Commerce Act 2006 (Act 658) are expressly interdicted from invoking these computational assets.</p>
                 </div>
 
                 <!-- Section 2 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec2_h">2. Scope of Digital Services, Non-Authoritative Status & Institutional Decoupling</div>
-                    <p class="terms-section-body" id="sec2_p">UTeM Confessions Pro Max operates as an independent, decentralized, student-operated digital ecosystem providing heuristic academic calculators (e.g., GPA/CGPA forecasting matrices), transit chronometry estimations, and peer-to-peer discourse nodes. The platform maintains complete legal, financial, administrative, and infrastructural decoupling from the governing administration of <strong>Universiti Teknikal Malaysia Melaka (UTeM)</strong>. No data artifact, algorithmic forecast, calendar representation, or bus timetable provided herein constitutes an official university instrument or legally binding administrative verification.</p>
+                    <div class="terms-section-header" id="terms_sec2_h">2. Scope of Digital Services, Non-Authoritative Status & Institutional Decoupling</div>
+                    <p class="terms-section-body" id="terms_sec2_p">UTeM Confessions Pro Max operates as an independent, decentralized, student-operated digital ecosystem providing heuristic academic calculators (e.g., GPA/CGPA forecasting matrices), transit chronometry estimations, and peer-to-peer discourse nodes. The platform maintains complete legal, financial, administrative, and infrastructural decoupling from the governing administration of <strong>Universiti Teknikal Malaysia Melaka (UTeM)</strong>. No data artifact, algorithmic forecast, calendar representation, or bus timetable provided herein constitutes an official university instrument or legally binding administrative verification.</p>
                 </div>
 
                 <!-- Section 3 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec3_h">3. Proscribed Conduct, Telecommunication Sanctions & Malicious Payloads</div>
-                    <p class="terms-section-body" id="sec3_p">Users are strictly interdicted from utilizing application vectors to transmit, propagate, or inject defamatory statements, unproven civil allegations, sexually explicit media, malicious payloads, cross-site scripting (XSS) vectors, automated scraping bots, or doxxing dossiers comprising personally identifiable records. Any transmission calculated to harass, intimidate, or disrupt campus equilibrium constitutes a direct breach of Section 233 of the Communications and Multimedia Act 1998 (Act 588) and triggers immediate, unappealable IP packet blacklisting.</p>
+                    <div class="terms-section-header" id="terms_sec3_h">3. Proscribed Conduct, Telecommunication Sanctions & Malicious Payloads</div>
+                    <p class="terms-section-body" id="terms_sec3_p">Users are strictly interdicted from utilizing application vectors to transmit, propagate, or inject defamatory statements, unproven civil allegations, sexually explicit media, malicious payloads, cross-site scripting (XSS) vectors, automated scraping bots, or doxxing dossiers comprising personally identifiable records. Any transmission calculated to harass, intimidate, or disrupt campus equilibrium constitutes a direct breach of Section 233 of the Communications and Multimedia Act 1998 (Act 588) and triggers immediate, unappealable IP packet blacklisting.</p>
                 </div>
 
                 <!-- Section 4 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec4_h">4. User-Generated Artifacts, Irrevocable Sublicensing & Moral Rights Waiver</div>
-                    <p class="terms-section-body" id="sec4_p">Upon programmatic dispatch of any textual confession, metadata string, or media artifact through our submission pipeline, the submitter hereby transfers an irrevocable, worldwide, perpetual, royalty-free, transferable, and sublicensable non-exclusive license empowering UCPM to store, parse, redact, reformat, index, broadcast, and syndicate the artifact across distributed content delivery networks, social aggregators, and search engine indices without financial remuneration or attribution obligations.</p>
+                    <div class="terms-section-header" id="terms_sec4_h">4. User-Generated Artifacts, Irrevocable Sublicensing & Moral Rights Waiver</div>
+                    <p class="terms-section-body" id="terms_sec4_p">Upon programmatic dispatch of any textual confession, metadata string, or media artifact through our submission pipeline, the submitter hereby transfers an irrevocable, worldwide, perpetual, royalty-free, transferable, and sublicensable non-exclusive license empowering UCPM to store, parse, redact, reformat, index, broadcast, and syndicate the artifact across distributed content delivery networks, social aggregators, and search engine indices without financial remuneration or attribution obligations.</p>
                 </div>
 
                 <!-- Section 5 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec5_h">5. Algorithmic Moderation, Autonomous Rate Limiting & Unilateral Content Purging</div>
-                    <p class="terms-section-body" id="sec5_p">All ingested submissions are filtered through heuristic regex string evaluators, automated anti-spam throttling routines (enforcing a non-negotiable 30000-millisecond latency queue between requests), and volunteer peer review mechanisms. UCPM exercises sovereign, absolute, and unreviewable discretion to reject, truncate, quarantine, or permanently erase any incoming payload without assigning formal rationale, issuing prior notice, or incurring transitive liability to the initiating client.</p>
+                    <div class="terms-section-header" id="terms_sec5_h">5. Algorithmic Moderation, Autonomous Rate Limiting & Unilateral Content Purging</div>
+                    <p class="terms-section-body" id="terms_sec5_p">All ingested submissions are filtered through heuristic regex string evaluators, automated anti-spam throttling routines (enforcing a non-negotiable 30000-millisecond latency queue between requests), and volunteer peer review mechanisms. UCPM exercises sovereign, absolute, and unreviewable discretion to reject, truncate, quarantine, or permanently erase any incoming payload without assigning formal rationale, issuing prior notice, or incurring transitive liability to the initiating client.</p>
                 </div>
 
                 <!-- Section 6 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec6_h">6. Absolute Disclaimer of Warranties, As-Is Topology & Computational Idiosyncrasies</div>
-                    <p class="terms-section-body" id="sec6_p">The entire computational suite, algorithms, bus transit data, examination repositories, and guides are rendered strictly on an <strong>"AS-IS"</strong>, <strong>"AS-AVAILABLE"</strong>, and <strong>"WITH ALL FAULTS"</strong> basis. UCPM explicitly disclaims all express, statutory, or implied warranties—including but not limited to warranties of merchantability, fitness for particular academic prerequisites, uninterrupted uptime, cryptographic infallibility, or mathematical precision. Grade calculations and bus transit timings are approximate references only.</p>
+                    <div class="terms-section-header" id="terms_sec6_h">6. Absolute Disclaimer of Warranties, As-Is Topology & Computational Idiosyncrasies</div>
+                    <p class="terms-section-body" id="terms_sec6_p">The entire computational suite, algorithms, bus transit data, examination repositories, and guides are rendered strictly on an <strong>"AS-IS"</strong>, <strong>"AS-AVAILABLE"</strong>, and <strong>"WITH ALL FAULTS"</strong> basis. UCPM explicitly disclaims all express, statutory, or implied warranties—including but not limited to warranties of merchantability, fitness for particular academic prerequisites, uninterrupted uptime, cryptographic infallibility, or mathematical precision. Grade calculations and bus transit timings are approximate references only.</p>
                 </div>
 
                 <!-- Section 7 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec7_h">7. Exhaustive Limitation of Transitive Liability & Indemnification Covenant</div>
-                    <p class="terms-section-body" id="sec7_p">Under no jurisprudential doctrine, tort, strict liability, or contract theory shall UCPM, its student developers, volunteer moderators, or affiliates be liable for direct, indirect, incidental, punitive, special, or consequential damages (including academic probation, missed transport connections, disciplinary sanctions, or hardware failure). The aggregate financial liability of UCPM for any claim arising out of these services is capped at <strong>MYR 0.00</strong>. The User agrees to indemnify and hold harmless UCPM against all third-party legal claims.</p>
+                    <div class="terms-section-header" id="terms_sec7_h">7. Exhaustive Limitation of Transitive Liability & Indemnification Covenant</div>
+                    <p class="terms-section-body" id="terms_sec7_p">Under no jurisprudential doctrine, tort, strict liability, or contract theory shall UCPM, its student developers, volunteer moderators, or affiliates be liable for direct, indirect, incidental, punitive, special, or consequential damages (including academic probation, missed transport connections, disciplinary sanctions, or hardware failure). The aggregate financial liability of UCPM for any claim arising out of these services is capped at <strong>MYR 0.00</strong>. The User agrees to indemnify and hold harmless UCPM against all third-party legal claims.</p>
                 </div>
 
                 <!-- Section 8 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec8_h">8. Exogenous Syndication, Third-Party Advertising Adjacencies & External Disclaimers</div>
-                    <p class="terms-section-body" id="sec8_p">The platform accommodates programmatic advertising syndicates (including Google AdSense and Monetag) which independently serve contextual and behavioral promotional assets via client-side DOM injections. UCPM disclaims all agency, endorsement, or liability concerning the veracity, safety, or legality of third-party advertisements. Navigation across external hyperlinks terminating beyond the root domain occurs at the user's sole risk and discretion.</p>
+                    <div class="terms-section-header" id="terms_sec8_h">8. Exogenous Syndication, Third-Party Advertising Adjacencies & External Disclaimers</div>
+                    <p class="terms-section-body" id="terms_sec8_p">The platform accommodates programmatic advertising syndicates (including Google AdSense and Monetag) which independently serve contextual and behavioral promotional assets via client-side DOM injections. UCPM disclaims all agency, endorsement, or liability concerning the veracity, safety, or legality of third-party advertisements. Navigation across external hyperlinks terminating beyond the root domain occurs at the user's sole risk and discretion.</p>
                 </div>
 
                 <!-- Section 9 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec9_h">9. Intellectual Property Enclosure, Codebase Reservation & Reverse-Engineering</div>
-                    <p class="terms-section-body" id="sec9_p">All visual styling tokens, CSS stylesheets, UI components, vector assets, logos, brand typography, and proprietary JavaScript algorithms constitute protected intellectual property. Users are strictly prohibited from decompiling, reverse-engineering, modifying, republishing, or creating unauthorized mirrors of this digital corpus without prior written licensing authorization from the platform administrators.</p>
+                    <div class="terms-section-header" id="terms_sec9_h">9. Intellectual Property Enclosure, Codebase Reservation & Reverse-Engineering</div>
+                    <p class="terms-section-body" id="terms_sec9_p">All visual styling tokens, CSS stylesheets, UI components, vector assets, logos, brand typography, and proprietary JavaScript algorithms constitute protected intellectual property. Users are strictly prohibited from decompiling, reverse-engineering, modifying, republishing, or creating unauthorized mirrors of this digital corpus without prior written licensing authorization from the platform administrators.</p>
                 </div>
 
                 <!-- Section 10 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec10_h">10. Severability Clause, Temporal Precedence & Constructive Assent to Revisions</div>
-                    <p class="terms-section-body" id="sec10_p">Should any discrete provision of this agreement be deemed unenforceable, void, or unlawful by a competent court of law, such clause shall be severed without invalidating the residual covenants, which shall remain in full force and effect. UCPM reserves the unilateral right to amend these terms at any time; subsequent interaction with the platform constitutes non-revocable constructive assent to the revised terms.</p>
+                    <div class="terms-section-header" id="terms_sec10_h">10. Severability Clause, Temporal Precedence & Constructive Assent to Revisions</div>
+                    <p class="terms-section-body" id="terms_sec10_p">Should any discrete provision of this agreement be deemed unenforceable, void, or unlawful by a competent court of law, such clause shall be severed without invalidating the residual covenants, which shall remain in full force and effect. UCPM reserves the unilateral right to amend these terms at any time; subsequent interaction with the platform constitutes non-revocable constructive assent to the revised terms.</p>
                 </div>
 
                 <!-- Section 11 -->
                 <div class="terms-section-block">
-                    <div class="terms-section-header" id="sec11_h">11. Governing Jurisprudence, Forum Non Conveniens & Dispute Resolution</div>
-                    <p class="terms-section-body" id="sec11_p">These Terms of Service are construed, interpreted, and enforced exclusively under the laws of Malaysia. Any contentious legal proceedings, controversies, or claims arising from the operation of this application shall be submitted to the exclusive territorial jurisdiction of the courts of Melaka, Malaysia, with both parties explicitly waiving objections rooted in forum non conveniens.</p>
+                    <div class="terms-section-header" id="terms_sec11_h">11. Governing Jurisprudence, Forum Non Conveniens & Dispute Resolution</div>
+                    <p class="terms-section-body" id="terms_sec11_p">These Terms of Service are construed, interpreted, and enforced exclusively under the laws of Malaysia. Any contentious legal proceedings, controversies, or claims arising from the operation of this application shall be submitted to the exclusive territorial jurisdiction of the courts of Melaka, Malaysia, with both parties explicitly waiving objections rooted in forum non conveniens.</p>
                 </div>
             
                 </article>
@@ -554,73 +562,73 @@
             <div id="panel-privacy" class="legal-panel">
                 <article class="card content-card">
 
-                <h1 class="card-title" style="font-size: 20px; margin-bottom: 12px;" id="mainTitle">
+                <h2 class="card-title" style="font-size: 20px; margin-bottom: 12px;" id="privacy_mainTitle">
                     <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z"/></svg>
                     Privacy Policy & Data Governance Framework
-                </h1>
+                </h2>
                 
-                <p id="p_intro" style="margin-bottom: 22px; line-height: 1.7; color: var(--text-secondary); font-size: 14px;">
+                <p id="privacy_p_intro" style="margin-bottom: 22px; line-height: 1.7; color: var(--text-secondary); font-size: 14px;">
                     This comprehensive Privacy Policy and Data Governance Framework establishes the normative guidelines, cryptographic modalities, and regulatory compliance paradigms under which <strong>UTeM Confessions Pro Max (UCPM)</strong> processes, manipulates, isolates, and safeguards informational artifacts across its multi-tiered student digital infrastructure, third-party advertising exchanges, and client-side computational utilities.
                 </p>
 
                 <!-- Section 1: Anonymous Submissions (Clear & Direct) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec1_h">1. Anonymous Confession Submissions</div>
-                    <p class="privacy-section-body" id="sec1_p">Our confession submission system is engineered to prioritize anonymity. We do not collect personal identifiers, names, phone numbers, email addresses, or IP addresses when you submit a confession. Submissions are transmitted as plaintext statements. To protect your privacy and that of others, please refrain from typing personal names or identifiable details in your confession body.</p>
+                    <div class="privacy-section-header" id="privacy_sec1_h">1. Anonymous Confession Submissions</div>
+                    <p class="privacy-section-body" id="privacy_sec1_p">Our confession submission system is engineered to prioritize anonymity. We do not collect personal identifiers, names, phone numbers, email addresses, or IP addresses when you submit a confession. Submissions are transmitted as plaintext statements. To protect your privacy and that of others, please refrain from typing personal names or identifiable details in your confession body.</p>
                 </div>
 
                 <!-- Section 2: Client-Side Volumetric Web Storage (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec2_h">2. Client-Side Volumetric Web Storage Architecture & Local State Persistency</div>
-                    <p class="privacy-section-body" id="sec2_p">The platform utilizes W3C-compliant document-oriented HTML5 Web Storage Application Programming Interfaces (specifically isolated <code>window.localStorage</code> partitions) to execute decentralized, non-relational deterministic computations directly within the client’s sandboxed browser context. Execution artifacts generated by the GPA/CGPA Forecasting Module, Academic Chronometry Timers, Transit Matrix Lookups, and Cartographic Schemas reside exclusively within the local browser runtime filesystem. In consequence of this partitioned architectural topology, zero computational payload, numeric telemetry, grade coefficient variables, or idiosyncratic scheduling inputs are transmitted across remote transport-layer security (TLS) networks to server-side relational databases. Furthermore, persistent cryptographic token state flags governing thematic chromatic luminosity (Dark/Light mode) and monotonic anti-spam rate-limiting delta timestamps (enforcing a non-bypassable 30000-millisecond queuing latency) remain strictly localized, precluding extrinsic exfiltration.</p>
+                    <div class="privacy-section-header" id="privacy_sec2_h">2. Client-Side Volumetric Web Storage Architecture & Local State Persistency</div>
+                    <p class="privacy-section-body" id="privacy_sec2_p">The platform utilizes W3C-compliant document-oriented HTML5 Web Storage Application Programming Interfaces (specifically isolated <code>window.localStorage</code> partitions) to execute decentralized, non-relational deterministic computations directly within the client’s sandboxed browser context. Execution artifacts generated by the GPA/CGPA Forecasting Module, Academic Chronometry Timers, Transit Matrix Lookups, and Cartographic Schemas reside exclusively within the local browser runtime filesystem. In consequence of this partitioned architectural topology, zero computational payload, numeric telemetry, grade coefficient variables, or idiosyncratic scheduling inputs are transmitted across remote transport-layer security (TLS) networks to server-side relational databases. Furthermore, persistent cryptographic token state flags governing thematic chromatic luminosity (Dark/Light mode) and monotonic anti-spam rate-limiting delta timestamps (enforcing a non-bypassable 30000-millisecond queuing latency) remain strictly localized, precluding extrinsic exfiltration.</p>
                 </div>
 
                 <!-- Section 3: Third-Party Advertising (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec3_h">3. Programmatic Advertising Telemetry, Pseudonymous Identifiers & DART Mechanics</div>
-                    <p class="privacy-section-body" id="sec3_p">To sustain operational overheads, the application integrates multi-tenant algorithmic ad exchange protocols orchestrated primarily by <strong>Google AdSense</strong> and its associated programmatic syndicate networks. These third-party programmatic networks instantiate specialized tracking vectors, session-persistent algorithmic beacons, and probabilistic DoubleClick DART heuristic cookies within the user's user-agent cache. These instruments systematically aggregate contextual browsing signatures, domain-level referrers, and cross-site traversal telemetry to compute predictive demographic indices and serve hyper-targeted programmatic display units. Users retain the unconstrained prerogative to execute bilateral opt-out revocations via the centralized Google Advertising Preferences Protocol (<a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); font-weight: 600;">adssettings.google.com</a>) or through cross-industry consortia mechanisms such as the Network Advertising Initiative (NAI) and Digital Advertising Alliance (<a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); font-weight: 600;">aboutads.info</a>).</p>
+                    <div class="privacy-section-header" id="privacy_sec3_h">3. Programmatic Advertising Telemetry, Pseudonymous Identifiers & DART Mechanics</div>
+                    <p class="privacy-section-body" id="privacy_sec3_p">To sustain operational overheads, the application integrates multi-tenant algorithmic ad exchange protocols orchestrated primarily by <strong>Google AdSense</strong> and its associated programmatic syndicate networks. These third-party programmatic networks instantiate specialized tracking vectors, session-persistent algorithmic beacons, and probabilistic DoubleClick DART heuristic cookies within the user's user-agent cache. These instruments systematically aggregate contextual browsing signatures, domain-level referrers, and cross-site traversal telemetry to compute predictive demographic indices and serve hyper-targeted programmatic display units. Users retain the unconstrained prerogative to execute bilateral opt-out revocations via the centralized Google Advertising Preferences Protocol (<a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); font-weight: 600;">adssettings.google.com</a>) or through cross-industry consortia mechanisms such as the Network Advertising Initiative (NAI) and Digital Advertising Alliance (<a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); font-weight: 600;">aboutads.info</a>).</p>
                 </div>
 
                 <!-- Section 4: Monetag & RTB Exchanges (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec4_h">4. Monetization Intermediary Protocols, Script Injections & Web Beacons</div>
-                    <p class="privacy-section-body" id="sec4_p">In tandem with primary ad syndicates, supplementary algorithmic monetization platforms (specifically <strong>Monetag</strong> and its distributed edge delivery domains including, without limitation, <code>5gvci.com</code> and <code>n6wxm.com</code>) execute autonomous client-side JavaScript payloads, asynchronous pixel beacons, web worker threads, and interstitial vignette container initializations. Upon invocation of an interstitial or banner render request, the user's internet protocol (IP) routing header is mechanically parsed by upstream content delivery nodes to infer coarse-grain geographical telemetry (e.g., Autonomous System Numbers, municipal routing nodes) strictly for geolocation-based supply-side mediation without synthesizing persistent identifiable consumer profiles. Furthermore, the client environment persists deterministic frequency-capping state primitives within <code>window.localStorage</code> partitions (specifically utilizing the designated key <code>lastVignetteTime</code>) to throttle programmatic vignette render invocation intervals to a minimum non-configurable threshold of 900,000 milliseconds (15 minutes). These external monetization providers govern the operational lifecycles of their respective dynamic tracking artifacts in strict accordance with their sovereign, uncoordinated privacy disclaimers, whereupon UCPM disclaims vicarious architectural culpability for third-party client memory allocations, remote script execution boundaries, or vendor-side data ingestion protocols.</p>
+                    <div class="privacy-section-header" id="privacy_sec4_h">4. Monetization Intermediary Protocols, Script Injections & Web Beacons</div>
+                    <p class="privacy-section-body" id="privacy_sec4_p">In tandem with primary ad syndicates, supplementary algorithmic monetization platforms (specifically <strong>Monetag</strong> and its distributed edge delivery domains including, without limitation, <code>5gvci.com</code> and <code>n6wxm.com</code>) execute autonomous client-side JavaScript payloads, asynchronous pixel beacons, web worker threads, and interstitial vignette container initializations. Upon invocation of an interstitial or banner render request, the user's internet protocol (IP) routing header is mechanically parsed by upstream content delivery nodes to infer coarse-grain geographical telemetry (e.g., Autonomous System Numbers, municipal routing nodes) strictly for geolocation-based supply-side mediation without synthesizing persistent identifiable consumer profiles. Furthermore, the client environment persists deterministic frequency-capping state primitives within <code>window.localStorage</code> partitions (specifically utilizing the designated key <code>lastVignetteTime</code>) to throttle programmatic vignette render invocation intervals to a minimum non-configurable threshold of 900,000 milliseconds (15 minutes). These external monetization providers govern the operational lifecycles of their respective dynamic tracking artifacts in strict accordance with their sovereign, uncoordinated privacy disclaimers, whereupon UCPM disclaims vicarious architectural culpability for third-party client memory allocations, remote script execution boundaries, or vendor-side data ingestion protocols.</p>
                 </div>
 
                 <!-- Section 5: Analytics & Telemetry (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec5_h">5. Telemetric Diagnostic Aggregation & Performance Instrumentation Analytics</div>
-                    <p class="privacy-section-body" id="sec5_p">The platform deploys <strong>Google Analytics 4 (GA4)</strong> instrumentation hooks configured with automated Internet Protocol anonymization masking (<code>gtag.js</code> architecture). The analytical pipeline captures exclusively anonymized, macro-level telemetry—comprising viewport aspect ratios, user-agent hardware categorization, render latency metrics, and aggregate interaction event frequencies. Such statistical aggregations are divested of granular personal identifying characteristics (PII) and are utilized solely to diagnose cumulative layout shifts (CLS), optimize network throughput distribution, and audit computational responsiveness across diverse mobile and desktop screen form factors.</p>
+                    <div class="privacy-section-header" id="privacy_sec5_h">5. Telemetric Diagnostic Aggregation & Performance Instrumentation Analytics</div>
+                    <p class="privacy-section-body" id="privacy_sec5_p">The platform deploys <strong>Google Analytics 4 (GA4)</strong> instrumentation hooks configured with automated Internet Protocol anonymization masking (<code>gtag.js</code> architecture). The analytical pipeline captures exclusively anonymized, macro-level telemetry—comprising viewport aspect ratios, user-agent hardware categorization, render latency metrics, and aggregate interaction event frequencies. Such statistical aggregations are divested of granular personal identifying characteristics (PII) and are utilized solely to diagnose cumulative layout shifts (CLS), optimize network throughput distribution, and audit computational responsiveness across diverse mobile and desktop screen form factors.</p>
                 </div>
 
                 <!-- Section 6: Minor Protections (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec6_h">6. Statutory Minor Ineligibility, Jurisprudential Protections & Age Verification</div>
-                    <p class="privacy-section-body" id="sec6_p">Pursuant to the statutory stipulations codified within the Children’s Online Privacy Protection Act (COPPA) and congruent international legal frameworks, this service is expressly demarcated for use by tertiary university undergraduates, diploma scholars, academic staff, and autonomous adult cohorts aged 18 and older. The platform disavows any intentional solicitation, indexing, or processing of informational entities emanating from individuals sub-13 years of age. Should empirical evidence emerge substantiating unauthorized minor engagement resulting in transmission of identifiable records, immediate purge routines are executed upon receipt of verifiable notice.</p>
+                    <div class="privacy-section-header" id="privacy_sec6_h">6. Statutory Minor Ineligibility, Jurisprudential Protections & Age Verification</div>
+                    <p class="privacy-section-body" id="privacy_sec6_p">Pursuant to the statutory stipulations codified within the Children’s Online Privacy Protection Act (COPPA) and congruent international legal frameworks, this service is expressly demarcated for use by tertiary university undergraduates, diploma scholars, academic staff, and autonomous adult cohorts aged 18 and older. The platform disavows any intentional solicitation, indexing, or processing of informational entities emanating from individuals sub-13 years of age. Should empirical evidence emerge substantiating unauthorized minor engagement resulting in transmission of identifiable records, immediate purge routines are executed upon receipt of verifiable notice.</p>
                 </div>
 
                 <!-- Section 7: PDPA Compliance (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec7_h">7. Jurisprudential Data Governance, PDPA 2010 Alignment & Cross-Border Invocations</div>
-                    <p class="privacy-section-body" id="sec7_p">Informational governance methodologies operationalized within this infrastructure align conceptually with the core tenets of the <strong>Malaysian Personal Data Protection Act 2010 (Act 709 / PDPA)</strong> and general international data sovereignty standards. Users maintain statutory entitlements to petition for diagnostic confirmation regarding the non-existence of indexed personal dossiers, demand the irrevocable deletion of erroneous or intrusive user-generated submissions, and file formal redress petitions concerning third-party data processing behaviors via designated administrative transmission pipelines.</p>
+                    <div class="privacy-section-header" id="privacy_sec7_h">7. Jurisprudential Data Governance, PDPA 2010 Alignment & Cross-Border Invocations</div>
+                    <p class="privacy-section-body" id="privacy_sec7_p">Informational governance methodologies operationalized within this infrastructure align conceptually with the core tenets of the <strong>Malaysian Personal Data Protection Act 2010 (Act 709 / PDPA)</strong> and general international data sovereignty standards. Users maintain statutory entitlements to petition for diagnostic confirmation regarding the non-existence of indexed personal dossiers, demand the irrevocable deletion of erroneous or intrusive user-generated submissions, and file formal redress petitions concerning third-party data processing behaviors via designated administrative transmission pipelines.</p>
                 </div>
 
                 <!-- Section 8: Cryptographic Redaction (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec8_h">8. Ephemeral Session Telemetry, User-Initiated Revocation & Cryptographic Redaction</div>
-                    <p class="privacy-section-body" id="sec8_p">Should a data subject ascertain that an approved, publicly distributed anonymous post contains covert identifying vectors, defamatory inferences, or infringed privacy materials, the subject possesses the procedural right to invoke our fast-track cryptographic redaction workflow. Processing requires formal transmission of the exact record index accompanied by authenticating rationale to our designated compliance endpoint (<code>utemconfessionpromax@duck.com</code>) or Telegram node (<code>@utemconf</code>), triggering permanent record invalidation across content databases within 24 business hours.</p>
+                    <div class="privacy-section-header" id="privacy_sec8_h">8. Ephemeral Session Telemetry, User-Initiated Revocation & Cryptographic Redaction</div>
+                    <p class="privacy-section-body" id="privacy_sec8_p">Should a data subject ascertain that an approved, publicly distributed anonymous post contains covert identifying vectors, defamatory inferences, or infringed privacy materials, the subject possesses the procedural right to invoke our fast-track cryptographic redaction workflow. Processing requires formal transmission of the exact record index accompanied by authenticating rationale to our designated compliance endpoint (<code>utemconfessionpromax@duck.com</code>) or Telegram node (<code>@utemconf</code>), triggering permanent record invalidation across content databases within 24 business hours.</p>
                 </div>
 
                 <!-- Section 9: Third-Party Hyperlinks (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec9_h">9. Exogenous Hyperlink Encapsulation & Limitation of Transitive Liability</div>
-                    <p class="privacy-section-body" id="sec9_p">Our digital corpus contains external hypertext links directing user sessions to external domain endpoints (e.g., official UTeM SMPWeb portals, myPTPTN gateways, Google Forms document collectors, and transportation mapping servers). Following client-side click-event delegation resulting in navigations beyond the origin host domain (<code>utemconfession.github.io</code>), this Privacy Policy ceases applicability. UCPM maintains zero architectural oversight, control, or liability regarding the data processing mechanisms, cookie retention policies, or cybersecurity controls maintained by exogenous host operators.</p>
+                    <div class="privacy-section-header" id="privacy_sec9_h">9. Exogenous Hyperlink Encapsulation & Limitation of Transitive Liability</div>
+                    <p class="privacy-section-body" id="privacy_sec9_p">Our digital corpus contains external hypertext links directing user sessions to external domain endpoints (e.g., official UTeM SMPWeb portals, myPTPTN gateways, Google Forms document collectors, and transportation mapping servers). Following client-side click-event delegation resulting in navigations beyond the origin host domain (<code>utemconfession.github.io</code>), this Privacy Policy ceases applicability. UCPM maintains zero architectural oversight, control, or liability regarding the data processing mechanisms, cookie retention policies, or cybersecurity controls maintained by exogenous host operators.</p>
                 </div>
 
                 <!-- Section 10: Unilateral Modifications (Complex / Wordy) -->
                 <div class="privacy-section-block">
-                    <div class="privacy-section-header" id="sec10_h">10. Unilateral Policy Modifications, Temporal Precedence & Constructive Assent</div>
-                    <p class="privacy-section-body" id="sec10_p">The administration reserves the untrammeled prerogative to periodically enact unilateral modifications, addenda, and structural revisions to this governance covenant to accommodate evolving statutory mandates, programmatic ad exchange regulations, or infrastructural adjustments. Any revised framework takes instantaneous constructive effect upon deployment and timestamp publication within this document. Continued client-side HTTP/HTTPS requests to the platform following such updates constitute definitive, irrevocable constructive assent to the governing terms herein.</p>
+                    <div class="privacy-section-header" id="privacy_sec10_h">10. Unilateral Policy Modifications, Temporal Precedence & Constructive Assent</div>
+                    <p class="privacy-section-body" id="privacy_sec10_p">The administration reserves the untrammeled prerogative to periodically enact unilateral modifications, addenda, and structural revisions to this governance covenant to accommodate evolving statutory mandates, programmatic ad exchange regulations, or infrastructural adjustments. Any revised framework takes instantaneous constructive effect upon deployment and timestamp publication within this document. Continued client-side HTTP/HTTPS requests to the platform following such updates constitute definitive, irrevocable constructive assent to the governing terms herein.</p>
                 </div>
             
                 </article>
@@ -642,9 +650,9 @@
                             @utemconf Channel &rarr;
                         </a>
                     </div>
-                    <h1 class="card-title" style="font-size: 22px; margin-bottom: 8px; border-bottom: none; padding-bottom: 0; color: #ffffff;" id="mainTitle">
+                    <h2 class="card-title" style="font-size: 22px; margin-bottom: 8px; border-bottom: none; padding-bottom: 0; color: #ffffff;" id="telegram_mainTitle">
                         Telegram Terms of Service & Channel Safety Policy
-                    </h1>
+                    </h2>
                     <p id="p_hero_desc" style="margin: 0; line-height: 1.6; color: var(--text-secondary); font-size: 14px;">
                         Essential compliance rules, platform safety guidelines, Google service integrations, and mandatory prohibitions designed to protect the UTeM Confessions channel from permanent Telegram suspension.
                     </p>
@@ -1213,6 +1221,8 @@
 
         const generalTranslations = {
             en: {
+                pageTitleLegal: "UTeM Legal Compliance, Guidelines & Terms",
+                pageDescLegal: "Official platform terms, confession community rules, privacy policy, and channel safety guidelines.",
                 tab_label_rules: "Confession Rules",
                 tab_label_terms: "Terms of Service",
                 tab_label_privacy: "Privacy Policy",
@@ -1220,6 +1230,8 @@
                 backLink: "Back to Home"
             },
             ms: {
+                pageTitleLegal: "Pematuhan Undang-Undang, Panduan & Terma UTeM",
+                pageDescLegal: "Terma rasmi platform, peraturan komuniti pengakuan, dasar privasi, dan panduan keselamatan saluran.",
                 tab_label_rules: "Peraturan Pengakuan",
                 tab_label_terms: "Syarat Perkhidmatan",
                 tab_label_privacy: "Dasar Privasi",
@@ -1268,7 +1280,9 @@
                 const dict = tabTranslations[tab][lang];
                 if (!dict) return;
                 Object.keys(dict).forEach(id => {
-                    const el = panel.querySelector('#' + id) || document.getElementById(id);
+                    const el = document.getElementById(tab + '_' + id) || 
+                               document.getElementById(id) || 
+                               (panel ? panel.querySelector('#' + id) : null);
                     if (el) {
                         el.textContent = dict[id];
                     }

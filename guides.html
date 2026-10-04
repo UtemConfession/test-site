@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google Analytics 4 (GA4) -->
@@ -36,7 +36,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1444529930367815" crossorigin="anonymous"></script>
 
@@ -54,6 +54,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 <body>
@@ -87,7 +96,7 @@
             </div>
 
             <!-- Articles Grid -->
-            <div class="guide-card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
+            <div class="guide-card-grid">
                 
                 <!-- Guide 1: GPA Calculator -->
                 <a href="guide-gpa-calculator.html" class="guide-card guide-catalog-card">
@@ -287,7 +296,7 @@
             </div>
 
             <!-- Static Overview Card for SEO -->
-            <div class="card content-card" style="margin-top: 30px; max-width: 100%;">
+            <div class="card content-card" style="max-width: 100%;">
                 <h3 style="color: var(--accent-gold); margin-top:0; font-size: 18px;" id="aboutCardTitle">About UTeM Confessions Pro Max Student Resources</h3>
                 <p style="color: var(--text-secondary); line-height: 1.6; font-size: 14px;" id="aboutCardDesc">
                     <strong>Universiti Teknikal Malaysia Melaka (UTeM)</strong> is Malaysia's premier public technical university, comprising faculties across engineering, information technology, technology management, and computer science. Our student resource guides are continuously updated by fellow UTeM undergraduates to provide accurate, reliable, and practical advice for navigating campus life.

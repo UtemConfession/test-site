@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <!-- Google AdSense temporarily paused on tool pages during review -->
 
     <!-- JSON-LD Structured Data -->
@@ -94,6 +94,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 
@@ -114,12 +123,12 @@
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
                         <div>
-                            <h2 class="card-title" id="activitiesTitle" style="margin-bottom: 6px;">
+                            <h1 class="card-title" id="activitiesTitle" style="margin-bottom: 6px;">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                                 </svg>
                                 Explore Melaka
-                            </h2>
+                            </h1>
                             <p style="color: var(--text-secondary); font-size: 13.5px; margin: 0; line-height: 1.5;" id="descActivities">
                                 Discover things to do around Melaka, from historical sites to hidden nature spots.
                             </p>
@@ -180,7 +189,7 @@
             </div>
 
             <!-- FEATURE-SPECIFIC SEO OVERVIEW & CROSS-LINK SECTION -->
-            <section class="card content-card" style="margin-top: 24px; border-color: rgba(var(--accent-gold-rgb), 0.25);">
+            <section class="card content-card" style="border-color: rgba(var(--accent-gold-rgb), 0.25);">
                 <h2 class="card-title" style="display: flex; align-items: center; gap: 10px; color: var(--accent-gold); font-size: 18px; font-weight: 800;">
                     <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                         <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
@@ -263,15 +272,15 @@
                 <!-- Section 4: Related Guides Cross-linking -->
                 <h3 style="color: var(--accent-gold); font-size: 15px; margin: 20px 0 10px 0;">🔗 Related Student Guides</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 8px;">
-                    <a href="bus.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="bus.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">🚌 Campus Bus & Transit Schedules</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">How to use BAS.MY M10A to reach Melaka Sentral & attractions.</span>
                     </a>
-                    <a href="guide-budget-living-food.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-budget-living-food.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">🍛 Student Budget Food & Makan Spots</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Affordable food haunts across Durian Tunggal & Melaka town.</span>
                     </a>
-                    <a href="calendar.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="calendar.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">📅 Academic Calendar & Public Holidays</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Plan semester breaks and long weekends in Melaka.</span>
                     </a>

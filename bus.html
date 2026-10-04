@@ -66,6 +66,55 @@
         .bus-holiday-alert.is-holiday #busHolidayTitle {
             color: #f87171;
         }
+                .bus-friday-alert {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.28);
+            border-left: 4px solid #10b981;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .bus-friday-alert.is-active-window {
+            background: rgba(234, 179, 8, 0.12);
+            border-color: rgba(234, 179, 8, 0.35);
+            border-left-color: var(--accent-gold);
+        }
+        .bus-friday-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .bus-friday-icon {
+            font-size: 24px;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .bus-friday-text {
+            flex: 1;
+        }
+        .bus-friday-heading-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+        #busFridayTitle {
+            color: #34d399;
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+        .bus-friday-alert.is-active-window #busFridayTitle {
+            color: var(--accent-gold);
+        }
+        #busFridayDesc {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 12.5px;
+            line-height: 1.5;
+        }
         .bus-holiday-content {
             display: flex;
             align-items: flex-start;
@@ -203,6 +252,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 
@@ -232,12 +290,12 @@
 
                 <!-- Top Bar: Title & Semester Switcher Toggle -->
                 <div class="bus-top-bar">
-                    <h2 class="card-title" style="margin: 0;">
+                    <h1 class="card-title" style="margin: 0;">
                         <svg viewBox="0 0 24 24">
                             <path d="M4 16c0 .88.39 1.67 1 2.22V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h8v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM18 11H6V6h12v5z" />
                         </svg>
                         <span id="title_campus_bus">UTeM Bus Timetable</span>
-                    </h2>
+                    </h1>
 
                     <!-- Segmented Semester Switcher Toggle -->
                     <div class="semester-toggle-container">
@@ -271,6 +329,19 @@
                             <button type="button" id="busHolidayDismiss" class="bus-holiday-dismiss-btn" aria-label="Dismiss notice" title="Dismiss" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; padding: 4px 8px; line-height: 1; border-radius: 6px;">
                                 ✕
                             </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dynamic Friday Prayer (Solat Jumaat) Transit Alert -->
+                <div id="busFridayNotice" class="bus-friday-alert" style="display: none;">
+                    <div class="bus-friday-content">
+                        <span class="bus-friday-icon">&#128332;</span>
+                        <div class="bus-friday-text">
+                            <div class="bus-friday-heading-row">
+                                <strong id="busFridayTitle">Friday Prayer Transit Advisory (12:15 PM &ndash; 2:15 PM)</strong>
+                                <span id="busFridayBadge" class="bus-status-tag holiday-reduced">Friday Schedule</span>
+                            </div>
+                            <p id="busFridayDesc">Standard lecture shuttle loops pause during Friday prayers (12:15&ndash;14:15). Dedicated campus mosque shuttles operate to/from Masjid Sayyidina Abu Bakar UTeM.</p>
                         </div>
                     </div>
                 </div>
@@ -420,7 +491,7 @@
                                     <!-- Populated by bus.js -->
                                 </tbody>
                             </table>
-                            <div id="busTableFootnotes" style="margin-top: 10px; padding: 10px 14px; background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--border-color); border-radius: 8px; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; display: none;">
+                            <div id="busTableFootnotes" style="margin-top: 10px; padding: 10px 14px; background: var(--bg-secondary); border: 1px dashed var(--border-color); border-radius: 8px; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; display: none;">
                                 <strong style="color: var(--accent-gold);">* Keterangan:</strong> 
                                 <span style="margin-left: 6px;"><strong style="color: var(--text-primary);">AJ:</strong> Kolej Kediaman Al-Jazari</span> &bull; 
                                 <span style="margin-left: 6px;"><strong style="color: var(--text-primary);">KSU:</strong> Kompleks Sukan UTeM</span> &bull; 
@@ -937,15 +1008,15 @@
                 <!-- Section 5: Related Guides Cross-linking -->
                 <h3 style="color: var(--accent-gold); font-size: 15px; margin: 20px 0 10px 0;" id="bus_sec5_title">🔗 Related Student Guides</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 8px;">
-                    <a href="guide-campus-bus-transit.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-campus-bus-transit.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="bus_rel1_title">🚌 UTeM Shuttle Bus & Transit Guide</strong>
                         <span style="font-size: 12px; color: var(--text-muted);" id="bus_rel1_desc">In-depth route timetables, stop maps, and transit tips.</span>
                     </a>
-                    <a href="guide-vehicle-sticker-parking.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-vehicle-sticker-parking.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="bus_rel2_title">🚗 Vehicle Sticker & Parking Rules</strong>
                         <span style="font-size: 12px; color: var(--text-muted);" id="bus_rel2_desc">How to apply for UTeM motor and car parking stickers.</span>
                     </a>
-                    <a href="guide-off-campus-rental.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-off-campus-rental.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="bus_rel3_title">🏠 Off-Campus Housing Near Bus Stops</strong>
                         <span style="font-size: 12px; color: var(--text-muted);" id="bus_rel3_desc">Rental guide for Emerald Park, Taman Tasik Utama, and Bukit Beruang.</span>
                     </a>

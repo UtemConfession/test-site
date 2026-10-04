@@ -2,8 +2,20 @@
 <html lang="en">
 
 <head>
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XTRN95HLDP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XTRN95HLDP');
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#060b19">
+    <meta name="google-site-verification" content="dwqgpqLYOpqd92hDyGq43MGexJ2DRGy8NZBVFKBzSeA" />
     <title>UTeM Wi-Fi & Campus Portals Directory | UTeM Confessions Pro Max</title>
 
     <meta name="description"
@@ -11,46 +23,61 @@
     <meta name="keywords"
         content="UTeM wifi, eduroam UTeM, UTeM VPN, LibProxy UTeM, i-UTeM portal, UTeM campus links, SMPWeb, Kolej Satria Wi-Fi">
     <meta name="author" content="UTeM Confessions Pro Max">
-    <link rel="canonical" href="https://utemconfessions.pages.dev/wifi.html">
+    <link rel="canonical" href="https://utemconfession.github.io/wifi.html">
 
     <!-- Open Graph (Facebook / Discord / WhatsApp) -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://utemconfessions.pages.dev/wifi.html">
+    <meta property="og:url" content="https://utemconfession.github.io/wifi.html">
     <meta property="og:title" content="UTeM Wi-Fi & Campus Portals Directory | UTeM Confessions Pro Max">
     <meta property="og:description"
         content="Quick access to official UTeM portals, wireless networks (eduroam, UTeM-Wifi), library LibProxy, SoftEther VPN, and essential campus student links.">
-    <meta property="og:image" content="https://utemconfessions.pages.dev/UCPMLogo.png">
+    <meta property="og:image" content="https://utemconfession.github.io/UCPMLogo.png">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://utemconfessions.pages.dev/wifi.html">
+    <meta name="twitter:url" content="https://utemconfession.github.io/wifi.html">
     <meta name="twitter:title" content="UTeM Wi-Fi & Campus Portals Directory | UTeM Confessions Pro Max">
     <meta name="twitter:description"
         content="Quick access to official UTeM portals, wireless networks (eduroam, UTeM-Wifi), library LibProxy, SoftEther VPN, and essential campus student links.">
-    <meta name="twitter:image" content="https://utemconfessions.pages.dev/UCPMLogo.png">
+    <meta name="twitter:image" content="https://utemconfession.github.io/UCPMLogo.png">
 
     <!-- Progressive Web App manifest -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0b1120">
 
     <link rel="icon" type="image/png" href="UCPMLogo.png">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
 
-    <!-- Google Fonts Preconnect & Inter / JetBrains Mono display swap -->
+    <!-- Google Fonts Preconnect & Outfit font preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "UTeM Wi-Fi & Campus Portals Directory",
+        "description": "Quick access to official UTeM portals, wireless networks (eduroam, UTeM-Wifi), library LibProxy, SoftEther VPN, and essential campus student links.",
+        "url": "https://utemconfession.github.io/wifi.html",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All"
+      }
+    ]
+    </script>
 
     <!-- Theme Initialization (prevents flash of incorrect theme) -->
     <script>
         (function () {
-            const savedTheme = localStorage.getItem('ucpm_theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
         })();
     </script>
-    <script src="components.js" defer></script>
+    <script src="components.js?v=8.0"></script>
 </head>
 
 <body>
@@ -69,17 +96,17 @@
                 <div class="wifi-main-layout">
 
                     <!-- 2. HERO: WIRELESS NETWORKS & DEVICE ENTERPRISE CONFIGURATOR -->
-                    <section class="card" style="position: relative; overflow: hidden; border-radius: 16px; padding: 28px; box-shadow: var(--card-shadow);">
+                    <section class="card">
                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3.5px; background: var(--gold-gradient);"></div>
 
                         <div style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
-                            <h2 class="card-title" style="margin-bottom: 6px; padding-bottom: 0; border-bottom: none;">
+                            <h1 class="card-title" style="margin-bottom: 6px; padding-bottom: 0; border-bottom: none;">
                                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                                     <path
                                         d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
                                 </svg>
                                 <span>UTeM Wi-Fi &amp; Campus Links</span>
-                            </h2>
+                            </h1>
                             <p class="subtitle" id="descImportantLinks" style="color: var(--text-secondary); font-size: 13.5px; margin: 0; line-height: 1.55;">
                                 Quick access to essential official campus portals, VPN clients, student council channels, and academic systems.
                             </p>
@@ -359,7 +386,7 @@
                     </div>
 
                     <!-- 4. OFFICIAL IT HELPDESK PRIORITY CARD -->
-                    <section class="card" style="background: var(--bg-card); border: 1px solid var(--accent-gold); border-radius: 16px; padding: 22px 24px; box-shadow: 0 4px 20px rgba(var(--accent-gold-rgb), 0.12); position: relative; overflow: hidden;">
+                    <section class="card" style="border: 1px solid var(--accent-gold); box-shadow: 0 4px 20px rgba(var(--accent-gold-rgb), 0.12); position: relative; overflow: hidden;">
                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3.5px; background: var(--gold-gradient);"></div>
                         <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
                             <div style="display: flex; align-items: center; gap: 12px;">
@@ -627,7 +654,7 @@
                     </section>
 
                     <!-- 6. FEATURE-SPECIFIC SEO OVERVIEW & MASTER GUIDE -->
-                    <section class="card content-card" style="border-radius: 18px; padding: 26px 28px; box-shadow: var(--card-shadow); border-color: rgba(var(--accent-gold-rgb), 0.25);">
+                    <section class="card content-card" style="border-color: rgba(var(--accent-gold-rgb), 0.25);">
                         <h2 class="card-title" style="display: flex; align-items: center; gap: 10px; color: var(--accent-gold); font-size: 18px; font-weight: 800; margin-bottom: 12px;">
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                                 <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />

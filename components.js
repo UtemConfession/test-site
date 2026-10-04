@@ -49,7 +49,7 @@ const UCPMSidebarHTML = `<!-- Desktop Sidebar Navigation -->
             <div class="brand-section">
                 <!-- Custom Inline SVG Logo matching Channel Emblem -->
                 <img src="UCPMLogo.webp" alt="UTeM Confessions Pro Max" class="brand-logo-img">
-                <h1 class="brand-title">UTeM Confessions</h1>
+                <div class="brand-title">UTeM Confessions</div>
                 <span class="brand-subtitle">Pro Max</span>
             </div>
             <!-- Sidebar Controls (Language & Theme) -->
@@ -672,13 +672,47 @@ function applyUniversalComponentTranslations(lang) {
     updateUniversalLangLabels(lang);
 }
 
+let lastActiveElementBeforeDrawer = null;
+let lastActiveElementBeforeThemeModal = null;
+
+function trapFocusInDialog(container, e) {
+    if (!container) return;
+    const focusables = Array.from(container.querySelectorAll(
+        'button:not([disabled]):not([aria-hidden="true"]), [href]:not([aria-hidden="true"]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(el => el.offsetParent !== null && window.getComputedStyle(el).visibility !== 'hidden');
+
+    if (focusables.length === 0) return;
+    const firstEl = focusables[0];
+    const lastEl = focusables[focusables.length - 1];
+
+    if (e.shiftKey) {
+        if (document.activeElement === firstEl || !container.contains(document.activeElement)) {
+            e.preventDefault();
+            lastEl.focus();
+        }
+    } else {
+        if (document.activeElement === lastEl || !container.contains(document.activeElement)) {
+            e.preventDefault();
+            firstEl.focus();
+        }
+    }
+}
+
 function openMobileDrawer() {
     const drawer = document.getElementById("mobileMoreDrawer");
     if (drawer) {
+        lastActiveElementBeforeDrawer = document.activeElement;
         drawer.classList.add("active");
+        drawer.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
         if (typeof navigator !== 'undefined' && navigator.vibrate) {
             try { navigator.vibrate(8); } catch (e) {}
+        }
+        const firstFocus = drawer.querySelector('#closeMobileDrawerBtn') || drawer.querySelector('.drawer-item-btn');
+        if (firstFocus) {
+            setTimeout(() => {
+                try { firstFocus.focus(); } catch (err) {}
+            }, 60);
         }
     }
 }
@@ -687,7 +721,12 @@ function closeMobileDrawer() {
     const drawer = document.getElementById("mobileMoreDrawer");
     if (drawer) {
         drawer.classList.remove("active");
+        drawer.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "";
+        if (lastActiveElementBeforeDrawer && typeof lastActiveElementBeforeDrawer.focus === 'function') {
+            try { lastActiveElementBeforeDrawer.focus(); } catch (e) {}
+            lastActiveElementBeforeDrawer = null;
+        }
     }
 }
 
@@ -1052,14 +1091,41 @@ function initThemePresetSystem() {
         }
     });
 
-    // Escape key to close modal
+    // Universal Modal Keyboard Accessibility Handler (WCAG 2.1 Focus Trap & Escape Dismissal)
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+        const themeModal = document.getElementById('themePaletteModal');
+        const isThemeModalOpen = themeModal && themeModal.classList.contains('active');
+        const drawer = document.getElementById('mobileMoreDrawer');
+        const isDrawerOpen = drawer && drawer.classList.contains('active');
+        const imageModal = document.getElementById('marketplaceImageModal') || document.querySelector('.image-modal.active');
+        const isImageModalOpen = imageModal && (imageModal.classList.contains('active') || (imageModal.style && imageModal.style.opacity === '1'));
+
+        if (e.key === 'Tab') {
+            if (isThemeModalOpen) {
+                trapFocusInDialog(themeModal, e);
+            } else if (isDrawerOpen) {
+                trapFocusInDialog(drawer, e);
+            } else if (isImageModalOpen) {
+                trapFocusInDialog(imageModal, e);
+            }
+        } else if (e.key === 'Escape') {
             if (themeModalCloseTimer) {
                 clearTimeout(themeModalCloseTimer);
                 themeModalCloseTimer = null;
             }
-            closeThemePaletteModal();
+            if (isThemeModalOpen) {
+                closeThemePaletteModal();
+            } else if (isDrawerOpen) {
+                closeMobileDrawer();
+            } else if (isImageModalOpen) {
+                if (typeof window.closeMarketplaceImageModal === 'function') {
+                    window.closeMarketplaceImageModal();
+                } else {
+                    const closeBtn = imageModal.querySelector('#closeMarketplaceModalBtn, .modal-close');
+                    if (closeBtn) closeBtn.click();
+                    else imageModal.remove();
+                }
+            }
         }
     });
 }
@@ -1071,11 +1137,20 @@ function openThemePaletteModal() {
     }
     const modal = document.getElementById('themePaletteModal');
     if (!modal) return;
+    lastActiveElementBeforeThemeModal = document.activeElement;
     const currentTheme = getActiveThemeId();
     updateThemePresetUI(currentTheme);
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    // Auto-focus active theme option or close button for keyboard accessibility
+    const targetFocus = modal.querySelector('.theme-card-option.active') || modal.querySelector('#closeThemeModalBtn');
+    if (targetFocus) {
+        setTimeout(() => {
+            try { targetFocus.focus(); } catch (err) {}
+        }, 60);
+    }
 }
 
 function closeThemePaletteModal() {
@@ -1088,6 +1163,10 @@ function closeThemePaletteModal() {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lastActiveElementBeforeThemeModal && typeof lastActiveElementBeforeThemeModal.focus === 'function') {
+        try { lastActiveElementBeforeThemeModal.focus(); } catch (e) {}
+        lastActiveElementBeforeThemeModal = null;
+    }
 }
 
 function updateThemePresetUI(themeId) {

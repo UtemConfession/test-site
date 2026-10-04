@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1444529930367815" crossorigin="anonymous"></script>
 
     <!-- JSON-LD Structured Data -->
@@ -119,6 +119,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 <body>
@@ -254,7 +263,7 @@
                     </div>
                 
                 <!-- Social Share Action Card -->
-                <div class="share-card" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px; margin: 32px 0 16px 0;">
+                <div class="share-card">
                     <h3 style="color: var(--accent-gold); font-size: 15px; margin-top: 0; margin-bottom: 6px;" id="shareTitle">📢 Share this Guide with Coursemates</h3>
                     <p style="color: var(--text-secondary); font-size: 12.8px; margin: 0 0 14px 0; line-height: 1.5;" id="shareDesc">Help your faculty coursemates and juniors stay informed by sharing this guide directly to WhatsApp or Telegram study groups.</p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -281,15 +290,15 @@
                     <span>&#x1F4DA;</span> Related UTeM Student Handbooks
                 </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
-                    <a href="guide-hostel-kolej-kediaman-merit.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 14px; text-decoration: none; color: inherit; display: block; transition: var(--transition);">
+                    <a href="guide-hostel-kolej-kediaman-merit.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13px; display: block; margin-bottom: 4px;">🏢 Kolej Kediaman (Hostel) Merit System</strong>
                         <span style="font-size: 12px; color: var(--text-muted); line-height: 1.45; display: block;">Accumulating college merit points if you plan to return to on-campus accommodation.</span>
                     </a>
-                    <a href="guide-campus-parking-clamping.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 14px; text-decoration: none; color: inherit; display: block; transition: var(--transition);">
+                    <a href="guide-campus-parking-clamping.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13px; display: block; margin-bottom: 4px;">🚗 Vehicle Stickers & Commuter Parking</strong>
                         <span style="font-size: 12px; color: var(--text-muted); line-height: 1.45; display: block;">Parking sticker eligibility and zone rules for students living off-campus.</span>
                     </a>
-                    <a href="guide-budget-living-food.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 14px; text-decoration: none; color: inherit; display: block; transition: var(--transition);">
+                    <a href="guide-budget-living-food.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13px; display: block; margin-bottom: 4px;">🍽️ Student Budget Living & Expenses</strong>
                         <span style="font-size: 12px; color: var(--text-muted); line-height: 1.45; display: block;">Splitting rental utilities, cooking on a student budget, and affordable Melaka eateries.</span>
                     </a>

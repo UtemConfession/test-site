@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <!-- Google AdSense temporarily paused on tool pages during review -->
 
     <!-- JSON-LD Structured Data -->
@@ -92,6 +92,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 
@@ -122,12 +131,12 @@
                     <!-- SECTION 1: HERO (Clinic Hours & 24/7 Emergency Dispatch) -->
                     <section class="card health-hero-card" aria-label="Operating Hours & Emergency Hotline">
                         <div style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
-                            <h2 class="card-title" style="margin-bottom: 6px; padding-bottom: 0; border-bottom: none;">
+                            <h1 class="card-title" style="margin-bottom: 6px; padding-bottom: 0; border-bottom: none;">
                                 <svg viewBox="0 0 24 24">
                                     <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z" />
                                 </svg>
                                 <span id="titleHealthTab">Pusat Kesihatan UTeM (PKU)</span>
-                            </h2>
+                            </h1>
                             <p class="subtitle" style="color: var(--text-secondary); font-size: 13.5px; margin: 0; line-height: 1.55;">
                                 Official campus medical center directory, 24/7 emergency response vehicle dispatch, clinic consultation hours, dental e-appointments, and medical leave endorsement guides.
                             </p>
@@ -456,15 +465,15 @@
                         <!-- Section 5: Related Guides Cross-linking -->
                         <h3 style="color: var(--accent-gold); font-size: 15px; margin: 20px 0 12px 0;" id="health_sec5_title">🔗 Related Student Guides</h3>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 4px;">
-                            <a href="guide-freshman-survival.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit; transition: var(--transition);">
+                            <a href="guide-freshman-survival.html" class="related-guide-link">
                                 <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="health_rel1_title">🎒 Freshman Survival Guide</strong>
                                 <span style="font-size: 12px; color: var(--text-muted);" id="health_rel1_desc">Essential emergency hotlines and clinic navigation tips.</span>
                             </a>
-                            <a href="guide-hostel-kolej-kediaman-merit.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit; transition: var(--transition);">
+                            <a href="guide-hostel-kolej-kediaman-merit.html" class="related-guide-link">
                                 <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="health_rel2_title">🏢 Kolej Kediaman Hostel Guide</strong>
                                 <span style="font-size: 12px; color: var(--text-muted);" id="health_rel2_desc">Hostel warden contacts and first-aid points at Satria &amp; Lestari.</span>
                             </a>
-                            <a href="bus.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit; transition: var(--transition);">
+                            <a href="bus.html" class="related-guide-link">
                                 <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="health_rel3_title">🚌 Campus Shuttle Buses</strong>
                                 <span style="font-size: 12px; color: var(--text-muted);" id="health_rel3_desc">Shuttle routes between Durian Tunggal and Ayer Keroh clinics.</span>
                             </a>

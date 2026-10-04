@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <!-- Google AdSense temporarily paused on tool pages during review -->
 
     <!-- JSON-LD Structured Data -->
@@ -94,6 +94,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 
@@ -126,12 +135,12 @@
                     <section class="card library-section-card" aria-label="Library Operating Hours">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
                             <div>
-                                <h2 class="card-title" style="margin-bottom: 6px;">
+                                <h1 class="card-title" style="margin-bottom: 6px;">
                                     <svg viewBox="0 0 24 24" style="fill: currentColor;">
                                         <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM9 9h10v2H9zm0 3h6v2H9zm0-6h10v2H9z" />
                                     </svg>
                                     <span id="titleLibTab">Perpustakaan Laman Hikmah (PLH)</span>
-                                </h2>
+                                </h1>
                                 <p style="color: var(--text-secondary); font-size: 13.5px; margin: 0; line-height: 1.5;">
                                     Central academic knowledge hub across Kampus Induk and Kampus Teknologi.
                                 </p>
@@ -356,7 +365,7 @@
             </div>
 
             <!-- Crawlable Overview Section for Search Engines -->
-            <section class="card content-card" style="margin-top: 28px; max-width: 100%; border-color: rgba(var(--accent-gold-rgb), 0.25);">
+            <section class="card content-card" style="max-width: 100%; border-color: rgba(var(--accent-gold-rgb), 0.25);">
                 <h2 style="color: var(--accent-gold); font-size: 18px; font-weight: 800; margin-top: 0; display: flex; align-items: center; gap: 8px;">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                         <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z" />
@@ -458,15 +467,15 @@
                 <!-- Section 5: Related Guides Cross-linking -->
                 <h3 style="color: var(--accent-gold); font-size: 15px; margin: 20px 0 10px 0;" id="lib_sec5_title">🔗 Related Student Guides</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 8px;">
-                    <a href="guide-past-year-exams.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-past-year-exams.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="lib_rel1_title">📝 Past Year Exam Practice</strong>
                         <span style="font-size: 12px; color: var(--text-muted);" id="lib_rel1_desc">Access previous semester exam questions from the library archive.</span>
                     </a>
-                    <a href="guide-top-10-study-places.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-top-10-study-places.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="lib_rel2_title">☕ Top 10 Campus Study Spots</strong>
                         <span style="font-size: 12px; color: var(--text-muted);" id="lib_rel2_desc">Compare quiet spots across Kampus Induk & Kampus Teknologi.</span>
                     </a>
-                    <a href="guide-it-software-eduroam.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-it-software-eduroam.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;" id="lib_rel3_title">💻 IT Setup & Software Licenses</strong>
                         <span style="font-size: 12px; color: var(--text-muted);" id="lib_rel3_desc">Download MATLAB, SolidWorks, and setup eduroam Wi-Fi.</span>
                     </a>

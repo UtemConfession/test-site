@@ -11,7 +11,7 @@ try {
 }
 
 // sw.js — UTeM Confessions Pro Max Service Worker (Offline Support)
-const CACHE_NAME = 'ucpm-cache-v154';
+const CACHE_NAME = 'ucpm-cache-v162';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -35,6 +35,21 @@ const ASSETS_TO_CACHE = [
     './guides.html',
     './about.html',
     './legal.html',
+    './guide-budget-living-food.html',
+    './guide-campus-bus-transit.html',
+    './guide-campus-parking-clamping.html',
+    './guide-course-registration-add-drop.html',
+    './guide-final-year-project-fyp.html',
+    './guide-freshman-survival.html',
+    './guide-gpa-calculator.html',
+    './guide-hostel-kolej-kediaman-merit.html',
+    './guide-internship-industrial-training.html',
+    './guide-it-software-eduroam.html',
+    './guide-off-campus-rental.html',
+    './guide-past-year-exams.html',
+    './guide-ptptn-loan.html',
+    './guide-top-10-study-places.html',
+    './guide-vehicle-sticker-parking.html',
     './components.js',
     './style.min.css',
     './translation.min.js',
@@ -120,10 +135,19 @@ self.addEventListener('fetch', (event) => {
             })
         );
     } else {
-        // Cache-first for images / static media
+        // Cache-first with dynamic runtime caching for same-origin static media & images
         event.respondWith(
             caches.match(event.request, { ignoreSearch: true }).then((cachedResponse) => {
-                return cachedResponse || fetch(event.request);
+                if (cachedResponse) return cachedResponse;
+                return fetch(event.request).then((networkResponse) => {
+                    if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+                        const responseClone = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseClone);
+                        });
+                    }
+                    return networkResponse;
+                });
             })
         );
     }

@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <!-- Google AdSense temporarily paused on tool pages during review -->
 
     <!-- Monetag Vignette Banner with 15 Min Cooldown (Popunder removed as requested) -->
@@ -60,6 +60,15 @@
     </script>
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 
@@ -85,7 +94,7 @@
             </div>
 
             <!-- CARD 1: HERO & LIVE UNIT MEL STATUS -->
-            <div class="card" style="margin-bottom: 24px; padding: 26px 24px;">
+            <div class="card" style="margin-bottom: 24px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
                     <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--accent-gold)">
                         <path d="M20 7l-8-4-8 4 8 4 8-4zm-8 6l-8-4v8l8 4 8-4v-8l-8 4z"/>
@@ -108,7 +117,7 @@
             <div class="parcel-main-layout">
 
                 <!-- CARD 2: INTERACTIVE 1-CLICK SHIPPING ADDRESS GENERATOR -->
-                <section class="card" style="padding: 28px 24px;" aria-label="Shipping Address Generator">
+                <section class="card" aria-label="Shipping Address Generator">
                     <h2 id="titleAddressGen" style="font-size: 18px; font-weight: 700; color: var(--accent-gold); margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
                         📋 1-Tap Shipping Address Generator
                     </h2>
@@ -177,7 +186,7 @@
                 </section>
 
                 <!-- CARD 3: UNIVERSAL COURIER TRACKING QUICK-LOOKUP -->
-                <section class="card" style="padding: 28px 24px;" aria-label="Courier Tracking Shortcut">
+                <section class="card" aria-label="Courier Tracking Shortcut">
                     <h2 id="titleTracking" style="font-size: 18px; font-weight: 700; color: var(--accent-gold); margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
                         🔎 Multi-Courier Tracking Shortcut
                     </h2>
@@ -212,7 +221,7 @@
                 </section>
 
                 <!-- CARD 4: UNIT MEL & COURIER DROP RADAR -->
-                <section class="card" style="padding: 28px 24px;" aria-label="Unit Mel Hours and Drop Radar">
+                <section class="card" aria-label="Unit Mel Hours and Drop Radar">
                     <h2 id="titlePickupHours" style="font-size: 18px; font-weight: 700; color: var(--accent-gold); margin: 0 0 16px 0; display: flex; align-items: center; gap: 8px;">
                         📍 Unit Mel Pickup Hours &amp; Drop Radar
                     </h2>
@@ -294,7 +303,7 @@
                 </div>
 
                 <!-- CARD 5: "PARCEL MARKED DELIVERED BUT NOT RECEIVED?" PROTOCOL -->
-                <section class="card" style="padding: 28px 24px;" aria-label="Delivered But Not Received Action Checklist">
+                <section class="card" aria-label="Delivered But Not Received Action Checklist">
                     <h2 id="titleDeliveredNotReceived" style="font-size: 18px; font-weight: 700; color: var(--accent-gold); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;">
                         🚨 "Delivered But Not Received?" Quick Action Checklist
                     </h2>

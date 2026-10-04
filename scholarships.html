@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <!-- Google AdSense temporarily paused on tool pages during review -->
 
     <!-- JSON-LD Structured Data -->
@@ -94,6 +94,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 
@@ -111,13 +120,13 @@
             <!-- SCHOLARSHIPS MAIN CONTAINER -->
             <div class="tab-content active" id="scholarships-tab">
                 <div class="scholarships-layout">
-                    <section class="card" style="padding: 26px 24px; margin-bottom: 24px;" aria-label="Scholarship Search and Filters">
-                        <h2 class="card-title">
+                    <section class="card" aria-label="Scholarship Search and Filters">
+                        <h1 class="card-title">
                             <svg viewBox="0 0 24 24">
                                 <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
                             </svg>
                             <span id="titleScholarships">Scholarship &amp; Financial Aid</span>
-                        </h2>
+                        </h1>
 
                         <p style="margin-bottom: 20px; line-height: 1.6; color: var(--text-secondary);"
                             id="descScholarships">
@@ -1054,7 +1063,7 @@
             </div>
 
             <!-- Crawlable Feature-Specific SEO Overview Section -->
-            <section class="card content-card" style="margin-top: 20px; max-width: 100%; border-color: rgba(var(--accent-gold-rgb), 0.25);">
+            <section class="card content-card" style="max-width: 100%; border-color: rgba(var(--accent-gold-rgb), 0.25);">
                 <h2 style="color: var(--accent-gold); font-size: 18px; font-weight: 800; margin-top: 0; display: flex; align-items: center; gap: 8px;">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                         <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
@@ -1109,15 +1118,15 @@
                 <!-- Section 4: Related Guides Cross-linking -->
                 <h3 style="color: var(--accent-gold); font-size: 15px; margin: 20px 0 10px 0;">🔗 Related Student Guides</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 8px;">
-                    <a href="guide-ptptn-loan.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-ptptn-loan.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">💰 PTPTN Loan &amp; Exemption Guide</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Step-by-step application walkthrough and waiver tips.</span>
                     </a>
-                    <a href="gpa.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="gpa.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">📊 GPA &amp; CGPA Target Calculator</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Calculate targets required for First Class degree honours.</span>
                     </a>
-                    <a href="guide-budget-living-food.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; text-decoration: none; color: inherit;">
+                    <a href="guide-budget-living-food.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13.5px; display: block; margin-bottom: 4px;">🍱 Student Budget &amp; Makan Guide</strong>
                         <span style="font-size: 12px; color: var(--text-muted);">Stretch your scholarship allowance in Durian Tunggal & Ayer Keroh.</span>
                     </a>

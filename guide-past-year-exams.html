@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google Analytics 4 (GA4) -->
@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="style.min.css?v=8.0">
+    <link rel="stylesheet" href="style.min.css?v=8.1">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1444529930367815" crossorigin="anonymous"></script>
     <!-- Monetag Vignette Banner with 15 Min Cooldown -->
@@ -120,6 +120,15 @@
     <link rel="icon" type="image/png" href="UCPMLogo.png">
     <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://accounts.google.com">
+        <!-- Theme Initialization (prevents flash of incorrect theme) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('ucpm_theme') || 'classic';
+            if (savedTheme && savedTheme !== 'classic') {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
     <script src="components.js?v=8.0"></script>
 </head>
 <body>
@@ -231,7 +240,7 @@
                     </ol>
                 
                 <!-- Social Share Action Card -->
-                <div class="share-card" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px; margin: 32px 0 16px 0;">
+                <div class="share-card">
                     <h3 style="color: var(--accent-gold); font-size: 15px; margin-top: 0; margin-bottom: 6px;" id="shareTitle">📢 Share this Guide with Coursemates</h3>
                     <p style="color: var(--text-secondary); font-size: 12.8px; margin: 0 0 14px 0; line-height: 1.5;" id="shareDesc">Help your faculty coursemates and juniors stay informed by sharing this guide directly to WhatsApp or Telegram study groups.</p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -258,15 +267,15 @@
                     <span>&#x1F4DA;</span> Related UTeM Student Handbooks
                 </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
-                    <a href="guide-gpa-calculator.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 14px; text-decoration: none; color: inherit; display: block; transition: var(--transition);">
+                    <a href="guide-gpa-calculator.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13px; display: block; margin-bottom: 4px;">🎓 UTeM GPA Calculator & Scale</strong>
                         <span style="font-size: 12px; color: var(--text-muted); line-height: 1.45; display: block;">Calculate cumulative CGPA, target Dean's List (Anugerah Dekan), and understand probation thresholds.</span>
                     </a>
-                    <a href="guide-top-10-study-places.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 14px; text-decoration: none; color: inherit; display: block; transition: var(--transition);">
+                    <a href="guide-top-10-study-places.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13px; display: block; margin-bottom: 4px;">📍 Top 10 Study Spots in UTeM</strong>
                         <span style="font-size: 12px; color: var(--text-muted); line-height: 1.45; display: block;">Perpustakaan Laman Hikmah 24-hour zones, FTMK breakout lounges, and quiet revision spots.</span>
                     </a>
-                    <a href="guide-final-year-project-fyp.html" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 14px; text-decoration: none; color: inherit; display: block; transition: var(--transition);">
+                    <a href="guide-final-year-project-fyp.html" class="related-guide-link">
                         <strong style="color: var(--accent-gold); font-size: 13px; display: block; margin-bottom: 4px;">🔬 Final Year Project (FYP) Survival</strong>
                         <span style="font-size: 12px; color: var(--text-muted); line-height: 1.45; display: block;">Proposal drafting, supervisor consultation, IEEE referencing, and viva presentations.</span>
                     </a>
